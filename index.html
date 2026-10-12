@@ -49,31 +49,6 @@
     }
 
     /* ============================================
-       MOBILE MENU BUTTON (hidden on desktop)
-       ============================================ */
-    .mobile-nav {
-      position: fixed;
-      top: 1rem; right: 1rem;
-      z-index: 1000;
-      display: none;
-    }
-    .menu-toggle {
-      width: 48px; height: 48px;
-      border-radius: 50%;
-      background: rgba(11, 11, 15, 0.85);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(212, 175, 55, 0.4);
-      color: #d4af37;
-      font-size: 1.2rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: 0.3s;
-    }
-    .menu-toggle:hover { background: #d4af37; color: #0b0b0f; }
-
-    /* ============================================
        CONTENT WRAPPER
        ============================================ */
     .content {
@@ -375,7 +350,6 @@
       gap: clamp(0.8rem, 2vw, 1.5rem);
       margin-top: 1rem;
     }
-    /* Make first item span 2 columns on wider screens only */
     @media (min-width: 768px) {
       .gallery-item:nth-child(5n+1) { grid-column: span 2; }
     }
@@ -422,7 +396,6 @@
     @media (hover: hover) {
       .gallery-item:hover .gallery-overlay { opacity: 1; }
     }
-    /* On touch devices, always show overlay slightly */
     @media (hover: none) {
       .gallery-overlay { opacity: 1; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%); }
     }
@@ -600,22 +573,17 @@
     }
 
     /* ============================================
-       HIDE 3D CANVAS DETAILS ON VERY SMALL DEVICES
+       MOBILE OPTIMIZATIONS
        ============================================ */
     @media (max-width: 480px) {
       .gallery-item:nth-child(5n+1) { grid-column: span 1; }
       .gallery-grid { grid-template-columns: 1fr 1fr; }
       .gallery-item { aspect-ratio: 1 / 1; }
-      /* Compact hero */
       .hero { min-height: 90vh; min-height: 90svh; }
     }
     @media (max-width: 380px) {
       .gallery-grid { grid-template-columns: 1fr; }
     }
-
-    /* ============================================
-       LANDSCAPE PHONE OPTIMIZATION
-       ============================================ */
     @media (max-height: 500px) and (orientation: landscape) {
       .hero { min-height: auto; padding: 5rem 0 3rem; }
     }
@@ -627,8 +595,6 @@
     ::-webkit-scrollbar-track { background: #0b0b0f; }
     ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #b8942e; }
-
-    /* Hide scrollbar on mobile for cleaner look */
     @media (max-width: 768px) {
       ::-webkit-scrollbar { width: 0; }
     }
@@ -814,23 +780,27 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
     /* ============================================
-       GALLERY DATA
+       GALLERY DATA — FULL ONLINE URLs
+       These images load directly from GitHub Pages,
+       so no local kay/ folder is needed anymore.
        ============================================ */
+    const GITHUB_BASE = 'https://kampambajoseph62-bit.github.io/kay/';
+
     const galleryItems = [
-      { title: 'Traditional Elegance',  category: 'Wedding',     src: 'kay/photo1.jpg'  },
-      { title: 'Golden Hour Portrait',  category: 'Portrait',    src: 'kay/photo2.jpg'  },
-      { title: 'Heritage Beauty',       category: 'Portrait',    src: 'kay/photo3.jpg'  },
-      { title: 'Forever Begins',        category: 'Wedding',     src: 'kay/photo4.jpg'  },
-      { title: 'Royal Celebration',     category: 'Wedding',     src: 'kay/photo5.jpg'  },
-      { title: 'Bride in Bloom',        category: 'Wedding',     src: 'kay/photo6.jpg'  },
-      { title: 'Behind the Lens',       category: 'Documentary', src: 'kay/photo7.jpg'  },
-      { title: 'The Shot',              category: 'Documentary', src: 'kay/photo8.jpg'  },
-      { title: 'Event Floor',           category: 'Event',       src: 'kay/photo9.jpg'  },
-      { title: 'Gathering Moments',     category: 'Event',       src: 'kay/photo10.jpg' },
-      { title: 'Formal Occasion',       category: 'Event',       src: 'kay/photo11.jpg' },
-      { title: 'Studio Light',          category: 'Commercial',  src: 'kay/photo12.jpg' },
-      { title: 'Stage Performance',     category: 'Music',       src: 'kay/photo13.jpg' },
-      { title: 'Portrait Study',        category: 'Portrait',    src: 'kay/photo14.jpg' }
+      { title: 'Traditional Elegance',  category: 'Wedding',     src: GITHUB_BASE + '8925c6363afe20148d14ea2397d47089.jpg' },
+      { title: 'Golden Hour Portrait',  category: 'Portrait',    src: GITHUB_BASE + 'images.jpeg' },
+      { title: 'Heritage Beauty',       category: 'Portrait',    src: GITHUB_BASE + 'images%20(1).jpeg' },
+      { title: 'Forever Begins',        category: 'Wedding',     src: GITHUB_BASE + 'images%20(2).jpeg' },
+      { title: 'Royal Celebration',     category: 'Wedding',     src: GITHUB_BASE + 'images%20(3).jpeg' },
+      { title: 'Bride in Bloom',        category: 'Wedding',     src: GITHUB_BASE + 'images%20(4).jpeg' },
+      { title: 'Behind the Lens',       category: 'Documentary', src: GITHUB_BASE + 'IMG_0048.JPG.jpeg' },
+      { title: 'The Shot',              category: 'Documentary', src: GITHUB_BASE + 'IMG_0090.JPG.jpeg' },
+      { title: 'Event Floor',           category: 'Event',       src: GITHUB_BASE + 'IMG_3564.JPG.jpeg' },
+      { title: 'Gathering Moments',     category: 'Event',       src: GITHUB_BASE + 'IMG_3691.JPG.jpeg' },
+      { title: 'Formal Occasion',       category: 'Event',       src: GITHUB_BASE + 'IMG_6910.JPG.jpeg' },
+      { title: 'Studio Light',          category: 'Commercial',  src: GITHUB_BASE + 'IMG_9020.JPG.jpeg' },
+      { title: 'Stage Performance',     category: 'Music',       src: GITHUB_BASE + 'in.webp' },
+      { title: 'Portrait Study',        category: 'Portrait',    src: GITHUB_BASE + 'lighting-photography-portrait-03.webp' }
     ];
 
     /* ============================================
@@ -859,7 +829,7 @@
 
         el.innerHTML = `
           <span class="gallery-badge">4K</span>
-          <img src="${item.src}" alt="${item.title} — ${item.category}" loading="lazy">
+          <img src="${item.src}" alt="${item.title} — ${item.category}" loading="lazy" crossorigin="anonymous">
           <div class="gallery-overlay">
             <div class="gallery-category">${item.category}</div>
             <div class="gallery-title">${item.title}</div>
@@ -958,7 +928,7 @@
       }
     });
 
-    /* Touch swipe support for lightbox */
+    /* Touch swipe for lightbox */
     let touchStartX = 0;
     lightbox.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
@@ -1027,7 +997,6 @@
       const container = document.getElementById('canvas-container');
       if (!container) return;
 
-      // Detect mobile / low-end devices
       const isMobile = window.innerWidth < 768 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
       const isSmallMobile = window.innerWidth < 480;
 
@@ -1053,7 +1022,7 @@
       rimLight.position.set(0, -5, -10);
       scene.add(rimLight);
 
-      /* ---- CAMERA MODEL ---- */
+      /* CAMERA MODEL */
       const cameraGroup = new THREE.Group();
       const bodyMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.5, metalness: 0.7 });
       const accentMat = new THREE.MeshStandardMaterial({ color: 0xd4af37, roughness: 0.3, metalness: 0.9, emissive: 0x221100 });
@@ -1108,7 +1077,6 @@
       focusRing.position.set(0, 0, 2.2);
       cameraGroup.add(focusRing);
 
-      // Reduce grip details on mobile
       const gripCount = isMobile ? 12 : 24;
       for (let i = 0; i < gripCount; i++) {
         const angle = (i / gripCount) * Math.PI * 2;
@@ -1172,7 +1140,6 @@
       cameraGroup.rotation.x = 0.1;
       scene.add(cameraGroup);
 
-      // Particles — fewer on mobile
       const particlesCount = isMobile ? 700 : 1800;
       const particlesGeometry = new THREE.BufferGeometry();
       const posArray = new Float32Array(particlesCount * 3);
@@ -1189,7 +1156,6 @@
       const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
       scene.add(particlesMesh);
 
-      // Decorative rings — fewer on mobile
       const ringGeo = new THREE.TorusGeometry(3, 0.03, 8, 48);
       const ringMat = new THREE.MeshBasicMaterial({ color: 0xd4af37, transparent: true, opacity: 0.15 });
       const rings = [];
@@ -1204,7 +1170,6 @@
         rings.push(r);
       });
 
-      /* ---- THEMES ---- */
       const themes = {
         gold:    { bg: 0x0b0b0f, accent: 0xd4af37, overlay: 'rgba(11,11,15,0.95)' },
         cyan:    { bg: 0x051018, accent: 0x00d4ff, overlay: 'rgba(5,16,24,0.95)' },
@@ -1260,7 +1225,6 @@
         });
       }, { passive: true });
 
-      // Mouse / touch parallax
       let mouseX = 0, mouseY = 0;
       if (!isMobile) {
         document.addEventListener('mousemove', e => {
@@ -1276,12 +1240,10 @@
       }
 
       let time = 0;
-      let rafId;
       function animate() {
-        rafId = requestAnimationFrame(animate);
+        requestAnimationFrame(animate);
         time += 0.005;
 
-        // Pause rendering if page not visible (battery saving)
         if (document.hidden) return;
 
         currentTheme.bg.lerp(targetTheme.bg, LERP_SPEED);
