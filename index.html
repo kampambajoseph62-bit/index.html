@@ -2,23 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="theme-color" content="#0b0b0f">
+  <meta name="description" content="Kay Official TGD CHEZZI — Professional Videographer, Content Creator & Camera Operator. Capturing Stories. Creating Impact.">
   <title>Kay Official TGD CHEZZI | Videographer & Content Creator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    /* ============================================
+       RESET & BASE
+       ============================================ */
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
       font-family: 'Inter', sans-serif;
       background-color: #0b0b0f;
       color: #ffffff;
       overflow-x: hidden;
-      line-height: 1.5;
+      line-height: 1.6;
       transition: background-color 1s ease;
+      min-height: 100vh;
     }
+    img { max-width: 100%; height: auto; display: block; }
+    button { font-family: inherit; }
+
+    /* ============================================
+       BACKGROUND CANVAS
+       ============================================ */
     #canvas-container {
       position: fixed;
       top: 0; left: 0;
@@ -35,26 +47,60 @@
       pointer-events: none;
       transition: background 1.2s ease;
     }
+
+    /* ============================================
+       MOBILE MENU BUTTON (hidden on desktop)
+       ============================================ */
+    .mobile-nav {
+      position: fixed;
+      top: 1rem; right: 1rem;
+      z-index: 1000;
+      display: none;
+    }
+    .menu-toggle {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(11, 11, 15, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: #d4af37;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+    }
+    .menu-toggle:hover { background: #d4af37; color: #0b0b0f; }
+
+    /* ============================================
+       CONTENT WRAPPER
+       ============================================ */
     .content {
       position: relative;
       z-index: 2;
       max-width: 1400px;
       margin: 0 auto;
-      padding: 0 2rem;
+      padding: 0 clamp(1rem, 4vw, 2rem);
     }
-    h1, h2, h3, h4 { font-weight: 700; letter-spacing: -0.02em; }
+
+    /* ============================================
+       TYPOGRAPHY
+       ============================================ */
+    h1, h2, h3, h4 { font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
     h1 {
-      font-size: clamp(3rem, 8vw, 6rem);
-      line-height: 1.1;
+      font-size: clamp(2.2rem, 7vw, 6rem);
+      line-height: 1.05;
       background: linear-gradient(135deg, #ffffff 0%, #d4af37 80%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       margin-bottom: 0.5rem;
+      word-wrap: break-word;
     }
     h2 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      margin-bottom: 2rem;
+      font-size: clamp(1.6rem, 5vw, 3.5rem);
+      margin-bottom: clamp(1.5rem, 3vw, 2rem);
       position: relative;
       display: inline-block;
     }
@@ -62,147 +108,255 @@
       content: '';
       position: absolute;
       bottom: -10px; left: 0;
-      width: 60px; height: 4px;
+      width: 50px; height: 4px;
       background: #d4af37;
       border-radius: 2px;
       transition: background 1s ease;
     }
-    .section { padding: 6rem 0; }
+    p { font-size: clamp(0.95rem, 2.2vw, 1rem); }
+
+    /* ============================================
+       SECTIONS
+       ============================================ */
+    .section { padding: clamp(3rem, 8vw, 6rem) 0; }
+
+    /* ============================================
+       BUTTONS
+       ============================================ */
     .btn {
-      display: inline-block;
-      padding: 0.9rem 2.2rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(0.7rem, 2vw, 0.9rem) clamp(1.4rem, 3vw, 2.2rem);
       border-radius: 50px;
       font-weight: 600;
       text-decoration: none;
       transition: all 0.3s ease;
       letter-spacing: 0.5px;
-      font-size: 0.95rem;
+      font-size: clamp(0.8rem, 2vw, 0.95rem);
       border: 2px solid transparent;
       cursor: pointer;
       background: transparent;
       color: white;
-      margin-right: 1rem;
-      margin-bottom: 1rem;
+      margin-right: 0.6rem;
+      margin-bottom: 0.6rem;
+      white-space: nowrap;
     }
     .btn-primary { background: #d4af37; color: #0b0b0f; border-color: #d4af37; }
     .btn-primary:hover { background: transparent; color: #d4af37; transform: translateY(-3px); box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2); }
     .btn-outline { border-color: #ffffff; color: #ffffff; }
     .btn-outline:hover { background: #ffffff; color: #0b0b0f; transform: translateY(-3px); }
+
+    /* ============================================
+       HERO
+       ============================================ */
     .hero {
       min-height: 100vh;
+      min-height: 100svh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-      padding-top: 4rem;
+      padding: clamp(4rem, 12vw, 6rem) 0;
     }
     .hero-sub {
-      font-size: 1.3rem;
+      font-size: clamp(0.75rem, 2vw, 1.3rem);
       color: #d4af37;
-      margin-bottom: 0.5rem;
-      letter-spacing: 2px;
+      margin-bottom: 0.75rem;
+      letter-spacing: clamp(1px, 0.3vw, 2.5px);
       text-transform: uppercase;
       font-weight: 400;
     }
-    .hero-tagline { font-size: 1.5rem; color: rgba(255, 255, 255, 0.8); margin: 1.5rem 0 2.5rem; max-width: 700px; }
-    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; align-items: center; }
-    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem; }
+    .hero-tagline {
+      font-size: clamp(0.95rem, 2.5vw, 1.5rem);
+      color: rgba(255, 255, 255, 0.85);
+      margin: clamp(1rem, 3vw, 1.5rem) 0 clamp(1.5rem, 4vw, 2.5rem);
+      max-width: 700px;
+      line-height: 1.5;
+    }
+    .hero-buttons { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+
+    /* ============================================
+       GRIDS
+       ============================================ */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+      gap: clamp(1.5rem, 4vw, 3rem);
+      align-items: center;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+      gap: clamp(1rem, 3vw, 2rem);
+      margin-top: 2rem;
+    }
+
+    /* ============================================
+       CARDS
+       ============================================ */
     .card {
       background: rgba(20, 20, 30, 0.6);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border: 1px solid rgba(212, 175, 55, 0.15);
       border-radius: 24px;
-      padding: 2rem;
+      padding: clamp(1.4rem, 4vw, 2rem);
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       height: 100%;
     }
-    .card:hover { transform: translateY(-10px) scale(1.02); border-color: rgba(212, 175, 55, 0.5); }
-    .card i { font-size: 2.5rem; color: #d4af37; margin-bottom: 1.5rem; }
-    .card h3 { font-size: 1.6rem; margin-bottom: 1rem; }
-    .card p { color: rgba(255, 255, 255, 0.7); font-size: 1rem; }
-    .categories { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 2rem 0; }
+    @media (hover: hover) {
+      .card:hover { transform: translateY(-10px) scale(1.02); border-color: rgba(212, 175, 55, 0.5); }
+    }
+    .card i { font-size: clamp(2rem, 5vw, 2.5rem); color: #d4af37; margin-bottom: 1.2rem; }
+    .card h3 { font-size: clamp(1.15rem, 3vw, 1.6rem); margin-bottom: 0.8rem; }
+    .card p { color: rgba(255, 255, 255, 0.7); font-size: clamp(0.9rem, 2vw, 1rem); }
+
+    /* ============================================
+       PORTFOLIO CATEGORIES
+       ============================================ */
+    .categories { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 2rem 0; }
     .category-tag {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(212, 175, 55, 0.3);
-      padding: 0.6rem 1.4rem;
+      padding: 0.55rem 1.2rem;
       border-radius: 40px;
-      font-size: 0.9rem;
+      font-size: clamp(0.75rem, 2vw, 0.9rem);
       transition: 0.3s;
       color: #fff;
+      cursor: default;
     }
     .category-tag:hover { background: #d4af37; color: #0b0b0f; transform: scale(1.05); }
-    .process-steps { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 2rem; }
+
+    /* ============================================
+       PROCESS STEPS
+       ============================================ */
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+      gap: clamp(0.8rem, 2vw, 1.5rem);
+      margin-top: 2rem;
+    }
     .step {
-      flex: 1 1 150px;
       background: rgba(30, 30, 40, 0.5);
-      padding: 1.5rem;
+      padding: clamp(1.2rem, 3vw, 1.5rem);
       border-radius: 20px;
       border-left: 4px solid #d4af37;
       transition: 0.3s;
     }
     .step:hover { background: rgba(212, 175, 55, 0.1); }
-    .step-number { font-size: 2rem; font-weight: 800; color: #d4af37; opacity: 0.7; line-height: 1; }
-    .step h4 { margin: 0.5rem 0; font-size: 1.2rem; }
-    .step p { font-size: 0.9rem; color: rgba(255, 255, 255, 0.6); }
+    .step-number { font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 800; color: #d4af37; opacity: 0.7; line-height: 1; }
+    .step h4 { margin: 0.5rem 0; font-size: clamp(1rem, 2.5vw, 1.2rem); }
+    .step p { font-size: clamp(0.8rem, 2vw, 0.9rem); color: rgba(255, 255, 255, 0.6); }
+
+    /* ============================================
+       TESTIMONIALS
+       ============================================ */
     .testimonial-card {
       background: rgba(20, 20, 30, 0.8);
       border-radius: 24px;
-      padding: 2rem;
+      padding: clamp(1.5rem, 4vw, 2rem);
       border: 1px solid rgba(212, 175, 55, 0.2);
       font-style: italic;
       position: relative;
     }
     .testimonial-card::before {
       content: '"';
-      font-size: 6rem;
+      font-size: clamp(4rem, 10vw, 6rem);
       color: #d4af37;
       opacity: 0.2;
       position: absolute;
-      top: -10px; left: 20px;
+      top: -10px; left: clamp(10px, 2vw, 20px);
       font-family: serif;
+      line-height: 1;
     }
-    .testimonial-card p { font-size: 1.1rem; margin-bottom: 1.5rem; }
+    .testimonial-card p { font-size: clamp(0.95rem, 2.2vw, 1.1rem); margin-bottom: 1.2rem; position: relative; }
     .testimonial-author { color: #d4af37; font-weight: 600; font-style: normal; }
-    .faq-item { border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 1.2rem 0; }
-    .faq-question { font-weight: 600; font-size: 1.1rem; display: flex; justify-content: space-between; cursor: pointer; }
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; color: rgba(255, 255, 255, 0.7); padding-right: 2rem; }
-    .faq-item.active .faq-answer { max-height: 200px; margin-top: 0.8rem; }
+
+    /* ============================================
+       FAQ
+       ============================================ */
+    .faq-item { border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: clamp(0.9rem, 2vw, 1.2rem) 0; }
+    .faq-question {
+      font-weight: 600;
+      font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, margin 0.4s ease;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      padding-right: 2rem;
+    }
+    .faq-item.active .faq-answer { max-height: 300px; margin-top: 0.8rem; }
     .faq-item.active .faq-question i { transform: rotate(180deg); }
-    .faq-question i { transition: transform 0.3s; color: #d4af37; }
-    .footer { padding: 4rem 0 2rem; border-top: 1px solid rgba(255, 255, 255, 0.05); text-align: center; }
+    .faq-question i { transition: transform 0.3s; color: #d4af37; flex-shrink: 0; }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    .footer {
+      padding: clamp(2.5rem, 6vw, 4rem) 0 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+    }
+    .footer h3 { font-size: clamp(1.3rem, 3.5vw, 1.8rem); font-weight: 800; }
+    .footer .socials {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1.5rem 0;
+    }
     .footer .socials a {
       color: white;
       background: rgba(255, 255, 255, 0.05);
-      width: 45px; height: 45px;
+      width: 44px; height: 44px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      margin: 0 0.5rem;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       transition: 0.3s;
       text-decoration: none;
     }
     .footer .socials a:hover { background: #d4af37; color: #0b0b0f; transform: translateY(-5px); }
-    .copyright { margin-top: 2rem; color: rgba(255, 255, 255, 0.4); font-size: 0.9rem; }
+    .copyright { margin-top: 1.5rem; color: rgba(255, 255, 255, 0.4); font-size: clamp(0.75rem, 2vw, 0.9rem); }
+
+    /* ============================================
+       SCROLL ANIMATIONS
+       ============================================ */
     .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
     /* ============================================
-       GALLERY STYLES
+       GALLERY FILTERS
        ============================================ */
-    .gallery-filters { display: flex; flex-wrap: wrap; gap: 0.7rem; margin: 1rem 0 3rem; }
+    .gallery-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0 2rem;
+      -webkit-overflow-scrolling: touch;
+    }
     .filter-btn {
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(212, 175, 55, 0.3);
       color: #fff;
-      padding: 0.55rem 1.3rem;
+      padding: 0.5rem 1.1rem;
       border-radius: 40px;
-      font-size: 0.85rem;
+      font-size: clamp(0.75rem, 2vw, 0.85rem);
       font-weight: 500;
       cursor: pointer;
       transition: all 0.3s ease;
-      font-family: inherit;
+      white-space: nowrap;
     }
     .filter-btn:hover { background: rgba(212, 175, 55, 0.15); border-color: #d4af37; transform: translateY(-2px); }
     .filter-btn.active {
@@ -211,17 +365,23 @@
       border-color: #d4af37;
       box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
     }
+
+    /* ============================================
+       GALLERY GRID — RESPONSIVE
+       ============================================ */
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+      gap: clamp(0.8rem, 2vw, 1.5rem);
       margin-top: 1rem;
     }
-    .gallery-item:nth-child(5n+1) { grid-column: span 2; }
-    @media (max-width: 900px) { .gallery-item:nth-child(5n+1) { grid-column: span 1; } }
+    /* Make first item span 2 columns on wider screens only */
+    @media (min-width: 768px) {
+      .gallery-item:nth-child(5n+1) { grid-column: span 2; }
+    }
     .gallery-item {
       position: relative;
-      border-radius: 20px;
+      border-radius: clamp(14px, 2vw, 20px);
       overflow: hidden;
       aspect-ratio: 16 / 10;
       cursor: pointer;
@@ -239,15 +399,15 @@
       height: 100%;
       object-fit: cover;
       transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s ease;
-      display: block;
-      image-rendering: -webkit-optimize-contrast;
     }
-    .gallery-item:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 30px 60px rgba(212, 175, 55, 0.25);
-      z-index: 3;
+    @media (hover: hover) {
+      .gallery-item:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 30px 60px rgba(212, 175, 55, 0.25);
+        z-index: 3;
+      }
+      .gallery-item:hover img { transform: scale(1.12); filter: brightness(1.15) saturate(1.1); }
     }
-    .gallery-item:hover img { transform: scale(1.12); filter: brightness(1.15) saturate(1.1); }
     .gallery-overlay {
       position: absolute;
       inset: 0;
@@ -255,72 +415,60 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 1.5rem;
+      padding: clamp(0.9rem, 2.5vw, 1.5rem);
       opacity: 0;
       transition: opacity 0.4s ease;
     }
-    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    @media (hover: hover) {
+      .gallery-item:hover .gallery-overlay { opacity: 1; }
+    }
+    /* On touch devices, always show overlay slightly */
+    @media (hover: none) {
+      .gallery-overlay { opacity: 1; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%); }
+    }
     .gallery-category {
-      font-size: 0.75rem;
+      font-size: clamp(0.65rem, 1.8vw, 0.75rem);
       color: #d4af37;
       letter-spacing: 2px;
       text-transform: uppercase;
       font-weight: 600;
-      margin-bottom: 0.4rem;
-      transform: translateY(10px);
-      transition: transform 0.4s ease 0.05s;
+      margin-bottom: 0.3rem;
     }
     .gallery-title {
-      font-size: 1.25rem;
+      font-size: clamp(0.95rem, 2.5vw, 1.25rem);
       font-weight: 700;
-      transform: translateY(10px);
-      transition: transform 0.4s ease 0.1s;
     }
-    .gallery-item:hover .gallery-category,
-    .gallery-item:hover .gallery-title { transform: translateY(0); }
     .gallery-badge {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
+      top: clamp(0.6rem, 1.5vw, 1rem);
+      right: clamp(0.6rem, 1.5vw, 1rem);
       background: rgba(11, 11, 15, 0.75);
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       border: 1px solid rgba(212, 175, 55, 0.5);
       color: #d4af37;
-      font-size: 0.65rem;
+      font-size: clamp(0.55rem, 1.6vw, 0.65rem);
       font-weight: 700;
       letter-spacing: 1.5px;
-      padding: 0.3rem 0.7rem;
+      padding: 0.25rem 0.6rem;
       border-radius: 8px;
       z-index: 2;
-      transition: background 0.3s ease;
     }
-    .gallery-item:hover .gallery-badge { background: #d4af37; color: #0b0b0f; }
-    .gallery-item::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -75%;
-      width: 50%; height: 100%;
-      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.15), transparent);
-      transform: skewX(-20deg);
-      transition: left 0.7s ease;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .gallery-item:hover::after { left: 125%; }
 
     /* ============================================
-       LIGHTBOX
+       LIGHTBOX — RESPONSIVE
        ============================================ */
     .lightbox {
       position: fixed;
       inset: 0;
       background: rgba(5, 5, 10, 0.96);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       z-index: 9999;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 2rem;
+      padding: clamp(0.8rem, 3vw, 2rem);
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.4s ease, visibility 0.4s ease;
@@ -332,7 +480,7 @@
       max-height: 85vh;
       transform: scale(0.85);
       transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      border-radius: 16px;
+      border-radius: clamp(10px, 2vw, 16px);
       overflow: hidden;
       box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 0 1px rgba(212,175,55,0.3);
     }
@@ -342,12 +490,12 @@
       position: absolute;
       bottom: 0; left: 0; right: 0;
       background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
-      padding: 2rem 1.5rem 1.2rem;
-      font-size: 1rem;
+      padding: clamp(1.2rem, 3vw, 2rem) clamp(1rem, 2vw, 1.5rem) clamp(0.8rem, 2vw, 1.2rem);
+      font-size: clamp(0.85rem, 2vw, 1rem);
     }
     .lightbox-caption .cat {
       color: #d4af37;
-      font-size: 0.75rem;
+      font-size: clamp(0.65rem, 1.8vw, 0.75rem);
       letter-spacing: 2px;
       text-transform: uppercase;
       font-weight: 600;
@@ -356,13 +504,15 @@
     }
     .lightbox-close {
       position: absolute;
-      top: 1.5rem; right: 1.5rem;
-      width: 50px; height: 50px;
+      top: clamp(0.8rem, 2vw, 1.5rem);
+      right: clamp(0.8rem, 2vw, 1.5rem);
+      width: clamp(42px, 5vw, 50px);
+      height: clamp(42px, 5vw, 50px);
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(212, 175, 55, 0.4);
       color: #fff;
-      font-size: 1.3rem;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -375,12 +525,13 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 55px; height: 55px;
+      width: clamp(42px, 5vw, 55px);
+      height: clamp(42px, 5vw, 55px);
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(212, 175, 55, 0.4);
       color: #fff;
-      font-size: 1.2rem;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -389,47 +540,98 @@
       z-index: 10000;
     }
     .lightbox-nav:hover { background: #d4af37; color: #0b0b0f; }
-    .lightbox-prev { left: 1.5rem; }
-    .lightbox-next { right: 1.5rem; }
-    @media (max-width: 700px) {
-      .lightbox-nav { width: 42px; height: 42px; }
-      .lightbox-prev { left: 0.5rem; }
-      .lightbox-next { right: 0.5rem; }
-      .gallery-grid { grid-template-columns: 1fr; }
-    }
+    .lightbox-prev { left: clamp(0.5rem, 2vw, 1.5rem); }
+    .lightbox-next { right: clamp(0.5rem, 2vw, 1.5rem); }
 
     /* ============================================
        STATS BANNER
        ============================================ */
     .stats-banner {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 1.5rem;
-      margin: 3rem 0;
-      padding: 2.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(min(50%, 130px), 1fr));
+      gap: clamp(1rem, 3vw, 1.5rem);
+      margin: clamp(2rem, 5vw, 3rem) 0;
+      padding: clamp(1.5rem, 4vw, 2.5rem);
       background: rgba(20, 20, 30, 0.5);
       border: 1px solid rgba(212, 175, 55, 0.15);
       border-radius: 24px;
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
     .stat-item { text-align: center; }
     .stat-number {
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(1.6rem, 5vw, 3rem);
       font-weight: 800;
       color: #d4af37;
       line-height: 1;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
     .stat-label {
-      font-size: 0.85rem;
+      font-size: clamp(0.7rem, 2vw, 0.85rem);
       color: rgba(255, 255, 255, 0.6);
       letter-spacing: 1px;
       text-transform: uppercase;
     }
 
+    /* ============================================
+       CONTACT BOX
+       ============================================ */
+    .contact-info p {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.7rem;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      word-break: break-word;
+    }
+    .contact-info i { color: #d4af37; width: 20px; flex-shrink: 0; }
+    .booking-box {
+      background: rgba(20,20,30,0.7);
+      border-radius: 24px;
+      padding: clamp(1.4rem, 4vw, 2rem);
+      border: 1px solid rgba(212,175,55,0.2);
+    }
+    .booking-box h3 { font-size: clamp(1.05rem, 2.8vw, 1.25rem); margin-bottom: 1rem; }
+    .booking-box ul { list-style: none; }
+    .booking-box li {
+      margin-bottom: 0.5rem;
+      color: rgba(255,255,255,0.8);
+      font-size: clamp(0.85rem, 2vw, 1rem);
+    }
+
+    /* ============================================
+       HIDE 3D CANVAS DETAILS ON VERY SMALL DEVICES
+       ============================================ */
+    @media (max-width: 480px) {
+      .gallery-item:nth-child(5n+1) { grid-column: span 1; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item { aspect-ratio: 1 / 1; }
+      /* Compact hero */
+      .hero { min-height: 90vh; min-height: 90svh; }
+    }
+    @media (max-width: 380px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================
+       LANDSCAPE PHONE OPTIMIZATION
+       ============================================ */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .hero { min-height: auto; padding: 5rem 0 3rem; }
+    }
+
+    /* ============================================
+       SCROLLBAR
+       ============================================ */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #0b0b0f; }
     ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #b8942e; }
+
+    /* Hide scrollbar on mobile for cleaner look */
+    @media (max-width: 768px) {
+      ::-webkit-scrollbar { width: 0; }
+    }
   </style>
 </head>
 <body>
@@ -439,10 +641,10 @@
   <div class="content">
     <!-- HERO -->
     <section class="hero" data-theme="gold">
-      <div class="hero-sub">Videographer | Content Creator | Camera Operator</div>
+      <div class="hero-sub">Videographer · Content Creator · Camera Operator</div>
       <h1>Capturing Stories.<br>Creating Impact.</h1>
       <p class="hero-tagline">Welcome to Kay Official TGD CHEZZI — a creative media brand focused on professional videography, content creation and visual storytelling.</p>
-      <div>
+      <div class="hero-buttons">
         <a href="#gallery" class="btn btn-primary">View My Work</a>
         <a href="#contact" class="btn btn-outline">Book Me</a>
       </div>
@@ -453,12 +655,12 @@
       <h2>About Me</h2>
       <div class="grid-2">
         <div>
-          <p style="font-size: 1.2rem; margin-bottom: 1.5rem; color: #d4af37;">I’m Kay Nkhoma, a Videographer, Content Creator and Camera Operator with 5 years of experience in the creative media industry.</p>
+          <p style="font-size: clamp(1rem, 2.5vw, 1.2rem); margin-bottom: 1.5rem; color: #d4af37;">I’m Kay Nkhoma, a Videographer, Content Creator and Camera Operator with 5 years of experience in the creative media industry.</p>
           <p style="color: rgba(255,255,255,0.8); margin-bottom: 1.5rem;">My passion is creating visuals that don’t just look good, but communicate a story, capture emotion and leave a lasting impression.</p>
           <p style="color: rgba(255,255,255,0.8);">From weddings and events to documentaries, social media content and aerial coverage, I bring creativity, professionalism and attention to detail to every project.</p>
         </div>
-        <div style="background: rgba(212, 175, 55, 0.05); border-radius: 30px; padding: 2rem; border: 1px solid rgba(212, 175, 55, 0.2);">
-          <p style="font-size: 1.3rem; font-style: italic; color: #fff;">“Whether you need someone to capture an important moment or create content that represents your brand, I’m ready to bring your vision to life.”</p>
+        <div style="background: rgba(212, 175, 55, 0.05); border-radius: 24px; padding: clamp(1.4rem, 4vw, 2rem); border: 1px solid rgba(212, 175, 55, 0.2);">
+          <p style="font-size: clamp(1.05rem, 2.8vw, 1.3rem); font-style: italic; color: #fff;">“Whether you need someone to capture an important moment or create content that represents your brand, I’m ready to bring your vision to life.”</p>
           <p style="margin-top: 1.5rem; color: #d4af37; font-weight: 600;">— Kay Nkhoma</p>
         </div>
       </div>
@@ -477,9 +679,7 @@
       </div>
     </section>
 
-    <!-- ============================================
-         4K GALLERY OF OCCASIONS
-         ============================================ -->
+    <!-- GALLERY -->
     <section class="section fade-up" id="gallery" data-theme="red">
       <h2>Occasions I Capture</h2>
       <p style="color: rgba(255,255,255,0.7); max-width: 700px; margin-bottom: 0.5rem;">
@@ -489,7 +689,6 @@
       <div class="gallery-filters" id="galleryFilters"></div>
       <div class="gallery-grid" id="galleryGrid"></div>
 
-      <!-- Stats banner -->
       <div class="stats-banner">
         <div class="stat-item"><div class="stat-number" data-count="250">0</div><div class="stat-label">Projects Shot</div></div>
         <div class="stat-item"><div class="stat-number" data-count="120">0</div><div class="stat-label">Happy Clients</div></div>
@@ -531,8 +730,8 @@
         <div class="testimonial-card"><p>“Great attention to detail and amazing editing. I would definitely recommend Kay for any media project.”</p><div class="testimonial-author">— Client</div></div>
       </div>
       <p style="color: rgba(255,255,255,0.5); margin-top: 2rem;">More client testimonials coming soon.</p>
-      <div style="margin-top: 3rem;">
-        <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">I am available for projects involving:</h3>
+      <div style="margin-top: clamp(2rem, 5vw, 3rem);">
+        <h3 style="font-size: clamp(1.1rem, 3vw, 1.5rem); margin-bottom: 1rem;">I am available for projects involving:</h3>
         <p style="color: rgba(255,255,255,0.8);">Individuals | Businesses | Churches | Organizations | Artists | Brands | Events | Weddings</p>
       </div>
     </section>
@@ -541,27 +740,27 @@
     <section class="section fade-up" id="contact" data-theme="teal">
       <h2>Let’s Work Together</h2>
       <div class="grid-2">
-        <div>
-          <p style="font-size: 1.3rem; margin-bottom: 1.5rem;">Have a wedding, event, documentary, business project or content idea? Let’s turn your vision into powerful visual content.</p>
+        <div class="contact-info">
+          <p style="font-size: clamp(1.05rem, 2.8vw, 1.3rem); margin-bottom: 1.5rem;">Have a wedding, event, documentary, business project or content idea? Let’s turn your vision into powerful visual content.</p>
           <p style="margin-bottom: 2rem;">Available for bookings and creative collaborations.</p>
           <div style="margin: 2rem 0;">
-            <p><i class="fas fa-phone-alt" style="color: #d4af37; width: 25px;"></i> +260 765 169 875</p>
-            <p><i class="fas fa-envelope" style="color: #d4af37; width: 25px;"></i> kayalexisnkhomatgd@gmail.com</p>
-            <p><i class="fab fa-instagram" style="color: #d4af37; width: 25px;"></i> Kay Nkhoma TGD</p>
-            <p><i class="fab fa-tiktok" style="color: #d4af37; width: 25px;"></i> Kay Official TGD</p>
+            <p><i class="fas fa-phone-alt"></i> +260 765 169 875</p>
+            <p><i class="fas fa-envelope"></i> kayalexisnkhomatgd@gmail.com</p>
+            <p><i class="fab fa-instagram"></i> Kay Nkhoma TGD</p>
+            <p><i class="fab fa-tiktok"></i> Kay Official TGD</p>
           </div>
           <a href="#" class="btn btn-primary">Book a Project</a>
         </div>
-        <div style="background: rgba(20,20,30,0.7); border-radius: 30px; padding: 2rem; border: 1px solid rgba(212,175,55,0.2);">
-          <h3 style="margin-bottom: 1rem;">To book my services, send me:</h3>
-          <ul style="list-style: none; color: rgba(255,255,255,0.8);">
-            <li style="margin-bottom: 0.5rem;">• Your name</li>
-            <li style="margin-bottom: 0.5rem;">• Type of project</li>
-            <li style="margin-bottom: 0.5rem;">• Date of the project</li>
-            <li style="margin-bottom: 0.5rem;">• Location</li>
-            <li style="margin-bottom: 0.5rem;">• Services required</li>
-            <li style="margin-bottom: 0.5rem;">• Expected duration</li>
-            <li style="margin-bottom: 0.5rem;">• Any special requirements</li>
+        <div class="booking-box">
+          <h3>To book my services, send me:</h3>
+          <ul>
+            <li>• Your name</li>
+            <li>• Type of project</li>
+            <li>• Date of the project</li>
+            <li>• Location</li>
+            <li>• Services required</li>
+            <li>• Expected duration</li>
+            <li>• Any special requirements</li>
           </ul>
           <p style="margin-top: 1.5rem; color: #d4af37;">I will get back to you with availability and a quotation.</p>
         </div>
@@ -583,16 +782,16 @@
 
     <!-- FOOTER -->
     <footer class="footer fade-up" data-theme="gold">
-      <h3 style="font-size: 1.8rem; font-weight: 800;">KAY OFFICIAL TGD CHEZZI</h3>
-      <p style="color: #d4af37; letter-spacing: 2px; margin: 0.5rem 0 1rem;">Videographer · Content Creator · Camera Operator</p>
-      <p style="font-size: 1.3rem; font-style: italic; margin-bottom: 2rem;">Capturing Stories. Creating Impact.</p>
+      <h3>KAY OFFICIAL TGD CHEZZI</h3>
+      <p style="color: #d4af37; letter-spacing: 2px; margin: 0.5rem 0 1rem; font-size: clamp(0.75rem, 2vw, 0.9rem);">Videographer · Content Creator · Camera Operator</p>
+      <p style="font-size: clamp(1rem, 2.5vw, 1.3rem); font-style: italic; margin-bottom: 2rem;">Capturing Stories. Creating Impact.</p>
       <div class="socials">
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-tiktok"></i></a>
-        <a href="#"><i class="fab fa-whatsapp"></i></a>
-        <a href="#"><i class="fas fa-envelope"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
       </div>
-      <p style="margin-top: 2rem;">📱 +260 765 169 875 &nbsp;|&nbsp; ✉️ kayalexisnkhomatgd@gmail.com</p>
+      <p style="margin-top: 1.5rem;">📱 +260 765 169 875 &nbsp;|&nbsp; ✉️ kayalexisnkhomatgd@gmail.com</p>
       <p style="margin-top: 1rem; color: #d4af37;">Let’s create something worth remembering.</p>
       <div class="copyright">© 2026 Kay Official TGD CHEZZI. All Rights Reserved.</div>
     </footer>
@@ -600,9 +799,9 @@
 
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox">
-    <button class="lightbox-close" id="lightboxClose"><i class="fas fa-times"></i></button>
-    <button class="lightbox-nav lightbox-prev" id="lightboxPrev"><i class="fas fa-chevron-left"></i></button>
-    <button class="lightbox-nav lightbox-next" id="lightboxNext"><i class="fas fa-chevron-right"></i></button>
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close"><i class="fas fa-times"></i></button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
     <div class="lightbox-img-wrap">
       <img id="lightboxImg" src="" alt="">
       <div class="lightbox-caption">
@@ -615,32 +814,27 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
     /* ============================================
-       GALLERY DATA — YOUR REAL PHOTOS (kay folder)
+       GALLERY DATA
        ============================================ */
     const galleryItems = [
-      // Weddings / Couples / Portrait
-      { title: 'Traditional Elegance',   category: 'Wedding',       src: 'kay/8925c6363afe20148d14ea2397d47089.jpg' },
-      { title: 'Golden Hour Portrait',   category: 'Portrait',      src: 'kay/images.jpeg' },
-      { title: 'Heritage Beauty',        category: 'Portrait',      src: 'kay/images%20(1).jpeg' },
-      { title: 'Forever Begins',         category: 'Wedding',       src: 'kay/images%20(2).jpeg' },
-      { title: 'Royal Celebration',      category: 'Wedding',       src: 'kay/images%20(3).jpeg' },
-      { title: 'Bride in Bloom',         category: 'Wedding',       src: 'kay/images%20(4).jpeg' },
-
-      // Documentary / Behind the Scenes
-      { title: 'Behind the Lens',        category: 'Documentary',   src: 'kay/IMG_0048.JPG' },
-      { title: 'The Shot',               category: 'Documentary',   src: 'kay/IMG_0090.JPG' },
-      { title: 'Event Floor',            category: 'Event',         src: 'kay/IMG_3564.JPG' },
-      { title: 'Gathering Moments',      category: 'Event',         src: 'kay/IMG_3691.JPG' },
-      { title: 'Formal Occasion',        category: 'Event',         src: 'kay/IMG_6910.JPG' },
-
-      // Studio / Creative / Music
-      { title: 'Studio Light',           category: 'Commercial',    src: 'kay/IMG_9020.JPG' },
-      { title: 'Stage Performance',      category: 'Music',         src: 'kay/in.webp' },
-      { title: 'Portrait Study',         category: 'Portrait',      src: 'kay/lighting-photography-portrait-03.webp' }
+      { title: 'Traditional Elegance',  category: 'Wedding',     src: 'kay/photo1.jpg'  },
+      { title: 'Golden Hour Portrait',  category: 'Portrait',    src: 'kay/photo2.jpg'  },
+      { title: 'Heritage Beauty',       category: 'Portrait',    src: 'kay/photo3.jpg'  },
+      { title: 'Forever Begins',        category: 'Wedding',     src: 'kay/photo4.jpg'  },
+      { title: 'Royal Celebration',     category: 'Wedding',     src: 'kay/photo5.jpg'  },
+      { title: 'Bride in Bloom',        category: 'Wedding',     src: 'kay/photo6.jpg'  },
+      { title: 'Behind the Lens',       category: 'Documentary', src: 'kay/photo7.jpg'  },
+      { title: 'The Shot',              category: 'Documentary', src: 'kay/photo8.jpg'  },
+      { title: 'Event Floor',           category: 'Event',       src: 'kay/photo9.jpg'  },
+      { title: 'Gathering Moments',     category: 'Event',       src: 'kay/photo10.jpg' },
+      { title: 'Formal Occasion',       category: 'Event',       src: 'kay/photo11.jpg' },
+      { title: 'Studio Light',          category: 'Commercial',  src: 'kay/photo12.jpg' },
+      { title: 'Stage Performance',     category: 'Music',       src: 'kay/photo13.jpg' },
+      { title: 'Portrait Study',        category: 'Portrait',    src: 'kay/photo14.jpg' }
     ];
 
     /* ============================================
-       BUILD THE GALLERY
+       BUILD GALLERY
        ============================================ */
     (function buildGallery() {
       const grid = document.getElementById('galleryGrid');
@@ -677,8 +871,8 @@
           this.style.display = 'none';
           el.style.background = 'linear-gradient(135deg, #1a1a2e 0%, #d4af37 100%)';
           const fb = document.createElement('div');
-          fb.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:#fff;padding:1rem;text-align:center;';
-          fb.textContent = '⚠ Missing: ' + decodeURIComponent(item.src.split('/').pop());
+          fb.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:#fff;padding:0.8rem;text-align:center;';
+          fb.textContent = '⚠ ' + decodeURIComponent(item.src.split('/').pop());
           el.appendChild(fb);
         };
 
@@ -764,6 +958,24 @@
       }
     });
 
+    /* Touch swipe support for lightbox */
+    let touchStartX = 0;
+    lightbox.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    lightbox.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          currentLightboxIndex = (currentLightboxIndex + 1) % galleryItems.length;
+        } else {
+          currentLightboxIndex = (currentLightboxIndex - 1 + galleryItems.length) % galleryItems.length;
+        }
+        updateLightbox();
+      }
+    }, { passive: true });
+
     document.addEventListener('keydown', (e) => {
       if (!lightbox.classList.contains('open')) return;
       if (e.key === 'Escape') {
@@ -808,22 +1020,26 @@
     })();
 
     /* ============================================
-       3D CAMERA BACKGROUND WITH SCROLL-REACTIVE COLORS
+       3D CAMERA BACKGROUND
+       Adaptive quality for mobile
        ============================================ */
     (function() {
       const container = document.getElementById('canvas-container');
       if (!container) return;
 
+      // Detect mobile / low-end devices
+      const isMobile = window.innerWidth < 768 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      const isSmallMobile = window.innerWidth < 480;
+
       const scene = new THREE.Scene();
       scene.background = new THREE.Color(0x0b0b0f);
 
       const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-      camera.position.set(0, 3, 22);
+      camera.position.set(0, 3, isMobile ? 28 : 22);
 
-      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+      const renderer = new THREE.WebGLRenderer({ antialias: !isSmallMobile, alpha: false });
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.shadowMap.enabled = true;
+      renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio, 2));
       container.appendChild(renderer.domElement);
 
       scene.add(new THREE.AmbientLight(0x404060, 0.8));
@@ -837,6 +1053,7 @@
       rimLight.position.set(0, -5, -10);
       scene.add(rimLight);
 
+      /* ---- CAMERA MODEL ---- */
       const cameraGroup = new THREE.Group();
       const bodyMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.5, metalness: 0.7 });
       const accentMat = new THREE.MeshStandardMaterial({ color: 0xd4af37, roughness: 0.3, metalness: 0.9, emissive: 0x221100 });
@@ -863,42 +1080,45 @@
 
       const lensGroup = new THREE.Group();
       lensGroup.position.set(0, 0, 1.6);
-      const lensOuter = new THREE.Mesh(new THREE.CylinderGeometry(1.6, 1.6, 1.2, 48), lensMat);
+      const lensOuter = new THREE.Mesh(new THREE.CylinderGeometry(1.6, 1.6, 1.2, 32), lensMat);
       lensOuter.rotation.x = Math.PI / 2;
       lensGroup.add(lensOuter);
       [0.6, -0.6].forEach(z => {
-        const r = new THREE.Mesh(new THREE.TorusGeometry(1.62, 0.08, 16, 64), accentMat);
+        const r = new THREE.Mesh(new THREE.TorusGeometry(1.62, 0.08, 12, 48), accentMat);
         r.position.z = z;
         lensGroup.add(r);
       });
-      const lensInner = new THREE.Mesh(new THREE.CylinderGeometry(1.2, 1.2, 1.3, 48), lensMat);
+      const lensInner = new THREE.Mesh(new THREE.CylinderGeometry(1.2, 1.2, 1.3, 32), lensMat);
       lensInner.rotation.x = Math.PI / 2;
       lensInner.position.z = 0.1;
       lensGroup.add(lensInner);
       const glassElement = new THREE.Mesh(
-        new THREE.SphereGeometry(1.05, 32, 32, 0, Math.PI * 2, 0, Math.PI / 3),
+        new THREE.SphereGeometry(1.05, 24, 24, 0, Math.PI * 2, 0, Math.PI / 3),
         glassMat
       );
       glassElement.rotation.x = -Math.PI / 2;
       glassElement.position.z = 1.15;
       lensGroup.add(glassElement);
-      const apertureRing = new THREE.Mesh(new THREE.TorusGeometry(1.35, 0.1, 16, 64), accentMat);
+      const apertureRing = new THREE.Mesh(new THREE.TorusGeometry(1.35, 0.1, 12, 48), accentMat);
       apertureRing.position.z = 1.0;
       lensGroup.add(apertureRing);
       cameraGroup.add(lensGroup);
 
-      const focusRing = new THREE.Mesh(new THREE.TorusGeometry(1.7, 0.12, 16, 64), accentMat);
+      const focusRing = new THREE.Mesh(new THREE.TorusGeometry(1.7, 0.12, 12, 48), accentMat);
       focusRing.position.set(0, 0, 2.2);
       cameraGroup.add(focusRing);
-      for (let i = 0; i < 24; i++) {
-        const angle = (i / 24) * Math.PI * 2;
+
+      // Reduce grip details on mobile
+      const gripCount = isMobile ? 12 : 24;
+      for (let i = 0; i < gripCount; i++) {
+        const angle = (i / gripCount) * Math.PI * 2;
         const grip = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.2, 0.3), bodyMat);
         grip.position.set(Math.cos(angle) * 1.7, Math.sin(angle) * 1.7, 2.2);
         grip.rotation.z = angle;
         cameraGroup.add(grip);
       }
 
-      const buttonGeo = new THREE.CylinderGeometry(0.15, 0.15, 0.15, 16);
+      const buttonGeo = new THREE.CylinderGeometry(0.15, 0.15, 0.15, 12);
       [[-1.8, 1.85, 0.8], [-1.2, 1.85, 0.8], [-0.6, 1.85, 0.8], [1.2, 1.85, 0.8]].forEach(p => {
         const b = new THREE.Mesh(buttonGeo, accentMat);
         b.position.set(p[0], p[1], p[2]);
@@ -918,10 +1138,10 @@
 
       const reelGroup = new THREE.Group();
       reelGroup.position.set(0, 2.8, 0);
-      const reelDisc = new THREE.Mesh(new THREE.CylinderGeometry(1.1, 1.1, 0.25, 32), reelMat);
+      const reelDisc = new THREE.Mesh(new THREE.CylinderGeometry(1.1, 1.1, 0.25, 24), reelMat);
       reelDisc.rotation.x = Math.PI / 2;
       reelGroup.add(reelDisc);
-      const reelHub = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.35, 16), accentMat);
+      const reelHub = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.35, 12), accentMat);
       reelHub.rotation.x = Math.PI / 2;
       reelGroup.add(reelHub);
       for (let i = 0; i < 4; i++) {
@@ -929,7 +1149,7 @@
         spoke.rotation.z = (i / 4) * Math.PI * 2;
         reelGroup.add(spoke);
       }
-      const reelRing = new THREE.Mesh(new THREE.TorusGeometry(1.1, 0.06, 12, 48), accentMat);
+      const reelRing = new THREE.Mesh(new THREE.TorusGeometry(1.1, 0.06, 10, 36), accentMat);
       reelGroup.add(reelRing);
       cameraGroup.add(reelGroup);
 
@@ -952,8 +1172,9 @@
       cameraGroup.rotation.x = 0.1;
       scene.add(cameraGroup);
 
+      // Particles — fewer on mobile
+      const particlesCount = isMobile ? 700 : 1800;
       const particlesGeometry = new THREE.BufferGeometry();
-      const particlesCount = 1800;
       const posArray = new Float32Array(particlesCount * 3);
       for (let i = 0; i < particlesCount * 3; i += 3) {
         posArray[i] = (Math.random() - 0.5) * 120;
@@ -962,15 +1183,20 @@
       }
       particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
       const particlesMaterial = new THREE.PointsMaterial({
-        size: 0.15, color: 0xd4af37, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending
+        size: isMobile ? 0.2 : 0.15,
+        color: 0xd4af37, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending
       });
       const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
       scene.add(particlesMesh);
 
-      const ringGeo = new THREE.TorusGeometry(3, 0.03, 8, 64);
+      // Decorative rings — fewer on mobile
+      const ringGeo = new THREE.TorusGeometry(3, 0.03, 8, 48);
       const ringMat = new THREE.MeshBasicMaterial({ color: 0xd4af37, transparent: true, opacity: 0.15 });
       const rings = [];
-      [[-10, 5, -8, Math.PI/3, 0, 0], [12, -6, -10, 0, Math.PI/4, 0], [8, 8, -12, 0, 0, Math.PI/5]].forEach((p, i) => {
+      const ringPositions = isMobile
+        ? [[-8, 5, -8, Math.PI/3, 0, 0], [10, -6, -10, 0, Math.PI/4, 0]]
+        : [[-10, 5, -8, Math.PI/3, 0, 0], [12, -6, -10, 0, Math.PI/4, 0], [8, 8, -12, 0, 0, Math.PI/5]];
+      ringPositions.forEach((p) => {
         const r = new THREE.Mesh(ringGeo, ringMat);
         r.position.set(p[0], p[1], p[2]);
         r.rotation.set(p[3], p[4], p[5]);
@@ -978,6 +1204,7 @@
         rings.push(r);
       });
 
+      /* ---- THEMES ---- */
       const themes = {
         gold:    { bg: 0x0b0b0f, accent: 0xd4af37, overlay: 'rgba(11,11,15,0.95)' },
         cyan:    { bg: 0x051018, accent: 0x00d4ff, overlay: 'rgba(5,16,24,0.95)' },
@@ -1008,35 +1235,54 @@
       }, { threshold: 0.4, rootMargin: '-10% 0px -10% 0px' });
       sections.forEach(s => themeObserver.observe(s));
 
+      let scrollTicking = false;
       window.addEventListener('scroll', () => {
-        let activeTheme = 'gold';
-        let maxVis = 0;
-        const vh = window.innerHeight;
-        sections.forEach(section => {
-          const rect = section.getBoundingClientRect();
-          const visTop = Math.max(rect.top, 0);
-          const visBot = Math.min(rect.bottom, vh);
-          const visH = Math.max(0, visBot - visTop);
-          const vis = visH / Math.min(rect.height, vh);
-          if (vis > maxVis) { maxVis = vis; activeTheme = section.getAttribute('data-theme'); }
+        if (scrollTicking) return;
+        scrollTicking = true;
+        requestAnimationFrame(() => {
+          let activeTheme = 'gold';
+          let maxVis = 0;
+          const vh = window.innerHeight;
+          sections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            const visTop = Math.max(rect.top, 0);
+            const visBot = Math.min(rect.bottom, vh);
+            const visH = Math.max(0, visBot - visTop);
+            const vis = visH / Math.min(rect.height, vh);
+            if (vis > maxVis) { maxVis = vis; activeTheme = section.getAttribute('data-theme'); }
+          });
+          setTheme(activeTheme);
+          const theme = themes[activeTheme] || themes.gold;
+          document.body.style.backgroundColor = '#' + theme.bg.toString(16).padStart(6, '0');
+          const ov = document.getElementById('overlay');
+          if (ov) ov.style.background = `radial-gradient(circle at 20% 30%, ${theme.overlay.replace('0.95','0.4')} 0%, ${theme.overlay} 90%)`;
+          scrollTicking = false;
         });
-        setTheme(activeTheme);
-        const theme = themes[activeTheme] || themes.gold;
-        document.body.style.backgroundColor = '#' + theme.bg.toString(16).padStart(6, '0');
-        const ov = document.getElementById('overlay');
-        if (ov) ov.style.background = `radial-gradient(circle at 20% 30%, ${theme.overlay.replace('0.95','0.4')} 0%, ${theme.overlay} 90%)`;
-      });
+      }, { passive: true });
 
+      // Mouse / touch parallax
       let mouseX = 0, mouseY = 0;
-      document.addEventListener('mousemove', e => {
-        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-      });
+      if (!isMobile) {
+        document.addEventListener('mousemove', e => {
+          mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+          mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+        }, { passive: true });
+      } else {
+        document.addEventListener('touchmove', e => {
+          if (!e.touches[0]) return;
+          mouseX = (e.touches[0].clientX / window.innerWidth - 0.5) * 2;
+          mouseY = (e.touches[0].clientY / window.innerHeight - 0.5) * 2;
+        }, { passive: true });
+      }
 
       let time = 0;
+      let rafId;
       function animate() {
-        requestAnimationFrame(animate);
+        rafId = requestAnimationFrame(animate);
         time += 0.005;
+
+        // Pause rendering if page not visible (battery saving)
+        if (document.hidden) return;
 
         currentTheme.bg.lerp(targetTheme.bg, LERP_SPEED);
         currentTheme.accent.lerp(targetTheme.accent, LERP_SPEED);
@@ -1065,12 +1311,13 @@
         particlesMesh.rotation.y += 0.0003;
         particlesMesh.rotation.x += 0.0001;
 
-        rings[0].rotation.z += 0.003; rings[0].rotation.x += 0.002;
-        rings[0].position.y = 5 + Math.sin(time * 0.6) * 1.5;
-        rings[1].rotation.z -= 0.004; rings[1].rotation.y += 0.002;
-        rings[1].position.x = 12 + Math.cos(time * 0.5) * 2;
-        rings[2].rotation.x += 0.003; rings[2].rotation.y -= 0.003;
-        rings[2].position.y = 8 + Math.sin(time * 0.7) * 1.5;
+        rings.forEach((r, i) => {
+          r.rotation.z += (i % 2 === 0 ? 0.003 : -0.004);
+          r.rotation.x += 0.002;
+          if (i === 0) r.position.y = 5 + Math.sin(time * 0.6) * 1.5;
+          if (i === 1) r.position.x = 12 + Math.cos(time * 0.5) * 2;
+          if (i === 2) r.position.y = 8 + Math.sin(time * 0.7) * 1.5;
+        });
 
         camera.position.x = Math.sin(time * 0.1) * 1.5 + mouseX * 0.5;
         camera.position.y = 3 + Math.cos(time * 0.15) * 0.8 - mouseY * 0.3;
@@ -1084,7 +1331,7 @@
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio, 2));
       });
     })();
 
