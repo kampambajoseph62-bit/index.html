@@ -11,9 +11,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    /* ============================================
-       RESET & BASE
-       ============================================ */
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
@@ -28,243 +25,139 @@
     img { max-width: 100%; height: auto; display: block; }
     button { font-family: inherit; }
 
-    /* ============================================
-       BACKGROUND CANVAS
-       ============================================ */
-    #canvas-container {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      z-index: 0;
-      pointer-events: none;
-    }
+    #canvas-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
     .overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: radial-gradient(circle at 20% 30%, rgba(10, 10, 20, 0.5) 0%, rgba(11, 11, 15, 0.95) 90%);
-      z-index: 1;
-      pointer-events: none;
-      transition: background 1.2s ease;
+      z-index: 1; pointer-events: none; transition: background 1.2s ease;
     }
-
-    /* ============================================
-       CONTENT WRAPPER
-       ============================================ */
     .content {
-      position: relative;
-      z-index: 2;
-      max-width: 1400px;
-      margin: 0 auto;
+      position: relative; z-index: 2;
+      max-width: 1400px; margin: 0 auto;
       padding: 0 clamp(1rem, 4vw, 2rem);
     }
-
-    /* ============================================
-       TYPOGRAPHY
-       ============================================ */
     h1, h2, h3, h4 { font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
     h1 {
       font-size: clamp(2.2rem, 7vw, 6rem);
       line-height: 1.05;
       background: linear-gradient(135deg, #ffffff 0%, #d4af37 80%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 0.5rem;
-      word-wrap: break-word;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 0.5rem; word-wrap: break-word;
     }
     h2 {
       font-size: clamp(1.6rem, 5vw, 3.5rem);
       margin-bottom: clamp(1.5rem, 3vw, 2rem);
-      position: relative;
-      display: inline-block;
+      position: relative; display: inline-block;
     }
     h2::after {
-      content: '';
-      position: absolute;
-      bottom: -10px; left: 0;
-      width: 50px; height: 4px;
-      background: #d4af37;
-      border-radius: 2px;
+      content: ''; position: absolute; bottom: -10px; left: 0;
+      width: 50px; height: 4px; background: #d4af37; border-radius: 2px;
       transition: background 1s ease;
     }
     p { font-size: clamp(0.95rem, 2.2vw, 1rem); }
-
-    /* ============================================
-       SECTIONS
-       ============================================ */
     .section { padding: clamp(3rem, 8vw, 6rem) 0; }
 
-    /* ============================================
-       BUTTONS
-       ============================================ */
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      display: inline-flex; align-items: center; justify-content: center;
       padding: clamp(0.7rem, 2vw, 0.9rem) clamp(1.4rem, 3vw, 2.2rem);
-      border-radius: 50px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      letter-spacing: 0.5px;
+      border-radius: 50px; font-weight: 600; text-decoration: none;
+      transition: all 0.3s ease; letter-spacing: 0.5px;
       font-size: clamp(0.8rem, 2vw, 0.95rem);
-      border: 2px solid transparent;
-      cursor: pointer;
-      background: transparent;
-      color: white;
-      margin-right: 0.6rem;
-      margin-bottom: 0.6rem;
-      white-space: nowrap;
+      border: 2px solid transparent; cursor: pointer;
+      background: transparent; color: white;
+      margin-right: 0.6rem; margin-bottom: 0.6rem; white-space: nowrap;
     }
     .btn-primary { background: #d4af37; color: #0b0b0f; border-color: #d4af37; }
     .btn-primary:hover { background: transparent; color: #d4af37; transform: translateY(-3px); box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2); }
     .btn-outline { border-color: #ffffff; color: #ffffff; }
     .btn-outline:hover { background: #ffffff; color: #0b0b0f; transform: translateY(-3px); }
 
-    /* ============================================
-       HERO
-       ============================================ */
     .hero {
-      min-height: 100vh;
-      min-height: 100svh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      padding: clamp(4rem, 12vw, 6rem) 0;
+      min-height: 100vh; min-height: 100svh;
+      display: flex; flex-direction: column; justify-content: center;
+      align-items: flex-start; padding: clamp(4rem, 12vw, 6rem) 0;
     }
     .hero-sub {
       font-size: clamp(0.75rem, 2vw, 1.3rem);
-      color: #d4af37;
-      margin-bottom: 0.75rem;
+      color: #d4af37; margin-bottom: 0.75rem;
       letter-spacing: clamp(1px, 0.3vw, 2.5px);
-      text-transform: uppercase;
-      font-weight: 400;
+      text-transform: uppercase; font-weight: 400;
     }
     .hero-tagline {
       font-size: clamp(0.95rem, 2.5vw, 1.5rem);
       color: rgba(255, 255, 255, 0.85);
       margin: clamp(1rem, 3vw, 1.5rem) 0 clamp(1.5rem, 4vw, 2.5rem);
-      max-width: 700px;
-      line-height: 1.5;
+      max-width: 700px; line-height: 1.5;
     }
     .hero-buttons { display: flex; flex-wrap: wrap; gap: 0.3rem; }
 
-    /* ============================================
-       GRIDS
-       ============================================ */
     .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-      gap: clamp(1.5rem, 4vw, 3rem);
-      align-items: center;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+      gap: clamp(1.5rem, 4vw, 3rem); align-items: center;
     }
     .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-      gap: clamp(1rem, 3vw, 2rem);
-      margin-top: 2rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+      gap: clamp(1rem, 3vw, 2rem); margin-top: 2rem;
     }
 
-    /* ============================================
-       CARDS
-       ============================================ */
     .card {
       background: rgba(20, 20, 30, 0.6);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
       border: 1px solid rgba(212, 175, 55, 0.15);
-      border-radius: 24px;
-      padding: clamp(1.4rem, 4vw, 2rem);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      height: 100%;
+      border-radius: 24px; padding: clamp(1.4rem, 4vw, 2rem);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); height: 100%;
     }
-    @media (hover: hover) {
-      .card:hover { transform: translateY(-10px) scale(1.02); border-color: rgba(212, 175, 55, 0.5); }
-    }
+    @media (hover: hover) { .card:hover { transform: translateY(-10px) scale(1.02); border-color: rgba(212, 175, 55, 0.5); } }
     .card i { font-size: clamp(2rem, 5vw, 2.5rem); color: #d4af37; margin-bottom: 1.2rem; }
     .card h3 { font-size: clamp(1.15rem, 3vw, 1.6rem); margin-bottom: 0.8rem; }
     .card p { color: rgba(255, 255, 255, 0.7); font-size: clamp(0.9rem, 2vw, 1rem); }
 
-    /* ============================================
-       PORTFOLIO CATEGORIES
-       ============================================ */
     .categories { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 2rem 0; }
     .category-tag {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(212, 175, 55, 0.3);
-      padding: 0.55rem 1.2rem;
-      border-radius: 40px;
+      padding: 0.55rem 1.2rem; border-radius: 40px;
       font-size: clamp(0.75rem, 2vw, 0.9rem);
-      transition: 0.3s;
-      color: #fff;
-      cursor: default;
+      transition: 0.3s; color: #fff; cursor: default;
     }
     .category-tag:hover { background: #d4af37; color: #0b0b0f; transform: scale(1.05); }
 
-    /* ============================================
-       PROCESS STEPS
-       ============================================ */
     .process-steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
-      gap: clamp(0.8rem, 2vw, 1.5rem);
-      margin-top: 2rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+      gap: clamp(0.8rem, 2vw, 1.5rem); margin-top: 2rem;
     }
     .step {
       background: rgba(30, 30, 40, 0.5);
       padding: clamp(1.2rem, 3vw, 1.5rem);
-      border-radius: 20px;
-      border-left: 4px solid #d4af37;
-      transition: 0.3s;
+      border-radius: 20px; border-left: 4px solid #d4af37; transition: 0.3s;
     }
     .step:hover { background: rgba(212, 175, 55, 0.1); }
     .step-number { font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 800; color: #d4af37; opacity: 0.7; line-height: 1; }
     .step h4 { margin: 0.5rem 0; font-size: clamp(1rem, 2.5vw, 1.2rem); }
     .step p { font-size: clamp(0.8rem, 2vw, 0.9rem); color: rgba(255, 255, 255, 0.6); }
 
-    /* ============================================
-       TESTIMONIALS
-       ============================================ */
     .testimonial-card {
       background: rgba(20, 20, 30, 0.8);
-      border-radius: 24px;
-      padding: clamp(1.5rem, 4vw, 2rem);
+      border-radius: 24px; padding: clamp(1.5rem, 4vw, 2rem);
       border: 1px solid rgba(212, 175, 55, 0.2);
-      font-style: italic;
-      position: relative;
+      font-style: italic; position: relative;
     }
     .testimonial-card::before {
-      content: '"';
-      font-size: clamp(4rem, 10vw, 6rem);
-      color: #d4af37;
-      opacity: 0.2;
-      position: absolute;
-      top: -10px; left: clamp(10px, 2vw, 20px);
-      font-family: serif;
-      line-height: 1;
+      content: '"'; font-size: clamp(4rem, 10vw, 6rem); color: #d4af37;
+      opacity: 0.2; position: absolute; top: -10px; left: clamp(10px, 2vw, 20px);
+      font-family: serif; line-height: 1;
     }
     .testimonial-card p { font-size: clamp(0.95rem, 2.2vw, 1.1rem); margin-bottom: 1.2rem; position: relative; }
     .testimonial-author { color: #d4af37; font-weight: 600; font-style: normal; }
 
-    /* ============================================
-       FAQ
-       ============================================ */
     .faq-item { border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: clamp(0.9rem, 2vw, 1.2rem) 0; }
     .faq-question {
-      font-weight: 600;
-      font-size: clamp(0.95rem, 2.2vw, 1.1rem);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      cursor: pointer;
-      user-select: none;
+      font-weight: 600; font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 1rem; cursor: pointer; user-select: none;
     }
     .faq-answer {
-      max-height: 0;
-      overflow: hidden;
+      max-height: 0; overflow: hidden;
       transition: max-height 0.4s ease, margin 0.4s ease;
       color: rgba(255, 255, 255, 0.7);
       font-size: clamp(0.85rem, 2vw, 1rem);
@@ -274,104 +167,65 @@
     .faq-item.active .faq-question i { transform: rotate(180deg); }
     .faq-question i { transition: transform 0.3s; color: #d4af37; flex-shrink: 0; }
 
-    /* ============================================
-       FOOTER
-       ============================================ */
     .footer {
       padding: clamp(2.5rem, 6vw, 4rem) 0 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.05); text-align: center;
     }
     .footer h3 { font-size: clamp(1.3rem, 3.5vw, 1.8rem); font-weight: 800; }
-    .footer .socials {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin: 1.5rem 0;
-    }
+    .footer .socials { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0; }
     .footer .socials a {
-      color: white;
-      background: rgba(255, 255, 255, 0.05);
-      width: 44px; height: 44px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      font-size: 1.1rem;
-      transition: 0.3s;
-      text-decoration: none;
+      color: white; background: rgba(255, 255, 255, 0.05);
+      width: 44px; height: 44px; display: inline-flex;
+      align-items: center; justify-content: center;
+      border-radius: 50%; font-size: 1.1rem;
+      transition: 0.3s; text-decoration: none;
     }
     .footer .socials a:hover { background: #d4af37; color: #0b0b0f; transform: translateY(-5px); }
     .copyright { margin-top: 1.5rem; color: rgba(255, 255, 255, 0.4); font-size: clamp(0.75rem, 2vw, 0.9rem); }
 
-    /* ============================================
-       SCROLL ANIMATIONS
-       ============================================ */
     .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    /* ============================================
-       GALLERY FILTERS
-       ============================================ */
     .gallery-filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin: 1rem 0 2rem;
-      -webkit-overflow-scrolling: touch;
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin: 1rem 0 2rem; -webkit-overflow-scrolling: touch;
     }
     .filter-btn {
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(212, 175, 55, 0.3);
-      color: #fff;
-      padding: 0.5rem 1.1rem;
+      color: #fff; padding: 0.5rem 1.1rem;
       border-radius: 40px;
       font-size: clamp(0.75rem, 2vw, 0.85rem);
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      white-space: nowrap;
+      font-weight: 500; cursor: pointer;
+      transition: all 0.3s ease; white-space: nowrap;
     }
     .filter-btn:hover { background: rgba(212, 175, 55, 0.15); border-color: #d4af37; transform: translateY(-2px); }
     .filter-btn.active {
-      background: #d4af37;
-      color: #0b0b0f;
+      background: #d4af37; color: #0b0b0f;
       border-color: #d4af37;
       box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
     }
 
-    /* ============================================
-       GALLERY GRID — RESPONSIVE
-       ============================================ */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
-      gap: clamp(0.8rem, 2vw, 1.5rem);
-      margin-top: 1rem;
+      gap: clamp(0.8rem, 2vw, 1.5rem); margin-top: 1rem;
     }
-    @media (min-width: 768px) {
-      .gallery-item:nth-child(5n+1) { grid-column: span 2; }
-    }
+    @media (min-width: 768px) { .gallery-item:nth-child(5n+1) { grid-column: span 2; } }
     .gallery-item {
       position: relative;
       border-radius: clamp(14px, 2vw, 20px);
-      overflow: hidden;
-      aspect-ratio: 16 / 10;
-      cursor: pointer;
-      background: #111;
+      overflow: hidden; aspect-ratio: 16 / 10;
+      cursor: pointer; background: #111;
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
       transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s ease, opacity 0.5s ease;
-      opacity: 0;
-      transform: translateY(30px) scale(0.96);
+      opacity: 0; transform: translateY(30px) scale(0.96);
       will-change: transform;
     }
     .gallery-item.in-view { opacity: 1; transform: translateY(0) scale(1); }
     .gallery-item.hidden { display: none; }
     .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      width: 100%; height: 100%; object-fit: cover;
       transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s ease;
     }
     @media (hover: hover) {
@@ -383,176 +237,116 @@
       .gallery-item:hover img { transform: scale(1.12); filter: brightness(1.15) saturate(1.1); }
     }
     .gallery-overlay {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+      display: flex; flex-direction: column; justify-content: flex-end;
       padding: clamp(0.9rem, 2.5vw, 1.5rem);
-      opacity: 0;
-      transition: opacity 0.4s ease;
+      opacity: 0; transition: opacity 0.4s ease;
     }
-    @media (hover: hover) {
-      .gallery-item:hover .gallery-overlay { opacity: 1; }
-    }
-    @media (hover: none) {
-      .gallery-overlay { opacity: 1; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%); }
-    }
+    @media (hover: hover) { .gallery-item:hover .gallery-overlay { opacity: 1; } }
+    @media (hover: none) { .gallery-overlay { opacity: 1; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%); } }
     .gallery-category {
       font-size: clamp(0.65rem, 1.8vw, 0.75rem);
-      color: #d4af37;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-weight: 600;
-      margin-bottom: 0.3rem;
+      color: #d4af37; letter-spacing: 2px;
+      text-transform: uppercase; font-weight: 600; margin-bottom: 0.3rem;
     }
-    .gallery-title {
-      font-size: clamp(0.95rem, 2.5vw, 1.25rem);
-      font-weight: 700;
-    }
+    .gallery-title { font-size: clamp(0.95rem, 2.5vw, 1.25rem); font-weight: 700; }
     .gallery-badge {
       position: absolute;
       top: clamp(0.6rem, 1.5vw, 1rem);
       right: clamp(0.6rem, 1.5vw, 1rem);
       background: rgba(11, 11, 15, 0.75);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
       border: 1px solid rgba(212, 175, 55, 0.5);
       color: #d4af37;
       font-size: clamp(0.55rem, 1.6vw, 0.65rem);
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      padding: 0.25rem 0.6rem;
-      border-radius: 8px;
-      z-index: 2;
+      font-weight: 700; letter-spacing: 1.5px;
+      padding: 0.25rem 0.6rem; border-radius: 8px; z-index: 2;
     }
 
-    /* ============================================
-       LIGHTBOX — RESPONSIVE
-       ============================================ */
     .lightbox {
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background: rgba(5, 5, 10, 0.96);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      z-index: 9999; display: flex;
+      align-items: center; justify-content: center;
       padding: clamp(0.8rem, 3vw, 2rem);
-      opacity: 0;
-      visibility: hidden;
+      opacity: 0; visibility: hidden;
       transition: opacity 0.4s ease, visibility 0.4s ease;
     }
     .lightbox.open { opacity: 1; visibility: visible; }
     .lightbox-img-wrap {
-      position: relative;
-      max-width: 92vw;
-      max-height: 85vh;
+      position: relative; max-width: 92vw; max-height: 85vh;
       transform: scale(0.85);
       transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      border-radius: clamp(10px, 2vw, 16px);
-      overflow: hidden;
+      border-radius: clamp(10px, 2vw, 16px); overflow: hidden;
       box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 0 1px rgba(212,175,55,0.3);
     }
     .lightbox.open .lightbox-img-wrap { transform: scale(1); }
     .lightbox img { display: block; max-width: 100%; max-height: 85vh; width: auto; height: auto; }
     .lightbox-caption {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
+      position: absolute; bottom: 0; left: 0; right: 0;
       background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
       padding: clamp(1.2rem, 3vw, 2rem) clamp(1rem, 2vw, 1.5rem) clamp(0.8rem, 2vw, 1.2rem);
       font-size: clamp(0.85rem, 2vw, 1rem);
     }
     .lightbox-caption .cat {
-      color: #d4af37;
-      font-size: clamp(0.65rem, 1.8vw, 0.75rem);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-weight: 600;
-      display: block;
-      margin-bottom: 0.3rem;
+      color: #d4af37; font-size: clamp(0.65rem, 1.8vw, 0.75rem);
+      letter-spacing: 2px; text-transform: uppercase;
+      font-weight: 600; display: block; margin-bottom: 0.3rem;
     }
     .lightbox-close {
       position: absolute;
       top: clamp(0.8rem, 2vw, 1.5rem);
       right: clamp(0.8rem, 2vw, 1.5rem);
-      width: clamp(42px, 5vw, 50px);
-      height: clamp(42px, 5vw, 50px);
+      width: clamp(42px, 5vw, 50px); height: clamp(42px, 5vw, 50px);
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(212, 175, 55, 0.4);
-      color: #fff;
-      font-size: clamp(1rem, 2.5vw, 1.3rem);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: 0.3s;
-      z-index: 10000;
+      color: #fff; font-size: clamp(1rem, 2.5vw, 1.3rem);
+      cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      transition: 0.3s; z-index: 10000;
     }
     .lightbox-close:hover { background: #d4af37; color: #0b0b0f; transform: rotate(90deg); }
     .lightbox-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: clamp(42px, 5vw, 55px);
-      height: clamp(42px, 5vw, 55px);
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: clamp(42px, 5vw, 55px); height: clamp(42px, 5vw, 55px);
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(212, 175, 55, 0.4);
-      color: #fff;
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: 0.3s;
-      z-index: 10000;
+      color: #fff; font-size: clamp(1rem, 2.5vw, 1.2rem);
+      cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      transition: 0.3s; z-index: 10000;
     }
     .lightbox-nav:hover { background: #d4af37; color: #0b0b0f; }
     .lightbox-prev { left: clamp(0.5rem, 2vw, 1.5rem); }
     .lightbox-next { right: clamp(0.5rem, 2vw, 1.5rem); }
 
-    /* ============================================
-       STATS BANNER
-       ============================================ */
     .stats-banner {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(50%, 130px), 1fr));
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(min(50%, 130px), 1fr));
       gap: clamp(1rem, 3vw, 1.5rem);
       margin: clamp(2rem, 5vw, 3rem) 0;
       padding: clamp(1.5rem, 4vw, 2.5rem);
       background: rgba(20, 20, 30, 0.5);
       border: 1px solid rgba(212, 175, 55, 0.15);
       border-radius: 24px;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
     }
     .stat-item { text-align: center; }
     .stat-number {
-      font-size: clamp(1.6rem, 5vw, 3rem);
-      font-weight: 800;
-      color: #d4af37;
-      line-height: 1;
-      margin-bottom: 0.4rem;
+      font-size: clamp(1.6rem, 5vw, 3rem); font-weight: 800;
+      color: #d4af37; line-height: 1; margin-bottom: 0.4rem;
     }
     .stat-label {
       font-size: clamp(0.7rem, 2vw, 0.85rem);
       color: rgba(255, 255, 255, 0.6);
-      letter-spacing: 1px;
-      text-transform: uppercase;
+      letter-spacing: 1px; text-transform: uppercase;
     }
 
-    /* ============================================
-       CONTACT BOX
-       ============================================ */
     .contact-info p {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
+      display: flex; align-items: center; gap: 0.6rem;
       margin-bottom: 0.7rem;
       font-size: clamp(0.9rem, 2vw, 1rem);
       word-break: break-word;
@@ -560,8 +354,7 @@
     .contact-info i { color: #d4af37; width: 20px; flex-shrink: 0; }
     .booking-box {
       background: rgba(20,20,30,0.7);
-      border-radius: 24px;
-      padding: clamp(1.4rem, 4vw, 2rem);
+      border-radius: 24px; padding: clamp(1.4rem, 4vw, 2rem);
       border: 1px solid rgba(212,175,55,0.2);
     }
     .booking-box h3 { font-size: clamp(1.05rem, 2.8vw, 1.25rem); margin-bottom: 1rem; }
@@ -572,32 +365,20 @@
       font-size: clamp(0.85rem, 2vw, 1rem);
     }
 
-    /* ============================================
-       MOBILE OPTIMIZATIONS
-       ============================================ */
     @media (max-width: 480px) {
       .gallery-item:nth-child(5n+1) { grid-column: span 1; }
       .gallery-grid { grid-template-columns: 1fr 1fr; }
       .gallery-item { aspect-ratio: 1 / 1; }
       .hero { min-height: 90vh; min-height: 90svh; }
     }
-    @media (max-width: 380px) {
-      .gallery-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-height: 500px) and (orientation: landscape) {
-      .hero { min-height: auto; padding: 5rem 0 3rem; }
-    }
+    @media (max-width: 380px) { .gallery-grid { grid-template-columns: 1fr; } }
+    @media (max-height: 500px) and (orientation: landscape) { .hero { min-height: auto; padding: 5rem 0 3rem; } }
 
-    /* ============================================
-       SCROLLBAR
-       ============================================ */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #0b0b0f; }
     ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #b8942e; }
-    @media (max-width: 768px) {
-      ::-webkit-scrollbar { width: 0; }
-    }
+    @media (max-width: 768px) { ::-webkit-scrollbar { width: 0; } }
   </style>
 </head>
 <body>
@@ -780,27 +561,40 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
     /* ============================================
-       GALLERY DATA — FULL ONLINE URLs
-       These images load directly from GitHub Pages,
-       so no local kay/ folder is needed anymore.
+       GALLERY DATA — YOUR REAL FILENAMES ON GITHUB
+       ============================================
+       Your GitHub repo has these files in /kay/:
+       - 8925c6363afe20148d14ea2397d47089.jpg
+       - images.jpeg
+       - images (1).jpeg  ... (4).jpeg
+       - IMG_0048.JPG.jpeg ... IMG_9020.JPG.jpeg
+       - in.webp
+       - lighting-photography-portrait-03.webp
+
+       The `photo()` helper auto-encodes spaces/parens.
        ============================================ */
     const GITHUB_BASE = 'https://kampambajoseph62-bit.github.io/kay/';
 
+    function photo(filename) {
+      // encodeURI keeps spaces as %20 and parentheses safe
+      return GITHUB_BASE + encodeURI(filename);
+    }
+
     const galleryItems = [
-      { title: 'Traditional Elegance',  category: 'Wedding',     src: GITHUB_BASE + '8925c6363afe20148d14ea2397d47089.jpg' },
-      { title: 'Golden Hour Portrait',  category: 'Portrait',    src: GITHUB_BASE + 'images.jpeg' },
-      { title: 'Heritage Beauty',       category: 'Portrait',    src: GITHUB_BASE + 'images%20(1).jpeg' },
-      { title: 'Forever Begins',        category: 'Wedding',     src: GITHUB_BASE + 'images%20(2).jpeg' },
-      { title: 'Royal Celebration',     category: 'Wedding',     src: GITHUB_BASE + 'images%20(3).jpeg' },
-      { title: 'Bride in Bloom',        category: 'Wedding',     src: GITHUB_BASE + 'images%20(4).jpeg' },
-      { title: 'Behind the Lens',       category: 'Documentary', src: GITHUB_BASE + 'IMG_0048.JPG.jpeg' },
-      { title: 'The Shot',              category: 'Documentary', src: GITHUB_BASE + 'IMG_0090.JPG.jpeg' },
-      { title: 'Event Floor',           category: 'Event',       src: GITHUB_BASE + 'IMG_3564.JPG.jpeg' },
-      { title: 'Gathering Moments',     category: 'Event',       src: GITHUB_BASE + 'IMG_3691.JPG.jpeg' },
-      { title: 'Formal Occasion',       category: 'Event',       src: GITHUB_BASE + 'IMG_6910.JPG.jpeg' },
-      { title: 'Studio Light',          category: 'Commercial',  src: GITHUB_BASE + 'IMG_9020.JPG.jpeg' },
-      { title: 'Stage Performance',     category: 'Music',       src: GITHUB_BASE + 'in.webp' },
-      { title: 'Portrait Study',        category: 'Portrait',    src: GITHUB_BASE + 'lighting-photography-portrait-03.webp' }
+      { title: 'Traditional Elegance',  category: 'Wedding',     src: photo('8925c6363afe20148d14ea2397d47089.jpg') },
+      { title: 'Golden Hour Portrait',  category: 'Portrait',    src: photo('images.jpeg') },
+      { title: 'Heritage Beauty',       category: 'Portrait',    src: photo('images (1).jpeg') },
+      { title: 'Forever Begins',        category: 'Wedding',     src: photo('images (2).jpeg') },
+      { title: 'Royal Celebration',     category: 'Wedding',     src: photo('images (3).jpeg') },
+      { title: 'Bride in Bloom',        category: 'Wedding',     src: photo('images (4).jpeg') },
+      { title: 'Behind the Lens',       category: 'Documentary', src: photo('IMG_0048.JPG.jpeg') },
+      { title: 'The Shot',              category: 'Documentary', src: photo('IMG_0090.JPG.jpeg') },
+      { title: 'Event Floor',           category: 'Event',       src: photo('IMG_3564.JPG.jpeg') },
+      { title: 'Gathering Moments',     category: 'Event',       src: photo('IMG_3691.JPG.jpeg') },
+      { title: 'Formal Occasion',       category: 'Event',       src: photo('IMG_6910.JPG.jpeg') },
+      { title: 'Studio Light',          category: 'Commercial',  src: photo('IMG_9020.JPG.jpeg') },
+      { title: 'Stage Performance',     category: 'Music',       src: photo('in.webp') },
+      { title: 'Portrait Study',        category: 'Portrait',    src: photo('lighting-photography-portrait-03.webp') }
     ];
 
     /* ============================================
@@ -829,7 +623,7 @@
 
         el.innerHTML = `
           <span class="gallery-badge">4K</span>
-          <img src="${item.src}" alt="${item.title} — ${item.category}" loading="lazy" crossorigin="anonymous">
+          <img src="${item.src}" alt="${item.title} — ${item.category}" loading="lazy">
           <div class="gallery-overlay">
             <div class="gallery-category">${item.category}</div>
             <div class="gallery-title">${item.title}</div>
@@ -928,7 +722,6 @@
       }
     });
 
-    /* Touch swipe for lightbox */
     let touchStartX = 0;
     lightbox.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
@@ -937,27 +730,17 @@
       const touchEndX = e.changedTouches[0].screenX;
       const diff = touchStartX - touchEndX;
       if (Math.abs(diff) > 50) {
-        if (diff > 0) {
-          currentLightboxIndex = (currentLightboxIndex + 1) % galleryItems.length;
-        } else {
-          currentLightboxIndex = (currentLightboxIndex - 1 + galleryItems.length) % galleryItems.length;
-        }
+        if (diff > 0) currentLightboxIndex = (currentLightboxIndex + 1) % galleryItems.length;
+        else currentLightboxIndex = (currentLightboxIndex - 1 + galleryItems.length) % galleryItems.length;
         updateLightbox();
       }
     }, { passive: true });
 
     document.addEventListener('keydown', (e) => {
       if (!lightbox.classList.contains('open')) return;
-      if (e.key === 'Escape') {
-        lightbox.classList.remove('open');
-        document.body.style.overflow = '';
-      } else if (e.key === 'ArrowLeft') {
-        currentLightboxIndex = (currentLightboxIndex - 1 + galleryItems.length) % galleryItems.length;
-        updateLightbox();
-      } else if (e.key === 'ArrowRight') {
-        currentLightboxIndex = (currentLightboxIndex + 1) % galleryItems.length;
-        updateLightbox();
-      }
+      if (e.key === 'Escape') { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
+      else if (e.key === 'ArrowLeft') { currentLightboxIndex = (currentLightboxIndex - 1 + galleryItems.length) % galleryItems.length; updateLightbox(); }
+      else if (e.key === 'ArrowRight') { currentLightboxIndex = (currentLightboxIndex + 1) % galleryItems.length; updateLightbox(); }
     });
 
     /* ============================================
@@ -975,12 +758,8 @@
           const increment = target / speed;
           const update = () => {
             current += increment;
-            if (current < target) {
-              el.textContent = Math.ceil(current);
-              requestAnimationFrame(update);
-            } else {
-              el.textContent = target + '+';
-            }
+            if (current < target) { el.textContent = Math.ceil(current); requestAnimationFrame(update); }
+            else el.textContent = target + '+';
           };
           update();
           counterObserver.unobserve(el);
@@ -991,7 +770,6 @@
 
     /* ============================================
        3D CAMERA BACKGROUND
-       Adaptive quality for mobile
        ============================================ */
     (function() {
       const container = document.getElementById('canvas-container');
@@ -1012,17 +790,10 @@
       container.appendChild(renderer.domElement);
 
       scene.add(new THREE.AmbientLight(0x404060, 0.8));
-      const keyLight = new THREE.DirectionalLight(0xd4af37, 1.2);
-      keyLight.position.set(5, 8, 10);
-      scene.add(keyLight);
-      const fillLight = new THREE.PointLight(0xd4af37, 0.6, 50);
-      fillLight.position.set(-8, 4, 8);
-      scene.add(fillLight);
-      const rimLight = new THREE.PointLight(0xd4af37, 0.4, 40);
-      rimLight.position.set(0, -5, -10);
-      scene.add(rimLight);
+      const keyLight = new THREE.DirectionalLight(0xd4af37, 1.2); keyLight.position.set(5, 8, 10); scene.add(keyLight);
+      const fillLight = new THREE.PointLight(0xd4af37, 0.6, 50); fillLight.position.set(-8, 4, 8); scene.add(fillLight);
+      const rimLight = new THREE.PointLight(0xd4af37, 0.4, 40); rimLight.position.set(0, -5, -10); scene.add(rimLight);
 
-      /* CAMERA MODEL */
       const cameraGroup = new THREE.Group();
       const bodyMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.5, metalness: 0.7 });
       const accentMat = new THREE.MeshStandardMaterial({ color: 0xd4af37, roughness: 0.3, metalness: 0.9, emissive: 0x221100 });
@@ -1034,106 +805,76 @@
       });
       const reelMat = new THREE.MeshStandardMaterial({ color: 0x2a2a2a, roughness: 0.6, metalness: 0.5 });
 
-      const body = new THREE.Mesh(new THREE.BoxGeometry(6, 3.4, 3.2), bodyMat);
-      cameraGroup.add(body);
-
+      cameraGroup.add(new THREE.Mesh(new THREE.BoxGeometry(6, 3.4, 3.2), bodyMat));
       const handle = new THREE.Mesh(new THREE.BoxGeometry(2.5, 0.6, 0.8), bodyMat);
-      handle.position.set(0, 2.1, 0);
-      cameraGroup.add(handle);
+      handle.position.set(0, 2.1, 0); cameraGroup.add(handle);
       const stripGeo = new THREE.BoxGeometry(2.5, 0.08, 0.85);
       [2.35, 1.9].forEach(y => {
-        const s = new THREE.Mesh(stripGeo, accentMat);
-        s.position.set(0, y, 0);
-        cameraGroup.add(s);
+        const s = new THREE.Mesh(stripGeo, accentMat); s.position.set(0, y, 0); cameraGroup.add(s);
       });
 
       const lensGroup = new THREE.Group();
       lensGroup.position.set(0, 0, 1.6);
       const lensOuter = new THREE.Mesh(new THREE.CylinderGeometry(1.6, 1.6, 1.2, 32), lensMat);
-      lensOuter.rotation.x = Math.PI / 2;
-      lensGroup.add(lensOuter);
+      lensOuter.rotation.x = Math.PI / 2; lensGroup.add(lensOuter);
       [0.6, -0.6].forEach(z => {
         const r = new THREE.Mesh(new THREE.TorusGeometry(1.62, 0.08, 12, 48), accentMat);
-        r.position.z = z;
-        lensGroup.add(r);
+        r.position.z = z; lensGroup.add(r);
       });
       const lensInner = new THREE.Mesh(new THREE.CylinderGeometry(1.2, 1.2, 1.3, 32), lensMat);
-      lensInner.rotation.x = Math.PI / 2;
-      lensInner.position.z = 0.1;
-      lensGroup.add(lensInner);
-      const glassElement = new THREE.Mesh(
-        new THREE.SphereGeometry(1.05, 24, 24, 0, Math.PI * 2, 0, Math.PI / 3),
-        glassMat
-      );
-      glassElement.rotation.x = -Math.PI / 2;
-      glassElement.position.z = 1.15;
-      lensGroup.add(glassElement);
+      lensInner.rotation.x = Math.PI / 2; lensInner.position.z = 0.1; lensGroup.add(lensInner);
+      const glassElement = new THREE.Mesh(new THREE.SphereGeometry(1.05, 24, 24, 0, Math.PI * 2, 0, Math.PI / 3), glassMat);
+      glassElement.rotation.x = -Math.PI / 2; glassElement.position.z = 1.15; lensGroup.add(glassElement);
       const apertureRing = new THREE.Mesh(new THREE.TorusGeometry(1.35, 0.1, 12, 48), accentMat);
-      apertureRing.position.z = 1.0;
-      lensGroup.add(apertureRing);
+      apertureRing.position.z = 1.0; lensGroup.add(apertureRing);
       cameraGroup.add(lensGroup);
 
       const focusRing = new THREE.Mesh(new THREE.TorusGeometry(1.7, 0.12, 12, 48), accentMat);
-      focusRing.position.set(0, 0, 2.2);
-      cameraGroup.add(focusRing);
+      focusRing.position.set(0, 0, 2.2); cameraGroup.add(focusRing);
 
       const gripCount = isMobile ? 12 : 24;
       for (let i = 0; i < gripCount; i++) {
         const angle = (i / gripCount) * Math.PI * 2;
         const grip = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.2, 0.3), bodyMat);
         grip.position.set(Math.cos(angle) * 1.7, Math.sin(angle) * 1.7, 2.2);
-        grip.rotation.z = angle;
-        cameraGroup.add(grip);
+        grip.rotation.z = angle; cameraGroup.add(grip);
       }
 
       const buttonGeo = new THREE.CylinderGeometry(0.15, 0.15, 0.15, 12);
       [[-1.8, 1.85, 0.8], [-1.2, 1.85, 0.8], [-0.6, 1.85, 0.8], [1.2, 1.85, 0.8]].forEach(p => {
-        const b = new THREE.Mesh(buttonGeo, accentMat);
-        b.position.set(p[0], p[1], p[2]);
-        cameraGroup.add(b);
+        const b = new THREE.Mesh(buttonGeo, accentMat); b.position.set(p[0], p[1], p[2]); cameraGroup.add(b);
       });
 
       const screenFrame = new THREE.Mesh(new THREE.BoxGeometry(0.1, 1.5, 2.2), bodyMat);
-      screenFrame.position.set(3.05, 0.2, 0);
-      cameraGroup.add(screenFrame);
+      screenFrame.position.set(3.05, 0.2, 0); cameraGroup.add(screenFrame);
       const screen = new THREE.Mesh(
         new THREE.PlaneGeometry(2.0, 1.3),
         new THREE.MeshStandardMaterial({ color: 0x0a1a2a, emissive: 0x112244, emissiveIntensity: 0.5, roughness: 0.2 })
       );
-      screen.position.set(3.12, 0.2, 0);
-      screen.rotation.y = Math.PI / 2;
-      cameraGroup.add(screen);
+      screen.position.set(3.12, 0.2, 0); screen.rotation.y = Math.PI / 2; cameraGroup.add(screen);
 
       const reelGroup = new THREE.Group();
       reelGroup.position.set(0, 2.8, 0);
       const reelDisc = new THREE.Mesh(new THREE.CylinderGeometry(1.1, 1.1, 0.25, 24), reelMat);
-      reelDisc.rotation.x = Math.PI / 2;
-      reelGroup.add(reelDisc);
+      reelDisc.rotation.x = Math.PI / 2; reelGroup.add(reelDisc);
       const reelHub = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.35, 12), accentMat);
-      reelHub.rotation.x = Math.PI / 2;
-      reelGroup.add(reelHub);
+      reelHub.rotation.x = Math.PI / 2; reelGroup.add(reelHub);
       for (let i = 0; i < 4; i++) {
         const spoke = new THREE.Mesh(new THREE.BoxGeometry(0.08, 1.8, 0.05), accentMat);
-        spoke.rotation.z = (i / 4) * Math.PI * 2;
-        reelGroup.add(spoke);
+        spoke.rotation.z = (i / 4) * Math.PI * 2; reelGroup.add(spoke);
       }
       const reelRing = new THREE.Mesh(new THREE.TorusGeometry(1.1, 0.06, 10, 36), accentMat);
-      reelGroup.add(reelRing);
-      cameraGroup.add(reelGroup);
+      reelGroup.add(reelRing); cameraGroup.add(reelGroup);
 
       const frontBar = new THREE.Mesh(new THREE.BoxGeometry(4.5, 0.15, 0.15), accentMat);
-      frontBar.position.set(0, -1.4, 1.65);
-      cameraGroup.add(frontBar);
+      frontBar.position.set(0, -1.4, 1.65); cameraGroup.add(frontBar);
       const brandPlate = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.4, 0.05), accentMat);
-      brandPlate.position.set(-1.5, 0.6, 1.65);
-      cameraGroup.add(brandPlate);
+      brandPlate.position.set(-1.5, 0.6, 1.65); cameraGroup.add(brandPlate);
 
       const leftGrip = new THREE.Mesh(new THREE.BoxGeometry(0.4, 2.8, 0.6), bodyMat);
-      leftGrip.position.set(-3.2, 0, 0);
-      cameraGroup.add(leftGrip);
+      leftGrip.position.set(-3.2, 0, 0); cameraGroup.add(leftGrip);
       const gripAccent = new THREE.Mesh(new THREE.BoxGeometry(0.15, 2.6, 0.65), accentMat);
-      gripAccent.position.set(-3.45, 0, 0);
-      cameraGroup.add(gripAccent);
+      gripAccent.position.set(-3.45, 0, 0); cameraGroup.add(gripAccent);
 
       cameraGroup.position.set(0, 1, 0);
       cameraGroup.rotation.y = -0.3;
@@ -1243,7 +984,6 @@
       function animate() {
         requestAnimationFrame(animate);
         time += 0.005;
-
         if (document.hidden) return;
 
         currentTheme.bg.lerp(targetTheme.bg, LERP_SPEED);
