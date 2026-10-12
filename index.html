@@ -4,13 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta name="theme-color" content="#0b0b0f">
-  <meta name="description" content="Kay Official TGD CHEZZI — Professional Videographer, Content Creator & Camera Operator. Capturing Stories. Creating Impact.">
+  <meta name="description" content="Kay Official TGD CHEZZI — Professional Videographer, Content Creator & Camera Operator. Capturing Stories. Creating Impact. Website by Codex-Banx.">
   <title>Kay Official TGD CHEZZI | Videographer & Content Creator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Favicon: Codex-Banx mark -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpolygon points='100,14 174,57 174,143 100,186 26,143 26,57' fill='none' stroke='%23d4af37' stroke-width='6' stroke-linejoin='round'/%3E%3Cpath d='M 62 70 L 44 100 L 62 130' fill='none' stroke='%23d4af37' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M 138 70 L 156 100 L 138 130' fill='none' stroke='%23d4af37' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='100' cy='100' r='9' fill='%23fff'/%3E%3C/svg%3E">
   <style>
+    /* ============================================
+       RESET & BASE
+       ============================================ */
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
@@ -25,139 +30,347 @@
     img { max-width: 100%; height: auto; display: block; }
     button { font-family: inherit; }
 
-    #canvas-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
-    .overlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(circle at 20% 30%, rgba(10, 10, 20, 0.5) 0%, rgba(11, 11, 15, 0.95) 90%);
-      z-index: 1; pointer-events: none; transition: background 1.2s ease;
+    /* ============================================
+       BACKGROUND CANVAS
+       ============================================ */
+    #canvas-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
     }
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(circle at 20% 30%, rgba(10, 10, 20, 0.5) 0%, rgba(11, 11, 15, 0.95) 90%);
+      z-index: 1;
+      pointer-events: none;
+      transition: background 1.2s ease;
+    }
+
+    /* ============================================
+       CODEX-BANX HEADER (Site builder credit)
+       ============================================ */
+    .codex-header {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.55rem 1rem 0.55rem 0.7rem;
+      background: rgba(11, 11, 15, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .codex-header:hover {
+      border-color: rgba(212, 175, 55, 0.6);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25);
+      transform: translateY(-2px);
+    }
+    .codex-header-mark {
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+      filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+    }
+    .codex-header-mark svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+    .codex-header-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+      gap: 0.15rem;
+    }
+    .codex-header-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+    }
+    .codex-header-name .dot {
+      color: #d4af37;
+      display: inline-block;
+      animation: codexDotBlink 2s ease-in-out infinite;
+    }
+    .codex-header-tag {
+      font-size: 0.55rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(212, 175, 55, 0.75);
+    }
+
+    @keyframes codexDotBlink {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0.3; }
+    }
+
+    /* Rotating logo pieces */
+    .codex-ring-outer {
+      transform-origin: 100px 100px;
+      animation: codexSpinSlow 22s linear infinite;
+    }
+    @keyframes codexSpinSlow {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    .codex-ring-mid {
+      transform-origin: 100px 100px;
+      animation: codexSpinReverse 16s linear infinite;
+    }
+    @keyframes codexSpinReverse {
+      from { transform: rotate(360deg); }
+      to   { transform: rotate(0deg); }
+    }
+    .codex-center-node {
+      transform-origin: 100px 100px;
+      animation: codexPulse 2.4s ease-in-out infinite;
+    }
+    @keyframes codexPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%      { transform: scale(1.15); opacity: 0.85; }
+    }
+    .codex-orbit-dot {
+      animation: codexOrbit 8s linear infinite;
+      transform-origin: 100px 100px;
+    }
+    .codex-orbit-dot:nth-child(2) { animation-duration: 12s; animation-direction: reverse; }
+    .codex-orbit-dot:nth-child(3) { animation-duration: 10s; }
+
+    @keyframes codexOrbit {
+      from { transform: rotate(0deg) translateX(88px) rotate(0deg); }
+      to   { transform: rotate(360deg) translateX(88px) rotate(-360deg); }
+    }
+
+    /* ============================================
+       CONTENT WRAPPER
+       ============================================ */
     .content {
-      position: relative; z-index: 2;
-      max-width: 1400px; margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      max-width: 1400px;
+      margin: 0 auto;
       padding: 0 clamp(1rem, 4vw, 2rem);
     }
+
+    /* ============================================
+       TYPOGRAPHY
+       ============================================ */
     h1, h2, h3, h4 { font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
     h1 {
       font-size: clamp(2.2rem, 7vw, 6rem);
       line-height: 1.05;
       background: linear-gradient(135deg, #ffffff 0%, #d4af37 80%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      margin-bottom: 0.5rem; word-wrap: break-word;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+      word-wrap: break-word;
     }
     h2 {
       font-size: clamp(1.6rem, 5vw, 3.5rem);
       margin-bottom: clamp(1.5rem, 3vw, 2rem);
-      position: relative; display: inline-block;
+      position: relative;
+      display: inline-block;
     }
     h2::after {
-      content: ''; position: absolute; bottom: -10px; left: 0;
-      width: 50px; height: 4px; background: #d4af37; border-radius: 2px;
+      content: '';
+      position: absolute;
+      bottom: -10px; left: 0;
+      width: 50px; height: 4px;
+      background: #d4af37;
+      border-radius: 2px;
       transition: background 1s ease;
     }
     p { font-size: clamp(0.95rem, 2.2vw, 1rem); }
+
+    /* ============================================
+       SECTIONS
+       ============================================ */
     .section { padding: clamp(3rem, 8vw, 6rem) 0; }
 
+    /* ============================================
+       BUTTONS
+       ============================================ */
     .btn {
-      display: inline-flex; align-items: center; justify-content: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       padding: clamp(0.7rem, 2vw, 0.9rem) clamp(1.4rem, 3vw, 2.2rem);
-      border-radius: 50px; font-weight: 600; text-decoration: none;
-      transition: all 0.3s ease; letter-spacing: 0.5px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      letter-spacing: 0.5px;
       font-size: clamp(0.8rem, 2vw, 0.95rem);
-      border: 2px solid transparent; cursor: pointer;
-      background: transparent; color: white;
-      margin-right: 0.6rem; margin-bottom: 0.6rem; white-space: nowrap;
+      border: 2px solid transparent;
+      cursor: pointer;
+      background: transparent;
+      color: white;
+      margin-right: 0.6rem;
+      margin-bottom: 0.6rem;
+      white-space: nowrap;
     }
     .btn-primary { background: #d4af37; color: #0b0b0f; border-color: #d4af37; }
     .btn-primary:hover { background: transparent; color: #d4af37; transform: translateY(-3px); box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2); }
     .btn-outline { border-color: #ffffff; color: #ffffff; }
     .btn-outline:hover { background: #ffffff; color: #0b0b0f; transform: translateY(-3px); }
 
+    /* ============================================
+       HERO
+       ============================================ */
     .hero {
-      min-height: 100vh; min-height: 100svh;
-      display: flex; flex-direction: column; justify-content: center;
-      align-items: flex-start; padding: clamp(4rem, 12vw, 6rem) 0;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: clamp(4rem, 12vw, 6rem) 0;
     }
     .hero-sub {
       font-size: clamp(0.75rem, 2vw, 1.3rem);
-      color: #d4af37; margin-bottom: 0.75rem;
+      color: #d4af37;
+      margin-bottom: 0.75rem;
       letter-spacing: clamp(1px, 0.3vw, 2.5px);
-      text-transform: uppercase; font-weight: 400;
+      text-transform: uppercase;
+      font-weight: 400;
     }
     .hero-tagline {
       font-size: clamp(0.95rem, 2.5vw, 1.5rem);
       color: rgba(255, 255, 255, 0.85);
       margin: clamp(1rem, 3vw, 1.5rem) 0 clamp(1.5rem, 4vw, 2.5rem);
-      max-width: 700px; line-height: 1.5;
+      max-width: 700px;
+      line-height: 1.5;
     }
     .hero-buttons { display: flex; flex-wrap: wrap; gap: 0.3rem; }
 
+    /* ============================================
+       GRIDS
+       ============================================ */
     .grid-2 {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-      gap: clamp(1.5rem, 4vw, 3rem); align-items: center;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+      gap: clamp(1.5rem, 4vw, 3rem);
+      align-items: center;
     }
     .grid-3 {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-      gap: clamp(1rem, 3vw, 2rem); margin-top: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+      gap: clamp(1rem, 3vw, 2rem);
+      margin-top: 2rem;
     }
 
+    /* ============================================
+       CARDS
+       ============================================ */
     .card {
       background: rgba(20, 20, 30, 0.6);
-      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border: 1px solid rgba(212, 175, 55, 0.15);
-      border-radius: 24px; padding: clamp(1.4rem, 4vw, 2rem);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); height: 100%;
+      border-radius: 24px;
+      padding: clamp(1.4rem, 4vw, 2rem);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      height: 100%;
     }
-    @media (hover: hover) { .card:hover { transform: translateY(-10px) scale(1.02); border-color: rgba(212, 175, 55, 0.5); } }
+    @media (hover: hover) {
+      .card:hover { transform: translateY(-10px) scale(1.02); border-color: rgba(212, 175, 55, 0.5); }
+    }
     .card i { font-size: clamp(2rem, 5vw, 2.5rem); color: #d4af37; margin-bottom: 1.2rem; }
     .card h3 { font-size: clamp(1.15rem, 3vw, 1.6rem); margin-bottom: 0.8rem; }
     .card p { color: rgba(255, 255, 255, 0.7); font-size: clamp(0.9rem, 2vw, 1rem); }
 
+    /* ============================================
+       PORTFOLIO CATEGORIES
+       ============================================ */
     .categories { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 2rem 0; }
     .category-tag {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(212, 175, 55, 0.3);
-      padding: 0.55rem 1.2rem; border-radius: 40px;
+      padding: 0.55rem 1.2rem;
+      border-radius: 40px;
       font-size: clamp(0.75rem, 2vw, 0.9rem);
-      transition: 0.3s; color: #fff; cursor: default;
+      transition: 0.3s;
+      color: #fff;
+      cursor: default;
     }
     .category-tag:hover { background: #d4af37; color: #0b0b0f; transform: scale(1.05); }
 
+    /* ============================================
+       PROCESS STEPS
+       ============================================ */
     .process-steps {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
-      gap: clamp(0.8rem, 2vw, 1.5rem); margin-top: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+      gap: clamp(0.8rem, 2vw, 1.5rem);
+      margin-top: 2rem;
     }
     .step {
       background: rgba(30, 30, 40, 0.5);
       padding: clamp(1.2rem, 3vw, 1.5rem);
-      border-radius: 20px; border-left: 4px solid #d4af37; transition: 0.3s;
+      border-radius: 20px;
+      border-left: 4px solid #d4af37;
+      transition: 0.3s;
     }
     .step:hover { background: rgba(212, 175, 55, 0.1); }
     .step-number { font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 800; color: #d4af37; opacity: 0.7; line-height: 1; }
     .step h4 { margin: 0.5rem 0; font-size: clamp(1rem, 2.5vw, 1.2rem); }
     .step p { font-size: clamp(0.8rem, 2vw, 0.9rem); color: rgba(255, 255, 255, 0.6); }
 
+    /* ============================================
+       TESTIMONIALS
+       ============================================ */
     .testimonial-card {
       background: rgba(20, 20, 30, 0.8);
-      border-radius: 24px; padding: clamp(1.5rem, 4vw, 2rem);
+      border-radius: 24px;
+      padding: clamp(1.5rem, 4vw, 2rem);
       border: 1px solid rgba(212, 175, 55, 0.2);
-      font-style: italic; position: relative;
+      font-style: italic;
+      position: relative;
     }
     .testimonial-card::before {
-      content: '"'; font-size: clamp(4rem, 10vw, 6rem); color: #d4af37;
-      opacity: 0.2; position: absolute; top: -10px; left: clamp(10px, 2vw, 20px);
-      font-family: serif; line-height: 1;
+      content: '"';
+      font-size: clamp(4rem, 10vw, 6rem);
+      color: #d4af37;
+      opacity: 0.2;
+      position: absolute;
+      top: -10px; left: clamp(10px, 2vw, 20px);
+      font-family: serif;
+      line-height: 1;
     }
     .testimonial-card p { font-size: clamp(0.95rem, 2.2vw, 1.1rem); margin-bottom: 1.2rem; position: relative; }
     .testimonial-author { color: #d4af37; font-weight: 600; font-style: normal; }
 
+    /* ============================================
+       FAQ
+       ============================================ */
     .faq-item { border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: clamp(0.9rem, 2vw, 1.2rem) 0; }
     .faq-question {
-      font-weight: 600; font-size: clamp(0.95rem, 2.2vw, 1.1rem);
-      display: flex; justify-content: space-between; align-items: center;
-      gap: 1rem; cursor: pointer; user-select: none;
+      font-weight: 600;
+      font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      user-select: none;
     }
     .faq-answer {
-      max-height: 0; overflow: hidden;
+      max-height: 0;
+      overflow: hidden;
       transition: max-height 0.4s ease, margin 0.4s ease;
       color: rgba(255, 255, 255, 0.7);
       font-size: clamp(0.85rem, 2vw, 1rem);
@@ -167,65 +380,190 @@
     .faq-item.active .faq-question i { transform: rotate(180deg); }
     .faq-question i { transition: transform 0.3s; color: #d4af37; flex-shrink: 0; }
 
+    /* ============================================
+       FOOTER
+       ============================================ */
     .footer {
       padding: clamp(2.5rem, 6vw, 4rem) 0 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05); text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
     }
     .footer h3 { font-size: clamp(1.3rem, 3.5vw, 1.8rem); font-weight: 800; }
-    .footer .socials { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0; }
+    .footer .socials {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1.5rem 0;
+    }
     .footer .socials a {
-      color: white; background: rgba(255, 255, 255, 0.05);
-      width: 44px; height: 44px; display: inline-flex;
-      align-items: center; justify-content: center;
-      border-radius: 50%; font-size: 1.1rem;
-      transition: 0.3s; text-decoration: none;
+      color: white;
+      background: rgba(255, 255, 255, 0.05);
+      width: 44px; height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      transition: 0.3s;
+      text-decoration: none;
     }
     .footer .socials a:hover { background: #d4af37; color: #0b0b0f; transform: translateY(-5px); }
     .copyright { margin-top: 1.5rem; color: rgba(255, 255, 255, 0.4); font-size: clamp(0.75rem, 2vw, 0.9rem); }
 
+    /* ============================================
+       FOOTER — CODEX-BANX BADGE
+       ============================================ */
+    .codex-badge {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.9rem;
+    }
+    .codex-badge-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+      font-weight: 500;
+    }
+    .codex-badge-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 0.8rem 1.6rem;
+      background: rgba(20, 20, 30, 0.6);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .codex-badge-link:hover {
+      border-color: rgba(212, 175, 55, 0.6);
+      box-shadow: 0 15px 40px rgba(212, 175, 55, 0.2);
+      transform: translateY(-3px);
+      background: rgba(212, 175, 55, 0.05);
+    }
+    .codex-badge-mark {
+      width: 46px;
+      height: 46px;
+      flex-shrink: 0;
+      filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
+      animation: codexFloat 6s ease-in-out infinite;
+    }
+    @keyframes codexFloat {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-4px); }
+    }
+    .codex-badge-mark svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+    .codex-badge-text {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      line-height: 1;
+      gap: 0.25rem;
+    }
+    .codex-badge-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #ffffff 0%, #d4af37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .codex-badge-name .dot {
+      color: #d4af37;
+      -webkit-text-fill-color: #d4af37;
+      animation: codexDotBlink 2s ease-in-out infinite;
+      display: inline-block;
+    }
+    .codex-badge-tag {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(212, 175, 55, 0.8);
+    }
+
+    /* ============================================
+       SCROLL ANIMATIONS
+       ============================================ */
     .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
+    /* ============================================
+       GALLERY FILTERS
+       ============================================ */
     .gallery-filters {
-      display: flex; flex-wrap: wrap; gap: 0.5rem;
-      margin: 1rem 0 2rem; -webkit-overflow-scrolling: touch;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0 2rem;
+      -webkit-overflow-scrolling: touch;
     }
     .filter-btn {
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(212, 175, 55, 0.3);
-      color: #fff; padding: 0.5rem 1.1rem;
+      color: #fff;
+      padding: 0.5rem 1.1rem;
       border-radius: 40px;
       font-size: clamp(0.75rem, 2vw, 0.85rem);
-      font-weight: 500; cursor: pointer;
-      transition: all 0.3s ease; white-space: nowrap;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
     }
     .filter-btn:hover { background: rgba(212, 175, 55, 0.15); border-color: #d4af37; transform: translateY(-2px); }
     .filter-btn.active {
-      background: #d4af37; color: #0b0b0f;
+      background: #d4af37;
+      color: #0b0b0f;
       border-color: #d4af37;
       box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
     }
 
+    /* ============================================
+       GALLERY GRID
+       ============================================ */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
-      gap: clamp(0.8rem, 2vw, 1.5rem); margin-top: 1rem;
+      gap: clamp(0.8rem, 2vw, 1.5rem);
+      margin-top: 1rem;
     }
-    @media (min-width: 768px) { .gallery-item:nth-child(5n+1) { grid-column: span 2; } }
+    @media (min-width: 768px) {
+      .gallery-item:nth-child(5n+1) { grid-column: span 2; }
+    }
     .gallery-item {
       position: relative;
       border-radius: clamp(14px, 2vw, 20px);
-      overflow: hidden; aspect-ratio: 16 / 10;
-      cursor: pointer; background: #111;
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+      cursor: pointer;
+      background: #111;
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
       transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s ease, opacity 0.5s ease;
-      opacity: 0; transform: translateY(30px) scale(0.96);
+      opacity: 0;
+      transform: translateY(30px) scale(0.96);
       will-change: transform;
     }
     .gallery-item.in-view { opacity: 1; transform: translateY(0) scale(1); }
     .gallery-item.hidden { display: none; }
     .gallery-item img {
-      width: 100%; height: 100%; object-fit: cover;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s ease;
     }
     @media (hover: hover) {
@@ -237,116 +575,176 @@
       .gallery-item:hover img { transform: scale(1.12); filter: brightness(1.15) saturate(1.1); }
     }
     .gallery-overlay {
-      position: absolute; inset: 0;
+      position: absolute;
+      inset: 0;
       background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
-      display: flex; flex-direction: column; justify-content: flex-end;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
       padding: clamp(0.9rem, 2.5vw, 1.5rem);
-      opacity: 0; transition: opacity 0.4s ease;
+      opacity: 0;
+      transition: opacity 0.4s ease;
     }
-    @media (hover: hover) { .gallery-item:hover .gallery-overlay { opacity: 1; } }
-    @media (hover: none) { .gallery-overlay { opacity: 1; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%); } }
+    @media (hover: hover) {
+      .gallery-item:hover .gallery-overlay { opacity: 1; }
+    }
+    @media (hover: none) {
+      .gallery-overlay { opacity: 1; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%); }
+    }
     .gallery-category {
       font-size: clamp(0.65rem, 1.8vw, 0.75rem);
-      color: #d4af37; letter-spacing: 2px;
-      text-transform: uppercase; font-weight: 600; margin-bottom: 0.3rem;
+      color: #d4af37;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
     }
-    .gallery-title { font-size: clamp(0.95rem, 2.5vw, 1.25rem); font-weight: 700; }
+    .gallery-title {
+      font-size: clamp(0.95rem, 2.5vw, 1.25rem);
+      font-weight: 700;
+    }
     .gallery-badge {
       position: absolute;
       top: clamp(0.6rem, 1.5vw, 1rem);
       right: clamp(0.6rem, 1.5vw, 1rem);
       background: rgba(11, 11, 15, 0.75);
-      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       border: 1px solid rgba(212, 175, 55, 0.5);
       color: #d4af37;
       font-size: clamp(0.55rem, 1.6vw, 0.65rem);
-      font-weight: 700; letter-spacing: 1.5px;
-      padding: 0.25rem 0.6rem; border-radius: 8px; z-index: 2;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      padding: 0.25rem 0.6rem;
+      border-radius: 8px;
+      z-index: 2;
     }
 
+    /* ============================================
+       LIGHTBOX
+       ============================================ */
     .lightbox {
-      position: fixed; inset: 0;
+      position: fixed;
+      inset: 0;
       background: rgba(5, 5, 10, 0.96);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      z-index: 9999; display: flex;
-      align-items: center; justify-content: center;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: clamp(0.8rem, 3vw, 2rem);
-      opacity: 0; visibility: hidden;
+      opacity: 0;
+      visibility: hidden;
       transition: opacity 0.4s ease, visibility 0.4s ease;
     }
     .lightbox.open { opacity: 1; visibility: visible; }
     .lightbox-img-wrap {
-      position: relative; max-width: 92vw; max-height: 85vh;
+      position: relative;
+      max-width: 92vw;
+      max-height: 85vh;
       transform: scale(0.85);
       transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      border-radius: clamp(10px, 2vw, 16px); overflow: hidden;
+      border-radius: clamp(10px, 2vw, 16px);
+      overflow: hidden;
       box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 0 1px rgba(212,175,55,0.3);
     }
     .lightbox.open .lightbox-img-wrap { transform: scale(1); }
     .lightbox img { display: block; max-width: 100%; max-height: 85vh; width: auto; height: auto; }
     .lightbox-caption {
-      position: absolute; bottom: 0; left: 0; right: 0;
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
       background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
       padding: clamp(1.2rem, 3vw, 2rem) clamp(1rem, 2vw, 1.5rem) clamp(0.8rem, 2vw, 1.2rem);
       font-size: clamp(0.85rem, 2vw, 1rem);
     }
     .lightbox-caption .cat {
-      color: #d4af37; font-size: clamp(0.65rem, 1.8vw, 0.75rem);
-      letter-spacing: 2px; text-transform: uppercase;
-      font-weight: 600; display: block; margin-bottom: 0.3rem;
+      color: #d4af37;
+      font-size: clamp(0.65rem, 1.8vw, 0.75rem);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.3rem;
     }
     .lightbox-close {
       position: absolute;
       top: clamp(0.8rem, 2vw, 1.5rem);
       right: clamp(0.8rem, 2vw, 1.5rem);
-      width: clamp(42px, 5vw, 50px); height: clamp(42px, 5vw, 50px);
+      width: clamp(42px, 5vw, 50px);
+      height: clamp(42px, 5vw, 50px);
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(212, 175, 55, 0.4);
-      color: #fff; font-size: clamp(1rem, 2.5vw, 1.3rem);
-      cursor: pointer; display: flex;
-      align-items: center; justify-content: center;
-      transition: 0.3s; z-index: 10000;
+      color: #fff;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+      z-index: 10000;
     }
     .lightbox-close:hover { background: #d4af37; color: #0b0b0f; transform: rotate(90deg); }
     .lightbox-nav {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      width: clamp(42px, 5vw, 55px); height: clamp(42px, 5vw, 55px);
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: clamp(42px, 5vw, 55px);
+      height: clamp(42px, 5vw, 55px);
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(212, 175, 55, 0.4);
-      color: #fff; font-size: clamp(1rem, 2.5vw, 1.2rem);
-      cursor: pointer; display: flex;
-      align-items: center; justify-content: center;
-      transition: 0.3s; z-index: 10000;
+      color: #fff;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+      z-index: 10000;
     }
     .lightbox-nav:hover { background: #d4af37; color: #0b0b0f; }
     .lightbox-prev { left: clamp(0.5rem, 2vw, 1.5rem); }
     .lightbox-next { right: clamp(0.5rem, 2vw, 1.5rem); }
 
+    /* ============================================
+       STATS BANNER
+       ============================================ */
     .stats-banner {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(min(50%, 130px), 1fr));
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(50%, 130px), 1fr));
       gap: clamp(1rem, 3vw, 1.5rem);
       margin: clamp(2rem, 5vw, 3rem) 0;
       padding: clamp(1.5rem, 4vw, 2.5rem);
       background: rgba(20, 20, 30, 0.5);
       border: 1px solid rgba(212, 175, 55, 0.15);
       border-radius: 24px;
-      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
     .stat-item { text-align: center; }
     .stat-number {
-      font-size: clamp(1.6rem, 5vw, 3rem); font-weight: 800;
-      color: #d4af37; line-height: 1; margin-bottom: 0.4rem;
+      font-size: clamp(1.6rem, 5vw, 3rem);
+      font-weight: 800;
+      color: #d4af37;
+      line-height: 1;
+      margin-bottom: 0.4rem;
     }
     .stat-label {
       font-size: clamp(0.7rem, 2vw, 0.85rem);
       color: rgba(255, 255, 255, 0.6);
-      letter-spacing: 1px; text-transform: uppercase;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
+    /* ============================================
+       CONTACT BOX
+       ============================================ */
     .contact-info p {
-      display: flex; align-items: center; gap: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
       margin-bottom: 0.7rem;
       font-size: clamp(0.9rem, 2vw, 1rem);
       word-break: break-word;
@@ -354,7 +752,8 @@
     .contact-info i { color: #d4af37; width: 20px; flex-shrink: 0; }
     .booking-box {
       background: rgba(20,20,30,0.7);
-      border-radius: 24px; padding: clamp(1.4rem, 4vw, 2rem);
+      border-radius: 24px;
+      padding: clamp(1.4rem, 4vw, 2rem);
       border: 1px solid rgba(212,175,55,0.2);
     }
     .booking-box h3 { font-size: clamp(1.05rem, 2.8vw, 1.25rem); margin-bottom: 1rem; }
@@ -365,23 +764,86 @@
       font-size: clamp(0.85rem, 2vw, 1rem);
     }
 
+    /* ============================================
+       MOBILE OPTIMIZATIONS
+       ============================================ */
     @media (max-width: 480px) {
       .gallery-item:nth-child(5n+1) { grid-column: span 1; }
       .gallery-grid { grid-template-columns: 1fr 1fr; }
       .gallery-item { aspect-ratio: 1 / 1; }
       .hero { min-height: 90vh; min-height: 90svh; }
+      .codex-header { top: 0.6rem; left: 0.6rem; padding: 0.45rem 0.85rem 0.45rem 0.6rem; }
+      .codex-header-name { font-size: 0.78rem; }
+      .codex-header-tag { font-size: 0.5rem; }
+      .codex-header-mark { width: 26px; height: 26px; }
+      .codex-badge-mark { width: 40px; height: 40px; }
+      .codex-badge-name { font-size: 1rem; }
     }
-    @media (max-width: 380px) { .gallery-grid { grid-template-columns: 1fr; } }
-    @media (max-height: 500px) and (orientation: landscape) { .hero { min-height: auto; padding: 5rem 0 3rem; } }
+    @media (max-width: 380px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .codex-header-text { display: none; }
+    }
+    @media (max-height: 500px) and (orientation: landscape) {
+      .hero { min-height: auto; padding: 5rem 0 3rem; }
+    }
 
+    /* ============================================
+       SCROLLBAR
+       ============================================ */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #0b0b0f; }
     ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #b8942e; }
-    @media (max-width: 768px) { ::-webkit-scrollbar { width: 0; } }
+    @media (max-width: 768px) {
+      ::-webkit-scrollbar { width: 0; }
+    }
+
+    /* Reduce motion for accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- ============================================
+       FIXED HEADER — Codex-Banx brand mark (top-left)
+       ============================================ -->
+  <a href="#" class="codex-header" aria-label="Codex-Banx — Web Development">
+    <div class="codex-header-mark">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="codexGoldGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#f9e8a8"/>
+            <stop offset="50%"  stop-color="#d4af37"/>
+            <stop offset="100%" stop-color="#b8942e"/>
+          </linearGradient>
+        </defs>
+        <g class="codex-ring-outer">
+          <circle cx="100" cy="100" r="92" fill="none" stroke="#d4af37" stroke-width="2" stroke-dasharray="6 10" opacity="0.5"/>
+        </g>
+        <polygon points="100,14 174,57 174,143 100,186 26,143 26,57"
+                 fill="none" stroke="url(#codexGoldGrad1)" stroke-width="5" stroke-linejoin="round"/>
+        <path d="M 62 70 L 44 100 L 62 130"
+              fill="none" stroke="url(#codexGoldGrad1)" stroke-width="11"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 138 70 L 156 100 L 138 130"
+              fill="none" stroke="url(#codexGoldGrad1)" stroke-width="11"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <g class="codex-center-node">
+          <circle cx="100" cy="100" r="5" fill="#ffffff"/>
+        </g>
+      </svg>
+    </div>
+    <div class="codex-header-text">
+      <span class="codex-header-name">Codex<span class="dot">·</span>Banx</span>
+      <span class="codex-header-tag">Built the site</span>
+    </div>
+  </a>
+
   <div id="canvas-container"></div>
   <div class="overlay" id="overlay"></div>
 
@@ -540,7 +1002,93 @@
       </div>
       <p style="margin-top: 1.5rem;">📱 +260 765 169 875 &nbsp;|&nbsp; ✉️ kayalexisnkhomatgd@gmail.com</p>
       <p style="margin-top: 1rem; color: #d4af37;">Let’s create something worth remembering.</p>
-      <div class="copyright">© 2026 Kay Official TGD CHEZZI. All Rights Reserved.</div>
+
+      <!-- ============================================
+           CODEX-BANX FOOTER BADGE
+           ============================================ -->
+      <div class="codex-badge">
+        <span class="codex-badge-label">— Website Crafted By —</span>
+        <a href="#" class="codex-badge-link" aria-label="Codex-Banx — We Build The Web">
+          <div class="codex-badge-mark">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="codexGoldGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%"   stop-color="#f9e8a8"/>
+                  <stop offset="50%"  stop-color="#d4af37"/>
+                  <stop offset="100%" stop-color="#b8942e"/>
+                </linearGradient>
+                <radialGradient id="codexGlow2" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%"   stop-color="#d4af37" stop-opacity="0.9"/>
+                  <stop offset="60%"  stop-color="#d4af37" stop-opacity="0.15"/>
+                  <stop offset="100%" stop-color="#d4af37" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+
+              <!-- Outer rotating dashed ring -->
+              <g class="codex-ring-outer">
+                <circle cx="100" cy="100" r="92"
+                        fill="none" stroke="#d4af37"
+                        stroke-width="1.2" stroke-dasharray="6 10"
+                        opacity="0.7"/>
+              </g>
+
+              <!-- Reverse rotating middle ring -->
+              <g class="codex-ring-mid">
+                <circle cx="100" cy="100" r="78"
+                        fill="none" stroke="#d4af37"
+                        stroke-width="0.8" opacity="0.35"
+                        stroke-dasharray="3 6"/>
+              </g>
+
+              <!-- Hexagonal shield -->
+              <polygon points="100,14 174,57 174,143 100,186 26,143 26,57"
+                       fill="none" stroke="url(#codexGoldGrad2)"
+                       stroke-width="3" stroke-linejoin="round"
+                       opacity="0.9"/>
+
+              <!-- Glowing center -->
+              <circle cx="100" cy="100" r="60" fill="url(#codexGlow2)"/>
+
+              <!-- Code brackets -->
+              <path d="M 62 70 L 44 100 L 62 130"
+                    fill="none" stroke="url(#codexGoldGrad2)"
+                    stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M 138 70 L 156 100 L 138 130"
+                    fill="none" stroke="url(#codexGoldGrad2)"
+                    stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+
+              <!-- Slash -->
+              <line x1="112" y1="68" x2="88" y2="132"
+                    stroke="url(#codexGoldGrad2)"
+                    stroke-width="6" stroke-linecap="round"/>
+
+              <!-- Pulsing center node -->
+              <g class="codex-center-node">
+                <circle cx="100" cy="100" r="6" fill="#ffffff"/>
+              </g>
+
+              <!-- Orbiting dots -->
+              <g class="codex-orbit-dot">
+                <circle cx="100" cy="12" r="3.5" fill="#d4af37"/>
+              </g>
+              <g class="codex-orbit-dot">
+                <circle cx="100" cy="12" r="2.5" fill="#f9e8a8"/>
+              </g>
+              <g class="codex-orbit-dot">
+                <circle cx="100" cy="12" r="2" fill="#d4af37" opacity="0.7"/>
+              </g>
+            </svg>
+          </div>
+          <div class="codex-badge-text">
+            <span class="codex-badge-name">Codex<span class="dot">·</span>Banx</span>
+            <span class="codex-badge-tag">We Build The Web</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="copyright">
+        © 2026 Kay Official TGD CHEZZI. All Rights Reserved.
+      </div>
     </footer>
   </div>
 
@@ -562,21 +1110,10 @@
   <script>
     /* ============================================
        GALLERY DATA — YOUR REAL FILENAMES ON GITHUB
-       ============================================
-       Your GitHub repo has these files in /kay/:
-       - 8925c6363afe20148d14ea2397d47089.jpg
-       - images.jpeg
-       - images (1).jpeg  ... (4).jpeg
-       - IMG_0048.JPG.jpeg ... IMG_9020.JPG.jpeg
-       - in.webp
-       - lighting-photography-portrait-03.webp
-
-       The `photo()` helper auto-encodes spaces/parens.
        ============================================ */
     const GITHUB_BASE = 'https://kampambajoseph62-bit.github.io/kay/';
 
     function photo(filename) {
-      // encodeURI keeps spaces as %20 and parentheses safe
       return GITHUB_BASE + encodeURI(filename);
     }
 
