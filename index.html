@@ -29,9 +29,6 @@
     img { max-width: 100%; height: auto; display: block; }
     button { font-family: inherit; }
 
-    /* ============================================
-       BACKGROUND CANVAS
-       ============================================ */
     #canvas-container {
       position: fixed;
       top: 0; left: 0;
@@ -49,9 +46,7 @@
       transition: background 1.2s ease;
     }
 
-    /* ============================================
-       CODEX-BANX HEADER
-       ============================================ */
+    /* Codex-Banx header */
     .codex-header {
       position: fixed;
       top: 1rem;
@@ -97,7 +92,6 @@
       text-transform: uppercase;
       color: rgba(212, 175, 55, 0.75);
     }
-
     @keyframes codexDotBlink {
       0%, 100% { opacity: 1; }
       50%      { opacity: 0.3; }
@@ -119,9 +113,6 @@
       to   { transform: rotate(360deg) translateX(88px) rotate(-360deg); }
     }
 
-    /* ============================================
-       CONTENT
-       ============================================ */
     .content {
       position: relative;
       z-index: 2;
@@ -183,7 +174,7 @@
     .btn-outline:hover { background: #ffffff; color: #0b0b0f; transform: translateY(-3px); }
 
     /* ============================================
-       HERO — TWO COLUMN LAYOUT (text left + photo right)
+       HERO — text left, photo right
        ============================================ */
     .hero {
       min-height: 100vh;
@@ -201,7 +192,6 @@
       justify-content: center;
       align-items: flex-start;
     }
-
     .hero-sub {
       font-size: clamp(0.7rem, 1.6vw, 1.1rem);
       color: #d4af37;
@@ -210,7 +200,6 @@
       text-transform: uppercase;
       font-weight: 500;
     }
-
     .hero-tagline {
       font-size: clamp(0.9rem, 2vw, 1.3rem);
       color: rgba(255, 255, 255, 0.85);
@@ -220,9 +209,7 @@
     }
     .hero-buttons { display: flex; flex-wrap: wrap; gap: 0.3rem; }
 
-    /* ============================================
-       HERO — PHOTO SIDE (perfect smooth shape)
-       ============================================ */
+    /* Photo wrap */
     .hero-photo-wrap {
       position: relative;
       display: flex;
@@ -231,7 +218,6 @@
       perspective: 1200px;
     }
 
-    /* Decorative rotating ring behind the photo */
     .hero-photo-wrap::before {
       content: '';
       position: absolute;
@@ -252,12 +238,8 @@
       z-index: 0;
       pointer-events: none;
     }
+    @keyframes heroHaloSpin { to { transform: rotate(360deg); } }
 
-    @keyframes heroHaloSpin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* The actual photo frame — organic blob shape */
     .hero-photo {
       position: relative;
       width: 100%;
@@ -265,7 +247,6 @@
       aspect-ratio: 3 / 4;
       overflow: hidden;
       z-index: 1;
-      /* Organic smooth blob shape (squircle-ish) */
       border-radius: 42% 58% 52% 48% / 48% 42% 58% 52%;
       box-shadow:
         0 30px 80px rgba(0, 0, 0, 0.65),
@@ -276,23 +257,12 @@
       transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.6s ease;
       will-change: border-radius, transform;
     }
-
-    /* Morph the blob shape smoothly */
     @keyframes heroBlobMorph {
-      0% {
-        border-radius: 42% 58% 52% 48% / 48% 42% 58% 52%;
-      }
-      33% {
-        border-radius: 58% 42% 46% 54% / 54% 58% 42% 46%;
-      }
-      66% {
-        border-radius: 50% 50% 60% 40% / 40% 55% 45% 60%;
-      }
-      100% {
-        border-radius: 48% 52% 42% 58% / 58% 48% 52% 42%;
-      }
+      0%   { border-radius: 42% 58% 52% 48% / 48% 42% 58% 52%; }
+      33%  { border-radius: 58% 42% 46% 54% / 54% 58% 42% 46%; }
+      66%  { border-radius: 50% 50% 60% 40% / 40% 55% 45% 60%; }
+      100% { border-radius: 48% 52% 42% 58% / 58% 48% 52% 42%; }
     }
-
     .hero-photo img {
       width: 100%;
       height: 100%;
@@ -302,8 +272,6 @@
       transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       filter: saturate(1.05) contrast(1.02);
     }
-
-    /* Subtle golden glow accent that follows the blob */
     .hero-photo::after {
       content: '';
       position: absolute;
@@ -317,8 +285,6 @@
       pointer-events: none;
       mix-blend-mode: screen;
     }
-
-    /* Hover effect on desktop */
     @media (hover: hover) {
       .hero-photo:hover {
         transform: translateY(-8px) scale(1.02);
@@ -328,12 +294,9 @@
           0 0 90px rgba(212, 175, 55, 0.3),
           inset 0 0 40px rgba(0, 0, 0, 0.5);
       }
-      .hero-photo:hover img {
-        transform: scale(1.06);
-      }
+      .hero-photo:hover img { transform: scale(1.06); }
     }
 
-    /* Floating gold dot badge on the photo */
     .hero-photo-badge {
       position: absolute;
       bottom: 8%;
@@ -375,8 +338,6 @@
       color: #d4af37;
       white-space: nowrap;
     }
-
-    /* Floating decorative ring top-left of photo */
     .hero-photo-ring {
       position: absolute;
       top: -4%;
@@ -389,12 +350,10 @@
       z-index: 2;
       pointer-events: none;
     }
-    @keyframes spinRing {
-      to { transform: rotate(360deg); }
-    }
+    @keyframes spinRing { to { transform: rotate(360deg); } }
 
     /* ============================================
-       GRIDS
+       GRIDS + CARDS
        ============================================ */
     .grid-2 {
       display: grid;
@@ -408,7 +367,6 @@
       gap: clamp(1rem, 3vw, 2rem);
       margin-top: 2rem;
     }
-
     .card {
       background: rgba(20, 20, 30, 0.6);
       backdrop-filter: blur(10px);
@@ -587,9 +545,7 @@
     .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    /* ============================================
-       GALLERY
-       ============================================ */
+    /* Gallery */
     .gallery-filters {
       display: flex;
       flex-wrap: wrap;
@@ -665,9 +621,7 @@
       opacity: 0;
       transition: opacity 0.4s ease;
     }
-    @media (hover: hover) {
-      .gallery-item:hover .gallery-overlay { opacity: 1; }
-    }
+    @media (hover: hover) { .gallery-item:hover .gallery-overlay { opacity: 1; } }
     @media (hover: none) {
       .gallery-overlay { opacity: 1; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%); }
     }
@@ -700,9 +654,7 @@
       z-index: 2;
     }
 
-    /* ============================================
-       LIGHTBOX
-       ============================================ */
+    /* Lightbox */
     .lightbox {
       position: fixed;
       inset: 0;
@@ -838,9 +790,7 @@
       font-size: clamp(0.85rem, 2vw, 1rem);
     }
 
-    /* ============================================
-       RESPONSIVE — hero photo moves below on mobile
-       ============================================ */
+    /* Responsive */
     @media (max-width: 900px) {
       .hero {
         grid-template-columns: 1fr;
@@ -849,22 +799,13 @@
         padding: clamp(5rem, 14vw, 7rem) 0 3rem;
       }
       .hero-photo-wrap {
-        order: -1; /* Photo first on mobile */
+        order: -1;
         justify-content: center;
       }
-      .hero-photo {
-        max-width: clamp(220px, 60vw, 320px);
-      }
-      .hero-photo-badge {
-        right: 2%;
-        bottom: 4%;
-      }
-      .hero-photo-ring {
-        width: 50px;
-        height: 50px;
-      }
+      .hero-photo { max-width: clamp(220px, 60vw, 320px); }
+      .hero-photo-badge { right: 2%; bottom: 4%; }
+      .hero-photo-ring { width: 50px; height: 50px; }
     }
-
     @media (max-width: 480px) {
       .gallery-item:nth-child(5n+1) { grid-column: span 1; }
       .gallery-grid { grid-template-columns: 1fr 1fr; }
@@ -875,9 +816,7 @@
       .codex-header-mark { width: 26px; height: 26px; }
       .codex-badge-mark { width: 40px; height: 40px; }
       .codex-badge-name { font-size: 1rem; }
-      .hero-photo-badge {
-        padding: 0.4rem 0.8rem 0.4rem 0.6rem;
-      }
+      .hero-photo-badge { padding: 0.4rem 0.8rem 0.4rem 0.6rem; }
       .hero-photo-badge .text { font-size: 0.6rem; }
     }
     @media (max-width: 380px) {
@@ -904,7 +843,6 @@
   </style>
 </head>
 <body>
-  <!-- Codex-Banx header -->
   <a href="#" class="codex-header" aria-label="Codex-Banx — Web Development">
     <div class="codex-header-mark">
       <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -942,11 +880,8 @@
 
   <div class="content">
 
-    <!-- ============================================
-         HERO — text left, photo right (desktop)
-         ============================================ -->
+    <!-- HERO -->
     <section class="hero" data-theme="gold">
-      <!-- LEFT: Text -->
       <div class="hero-text">
         <div class="hero-sub">Videographer · Content Creator · Camera Operator</div>
         <h1>Capturing Stories.<br>Creating Impact.</h1>
@@ -957,18 +892,11 @@
         </div>
       </div>
 
-      <!-- RIGHT: Photo with smooth blob shape -->
       <div class="hero-photo-wrap">
         <div class="hero-photo-ring"></div>
         <div class="hero-photo">
-          <!--
-            📸 HERO PHOTO
-            ─────────────────────────────────────────────
-            Save your photo as `kay/hero.jpg` on GitHub,
-            OR replace the src below with any image URL.
-          -->
           <img
-            src="kay/hero.jpg"
+            src="hero.jpg"
             alt="Kay Nkhoma — Videographer & Content Creator holding a professional camera"
             loading="eager"
             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=900&q=85&auto=format&fit=crop';"
@@ -1199,9 +1127,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
-    /* ============================================
-       GALLERY DATA — HIGH-QUALITY STOCK PHOTOS
-       ============================================ */
+    /* Gallery uses internet stock photos so no uploads are needed */
     const galleryItems = [
       { title: 'Traditional Elegance', category: 'Wedding',     src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=85&auto=format&fit=crop' },
       { title: 'Golden Hour Portrait', category: 'Portrait',    src: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=1600&q=85&auto=format&fit=crop' },
@@ -1219,16 +1145,11 @@
       { title: 'Portrait Study',       category: 'Portrait',    src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1600&q=85&auto=format&fit=crop' }
     ];
 
-    /* ============================================
-       BUILD GALLERY
-       ============================================ */
     (function buildGallery() {
       const grid = document.getElementById('galleryGrid');
       const filtersEl = document.getElementById('galleryFilters');
       if (!grid || !filtersEl) return;
-
       const categories = ['All', ...new Set(galleryItems.map(i => i.category))];
-
       categories.forEach((cat, idx) => {
         const btn = document.createElement('button');
         btn.className = 'filter-btn' + (idx === 0 ? ' active' : '');
@@ -1236,13 +1157,11 @@
         btn.dataset.filter = cat;
         filtersEl.appendChild(btn);
       });
-
       galleryItems.forEach((item, idx) => {
         const el = document.createElement('div');
         el.className = 'gallery-item';
         el.dataset.category = item.category;
         el.dataset.index = idx;
-
         el.innerHTML = `
           <span class="gallery-badge">4K</span>
           <img src="${item.src}" alt="${item.title} — ${item.category}" loading="lazy">
@@ -1251,21 +1170,9 @@
             <div class="gallery-title">${item.title}</div>
           </div>
         `;
-
-        const img = el.querySelector('img');
-        img.onerror = function() {
-          this.style.display = 'none';
-          el.style.background = 'linear-gradient(135deg, #1a1a2e 0%, #d4af37 100%)';
-          const fb = document.createElement('div');
-          fb.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:#fff;padding:1rem;text-align:center;';
-          fb.textContent = '📷 ' + item.title;
-          el.appendChild(fb);
-        };
-
         el.addEventListener('click', () => openLightbox(idx));
         grid.appendChild(el);
       });
-
       const items = grid.querySelectorAll('.gallery-item');
       filtersEl.addEventListener('click', (e) => {
         const btn = e.target.closest('.filter-btn');
@@ -1283,7 +1190,6 @@
           }
         });
       });
-
       const galleryObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -1293,13 +1199,9 @@
           }
         });
       }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
       items.forEach(item => galleryObserver.observe(item));
     })();
 
-    /* ============================================
-       LIGHTBOX
-       ============================================ */
     let currentLightboxIndex = 0;
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
@@ -1312,52 +1214,40 @@
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
-
     function updateLightbox() {
       const item = galleryItems[currentLightboxIndex];
       lightboxImg.src = item.src;
       lightboxCat.textContent = item.category;
       lightboxTitle.textContent = item.title;
     }
-
     document.getElementById('lightboxClose').addEventListener('click', () => {
       lightbox.classList.remove('open');
       document.body.style.overflow = '';
     });
-
     document.getElementById('lightboxPrev').addEventListener('click', (e) => {
       e.stopPropagation();
       currentLightboxIndex = (currentLightboxIndex - 1 + galleryItems.length) % galleryItems.length;
       updateLightbox();
     });
-
     document.getElementById('lightboxNext').addEventListener('click', (e) => {
       e.stopPropagation();
       currentLightboxIndex = (currentLightboxIndex + 1) % galleryItems.length;
       updateLightbox();
     });
-
     lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) {
-        lightbox.classList.remove('open');
-        document.body.style.overflow = '';
-      }
+      if (e.target === lightbox) { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
     });
-
     let touchStartX = 0;
-    lightbox.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
+    lightbox.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
     lightbox.addEventListener('touchend', (e) => {
-      const touchEndX = e.changedTouches[0].screenX;
-      const diff = touchStartX - touchEndX;
+      const diff = touchStartX - e.changedTouches[0].screenX;
       if (Math.abs(diff) > 50) {
-        if (diff > 0) currentLightboxIndex = (currentLightboxIndex + 1) % galleryItems.length;
-        else currentLightboxIndex = (currentLightboxIndex - 1 + galleryItems.length) % galleryItems.length;
+        currentLightboxIndex = diff > 0
+          ? (currentLightboxIndex + 1) % galleryItems.length
+          : (currentLightboxIndex - 1 + galleryItems.length) % galleryItems.length;
         updateLightbox();
       }
     }, { passive: true });
-
     document.addEventListener('keydown', (e) => {
       if (!lightbox.classList.contains('open')) return;
       if (e.key === 'Escape') { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
@@ -1365,9 +1255,6 @@
       else if (e.key === 'ArrowRight') { currentLightboxIndex = (currentLightboxIndex + 1) % galleryItems.length; updateLightbox(); }
     });
 
-    /* ============================================
-       STAT COUNTERS
-       ============================================ */
     (function statCounters() {
       const counters = document.querySelectorAll('.stat-number');
       const speed = 200;
@@ -1390,22 +1277,17 @@
       counters.forEach(c => counterObserver.observe(c));
     })();
 
-    /* ============================================
-       3D CAMERA BACKGROUND
-       ============================================ */
+    /* 3D camera background */
     (function() {
       const container = document.getElementById('canvas-container');
       if (!container) return;
-
       const isMobile = window.innerWidth < 768 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
       const isSmallMobile = window.innerWidth < 480;
 
       const scene = new THREE.Scene();
       scene.background = new THREE.Color(0x0b0b0f);
-
       const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
       camera.position.set(0, 3, isMobile ? 28 : 22);
-
       const renderer = new THREE.WebGLRenderer({ antialias: !isSmallMobile, alpha: false });
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio, 2));
@@ -1420,11 +1302,7 @@
       const bodyMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.5, metalness: 0.7 });
       const accentMat = new THREE.MeshStandardMaterial({ color: 0xd4af37, roughness: 0.3, metalness: 0.9, emissive: 0x221100 });
       const lensMat = new THREE.MeshStandardMaterial({ color: 0x0a0a0a, roughness: 0.1, metalness: 0.95 });
-      const glassMat = new THREE.MeshPhysicalMaterial({
-        color: 0x88aaff, roughness: 0.05, metalness: 0.1,
-        transmission: 0.9, transparent: true, opacity: 0.7,
-        emissive: 0x223344, emissiveIntensity: 0.3
-      });
+      const glassMat = new THREE.MeshPhysicalMaterial({ color: 0x88aaff, roughness: 0.05, metalness: 0.1, transmission: 0.9, transparent: true, opacity: 0.7, emissive: 0x223344, emissiveIntensity: 0.3 });
       const reelMat = new THREE.MeshStandardMaterial({ color: 0x2a2a2a, roughness: 0.6, metalness: 0.5 });
 
       cameraGroup.add(new THREE.Mesh(new THREE.BoxGeometry(6, 3.4, 3.2), bodyMat));
@@ -1434,7 +1312,6 @@
       [2.35, 1.9].forEach(y => {
         const s = new THREE.Mesh(stripGeo, accentMat); s.position.set(0, y, 0); cameraGroup.add(s);
       });
-
       const lensGroup = new THREE.Group();
       lensGroup.position.set(0, 0, 1.6);
       const lensOuter = new THREE.Mesh(new THREE.CylinderGeometry(1.6, 1.6, 1.2, 32), lensMat);
@@ -1450,7 +1327,6 @@
       const apertureRing = new THREE.Mesh(new THREE.TorusGeometry(1.35, 0.1, 12, 48), accentMat);
       apertureRing.position.z = 1.0; lensGroup.add(apertureRing);
       cameraGroup.add(lensGroup);
-
       const focusRing = new THREE.Mesh(new THREE.TorusGeometry(1.7, 0.12, 12, 48), accentMat);
       focusRing.position.set(0, 0, 2.2); cameraGroup.add(focusRing);
 
@@ -1461,18 +1337,13 @@
         grip.position.set(Math.cos(angle) * 1.7, Math.sin(angle) * 1.7, 2.2);
         grip.rotation.z = angle; cameraGroup.add(grip);
       }
-
       const buttonGeo = new THREE.CylinderGeometry(0.15, 0.15, 0.15, 12);
       [[-1.8, 1.85, 0.8], [-1.2, 1.85, 0.8], [-0.6, 1.85, 0.8], [1.2, 1.85, 0.8]].forEach(p => {
         const b = new THREE.Mesh(buttonGeo, accentMat); b.position.set(p[0], p[1], p[2]); cameraGroup.add(b);
       });
-
       const screenFrame = new THREE.Mesh(new THREE.BoxGeometry(0.1, 1.5, 2.2), bodyMat);
       screenFrame.position.set(3.05, 0.2, 0); cameraGroup.add(screenFrame);
-      const screen = new THREE.Mesh(
-        new THREE.PlaneGeometry(2.0, 1.3),
-        new THREE.MeshStandardMaterial({ color: 0x0a1a2a, emissive: 0x112244, emissiveIntensity: 0.5, roughness: 0.2 })
-      );
+      const screen = new THREE.Mesh(new THREE.PlaneGeometry(2.0, 1.3), new THREE.MeshStandardMaterial({ color: 0x0a1a2a, emissive: 0x112244, emissiveIntensity: 0.5, roughness: 0.2 }));
       screen.position.set(3.12, 0.2, 0); screen.rotation.y = Math.PI / 2; cameraGroup.add(screen);
 
       const reelGroup = new THREE.Group();
@@ -1492,7 +1363,6 @@
       frontBar.position.set(0, -1.4, 1.65); cameraGroup.add(frontBar);
       const brandPlate = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.4, 0.05), accentMat);
       brandPlate.position.set(-1.5, 0.6, 1.65); cameraGroup.add(brandPlate);
-
       const leftGrip = new THREE.Mesh(new THREE.BoxGeometry(0.4, 2.8, 0.6), bodyMat);
       leftGrip.position.set(-3.2, 0, 0); cameraGroup.add(leftGrip);
       const gripAccent = new THREE.Mesh(new THREE.BoxGeometry(0.15, 2.6, 0.65), accentMat);
@@ -1512,10 +1382,7 @@
         posArray[i+2] = (Math.random() - 0.5) * 120;
       }
       particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-      const particlesMaterial = new THREE.PointsMaterial({
-        size: isMobile ? 0.2 : 0.15,
-        color: 0xd4af37, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending
-      });
+      const particlesMaterial = new THREE.PointsMaterial({ size: isMobile ? 0.2 : 0.15, color: 0xd4af37, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending });
       const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
       scene.add(particlesMesh);
 
@@ -1544,17 +1411,14 @@
         teal:    { bg: 0x051818, accent: 0x00d4c8, overlay: 'rgba(5,24,24,0.95)' },
         indigo:  { bg: 0x080518, accent: 0x6366f1, overlay: 'rgba(8,5,24,0.95)' }
       };
-
       const currentTheme = { bg: new THREE.Color(0x0b0b0f), accent: new THREE.Color(0xd4af37) };
       const targetTheme = { bg: new THREE.Color(0x0b0b0f), accent: new THREE.Color(0xd4af37) };
       const LERP_SPEED = 0.03;
-
       function setTheme(name) {
         const t = themes[name] || themes.gold;
         targetTheme.bg.setHex(t.bg);
         targetTheme.accent.setHex(t.accent);
       }
-
       const sections = document.querySelectorAll('[data-theme]');
       const themeObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -1607,10 +1471,8 @@
         requestAnimationFrame(animate);
         time += 0.005;
         if (document.hidden) return;
-
         currentTheme.bg.lerp(targetTheme.bg, LERP_SPEED);
         currentTheme.accent.lerp(targetTheme.accent, LERP_SPEED);
-
         scene.background.copy(currentTheme.bg);
         keyLight.color.copy(currentTheme.accent);
         fillLight.color.copy(currentTheme.accent);
@@ -1631,10 +1493,8 @@
         reelGroup.rotation.z += 0.04;
         reelGroup.rotation.y = Math.sin(time * 0.5) * 0.1;
         glassMat.emissiveIntensity = 0.3 + Math.sin(time * 3) * 0.15;
-
         particlesMesh.rotation.y += 0.0003;
         particlesMesh.rotation.x += 0.0001;
-
         rings.forEach((r, i) => {
           r.rotation.z += (i % 2 === 0 ? 0.003 : -0.004);
           r.rotation.x += 0.002;
@@ -1642,11 +1502,9 @@
           if (i === 1) r.position.x = 12 + Math.cos(time * 0.5) * 2;
           if (i === 2) r.position.y = 8 + Math.sin(time * 0.7) * 1.5;
         });
-
         camera.position.x = Math.sin(time * 0.1) * 1.5 + mouseX * 0.5;
         camera.position.y = 3 + Math.cos(time * 0.15) * 0.8 - mouseY * 0.3;
         camera.lookAt(0, 1, 0);
-
         renderer.render(scene, camera);
       }
       animate();
@@ -1659,9 +1517,6 @@
       });
     })();
 
-    /* ============================================
-       SCROLL ANIMATIONS
-       ============================================ */
     (function() {
       const faders = document.querySelectorAll('.fade-up');
       const appearOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
@@ -1675,9 +1530,6 @@
       faders.forEach(fader => appearOnScroll.observe(fader));
     })();
 
-    /* ============================================
-       FAQ ACCORDION
-       ============================================ */
     (function() {
       const faqItems = document.querySelectorAll('.faq-item');
       faqItems.forEach(item => {
