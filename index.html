@@ -50,7 +50,7 @@
     }
 
     /* ============================================
-       CODEX-BANX HEADER (fixed top-left)
+       CODEX-BANX HEADER
        ============================================ */
     .codex-header {
       position: fixed;
@@ -102,19 +102,15 @@
       0%, 100% { opacity: 1; }
       50%      { opacity: 0.3; }
     }
-
     .codex-ring-outer { transform-origin: 100px 100px; animation: codexSpinSlow 22s linear infinite; }
     @keyframes codexSpinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
     .codex-ring-mid { transform-origin: 100px 100px; animation: codexSpinReverse 16s linear infinite; }
     @keyframes codexSpinReverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
-
     .codex-center-node { transform-origin: 100px 100px; animation: codexPulse 2.4s ease-in-out infinite; }
     @keyframes codexPulse {
       0%, 100% { transform: scale(1); opacity: 1; }
       50%      { transform: scale(1.15); opacity: 0.85; }
     }
-
     .codex-orbit-dot { animation: codexOrbit 8s linear infinite; transform-origin: 100px 100px; }
     .codex-orbit-dot:nth-child(2) { animation-duration: 12s; animation-direction: reverse; }
     .codex-orbit-dot:nth-child(3) { animation-duration: 10s; }
@@ -135,7 +131,7 @@
     }
     h1, h2, h3, h4 { font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
     h1 {
-      font-size: clamp(2.2rem, 7vw, 6rem);
+      font-size: clamp(2.2rem, 6.5vw, 5.5rem);
       line-height: 1.05;
       background: linear-gradient(135deg, #ffffff 0%, #d4af37 80%);
       -webkit-background-clip: text;
@@ -186,32 +182,220 @@
     .btn-outline { border-color: #ffffff; color: #ffffff; }
     .btn-outline:hover { background: #ffffff; color: #0b0b0f; transform: translateY(-3px); }
 
+    /* ============================================
+       HERO — TWO COLUMN LAYOUT (text left + photo right)
+       ============================================ */
     .hero {
       min-height: 100vh;
       min-height: 100svh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+      padding: clamp(6rem, 12vw, 8rem) 0 clamp(3rem, 8vw, 5rem);
+    }
+
+    .hero-text {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-      padding: clamp(4rem, 12vw, 6rem) 0;
     }
+
     .hero-sub {
-      font-size: clamp(0.75rem, 2vw, 1.3rem);
+      font-size: clamp(0.7rem, 1.6vw, 1.1rem);
       color: #d4af37;
       margin-bottom: 0.75rem;
       letter-spacing: clamp(1px, 0.3vw, 2.5px);
       text-transform: uppercase;
-      font-weight: 400;
+      font-weight: 500;
     }
+
     .hero-tagline {
-      font-size: clamp(0.95rem, 2.5vw, 1.5rem);
+      font-size: clamp(0.9rem, 2vw, 1.3rem);
       color: rgba(255, 255, 255, 0.85);
       margin: clamp(1rem, 3vw, 1.5rem) 0 clamp(1.5rem, 4vw, 2.5rem);
-      max-width: 700px;
-      line-height: 1.5;
+      max-width: 620px;
+      line-height: 1.55;
     }
     .hero-buttons { display: flex; flex-wrap: wrap; gap: 0.3rem; }
 
+    /* ============================================
+       HERO — PHOTO SIDE (perfect smooth shape)
+       ============================================ */
+    .hero-photo-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1200px;
+    }
+
+    /* Decorative rotating ring behind the photo */
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -6%;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgba(212, 175, 55, 0.35) 40deg,
+        transparent 80deg,
+        transparent 180deg,
+        rgba(212, 175, 55, 0.25) 220deg,
+        transparent 260deg
+      );
+      filter: blur(28px);
+      opacity: 0.7;
+      animation: heroHaloSpin 20s linear infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes heroHaloSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* The actual photo frame — organic blob shape */
+    .hero-photo {
+      position: relative;
+      width: 100%;
+      max-width: clamp(260px, 32vw, 460px);
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      z-index: 1;
+      /* Organic smooth blob shape (squircle-ish) */
+      border-radius: 42% 58% 52% 48% / 48% 42% 58% 52%;
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.65),
+        0 0 0 2px rgba(212, 175, 55, 0.35),
+        0 0 60px rgba(212, 175, 55, 0.15),
+        inset 0 0 40px rgba(0, 0, 0, 0.5);
+      animation: heroBlobMorph 12s ease-in-out infinite alternate;
+      transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.6s ease;
+      will-change: border-radius, transform;
+    }
+
+    /* Morph the blob shape smoothly */
+    @keyframes heroBlobMorph {
+      0% {
+        border-radius: 42% 58% 52% 48% / 48% 42% 58% 52%;
+      }
+      33% {
+        border-radius: 58% 42% 46% 54% / 54% 58% 42% 46%;
+      }
+      66% {
+        border-radius: 50% 50% 60% 40% / 40% 55% 45% 60%;
+      }
+      100% {
+        border-radius: 48% 52% 42% 58% / 58% 48% 52% 42%;
+      }
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
+      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      filter: saturate(1.05) contrast(1.02);
+    }
+
+    /* Subtle golden glow accent that follows the blob */
+    .hero-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(
+        circle at 30% 20%,
+        rgba(212, 175, 55, 0.12) 0%,
+        transparent 50%
+      );
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    /* Hover effect on desktop */
+    @media (hover: hover) {
+      .hero-photo:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow:
+          0 40px 100px rgba(0, 0, 0, 0.75),
+          0 0 0 2px rgba(212, 175, 55, 0.6),
+          0 0 90px rgba(212, 175, 55, 0.3),
+          inset 0 0 40px rgba(0, 0, 0, 0.5);
+      }
+      .hero-photo:hover img {
+        transform: scale(1.06);
+      }
+    }
+
+    /* Floating gold dot badge on the photo */
+    .hero-photo-badge {
+      position: absolute;
+      bottom: 8%;
+      right: -6%;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem 0.5rem 0.7rem;
+      background: rgba(11, 11, 15, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 50px;
+      animation: heroBadgeFloat 4s ease-in-out infinite;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    @keyframes heroBadgeFloat {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-6px); }
+    }
+    .hero-photo-badge .dot-live {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #00e676;
+      box-shadow: 0 0 10px #00e676;
+      animation: livePulse 1.6s ease-in-out infinite;
+    }
+    @keyframes livePulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%      { transform: scale(1.3); opacity: 0.6; }
+    }
+    .hero-photo-badge .text {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #d4af37;
+      white-space: nowrap;
+    }
+
+    /* Floating decorative ring top-left of photo */
+    .hero-photo-ring {
+      position: absolute;
+      top: -4%;
+      left: -4%;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: 2px dashed rgba(212, 175, 55, 0.5);
+      animation: spinRing 16s linear infinite;
+      z-index: 2;
+      pointer-events: none;
+    }
+    @keyframes spinRing {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ============================================
+       GRIDS
+       ============================================ */
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
@@ -332,7 +516,6 @@
     .footer .socials a:hover { background: #d4af37; color: #0b0b0f; transform: translateY(-5px); }
     .copyright { margin-top: 1.5rem; color: rgba(255, 255, 255, 0.4); font-size: clamp(0.75rem, 2vw, 0.9rem); }
 
-    /* Codex-Banx footer badge */
     .codex-badge {
       margin-top: 2rem;
       padding-top: 2rem;
@@ -655,17 +838,47 @@
       font-size: clamp(0.85rem, 2vw, 1rem);
     }
 
+    /* ============================================
+       RESPONSIVE — hero photo moves below on mobile
+       ============================================ */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: left;
+        padding: clamp(5rem, 14vw, 7rem) 0 3rem;
+      }
+      .hero-photo-wrap {
+        order: -1; /* Photo first on mobile */
+        justify-content: center;
+      }
+      .hero-photo {
+        max-width: clamp(220px, 60vw, 320px);
+      }
+      .hero-photo-badge {
+        right: 2%;
+        bottom: 4%;
+      }
+      .hero-photo-ring {
+        width: 50px;
+        height: 50px;
+      }
+    }
+
     @media (max-width: 480px) {
       .gallery-item:nth-child(5n+1) { grid-column: span 1; }
       .gallery-grid { grid-template-columns: 1fr 1fr; }
       .gallery-item { aspect-ratio: 1 / 1; }
-      .hero { min-height: 90vh; min-height: 90svh; }
       .codex-header { top: 0.6rem; left: 0.6rem; padding: 0.45rem 0.85rem 0.45rem 0.6rem; }
       .codex-header-name { font-size: 0.78rem; }
       .codex-header-tag { font-size: 0.5rem; }
       .codex-header-mark { width: 26px; height: 26px; }
       .codex-badge-mark { width: 40px; height: 40px; }
       .codex-badge-name { font-size: 1rem; }
+      .hero-photo-badge {
+        padding: 0.4rem 0.8rem 0.4rem 0.6rem;
+      }
+      .hero-photo-badge .text { font-size: 0.6rem; }
     }
     @media (max-width: 380px) {
       .gallery-grid { grid-template-columns: 1fr; }
@@ -728,14 +941,43 @@
   <div class="overlay" id="overlay"></div>
 
   <div class="content">
-    <!-- HERO -->
+
+    <!-- ============================================
+         HERO — text left, photo right (desktop)
+         ============================================ -->
     <section class="hero" data-theme="gold">
-      <div class="hero-sub">Videographer · Content Creator · Camera Operator</div>
-      <h1>Capturing Stories.<br>Creating Impact.</h1>
-      <p class="hero-tagline">Welcome to Kay Official TGD CHEZZI — a creative media brand focused on professional videography, content creation and visual storytelling.</p>
-      <div class="hero-buttons">
-        <a href="#gallery" class="btn btn-primary">View My Work</a>
-        <a href="#contact" class="btn btn-outline">Book Me</a>
+      <!-- LEFT: Text -->
+      <div class="hero-text">
+        <div class="hero-sub">Videographer · Content Creator · Camera Operator</div>
+        <h1>Capturing Stories.<br>Creating Impact.</h1>
+        <p class="hero-tagline">Welcome to Kay Official TGD CHEZZI — a creative media brand focused on professional videography, content creation and visual storytelling.</p>
+        <div class="hero-buttons">
+          <a href="#gallery" class="btn btn-primary">View My Work</a>
+          <a href="#contact" class="btn btn-outline">Book Me</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: Photo with smooth blob shape -->
+      <div class="hero-photo-wrap">
+        <div class="hero-photo-ring"></div>
+        <div class="hero-photo">
+          <!--
+            📸 HERO PHOTO
+            ─────────────────────────────────────────────
+            Save your photo as `kay/hero.jpg` on GitHub,
+            OR replace the src below with any image URL.
+          -->
+          <img
+            src="kay/hero.jpg"
+            alt="Kay Nkhoma — Videographer & Content Creator holding a professional camera"
+            loading="eager"
+            onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=900&q=85&auto=format&fit=crop';"
+          >
+        </div>
+        <div class="hero-photo-badge">
+          <span class="dot-live"></span>
+          <span class="text">Available for Bookings</span>
+        </div>
       </div>
     </section>
 
@@ -958,81 +1200,23 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
     /* ============================================
-       GALLERY DATA — HIGH-QUALITY STOCK PHOTOS FROM UNSPLASH
-       These images load from the internet — no local files needed.
-       Each URL is a permanent, direct image link.
+       GALLERY DATA — HIGH-QUALITY STOCK PHOTOS
        ============================================ */
     const galleryItems = [
-      {
-        title: 'Traditional Elegance',
-        category: 'Wedding',
-        src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=85&auto=format&fit=crop'
-      },
-      {
-        title: 'Golden Hour Portrait',
-        category: 'Portrait',
-        src: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=1600&q=85&auto=format&fit=crop'
-      },
-      {
-        title: 'Heritage Beauty',
-        category: 'Portrait',
-        src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1600&q=85&auto=format&fit=crop'
-      },
-      {
-        title: 'Forever Begins',
-        category: 'Wedding',
-        src: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1600&q=85&auto=format&fit=crop'
-      },
-      {
-        title: 'Royal Celebration',
-        category: 'Wedding',
-        src: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1600&q=85&auto=format&fit=crop'
-      },
-      {
-        title: 'Bride in Bloom',
-        category: 'Wedding',
-        src: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1600&q=85&auto=format&fit=crop'
-      },
-      {
-        title: 'Behind the Lens',
-        category: 'Documentary',
-        src: 'https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=1600&q=85&auto=format&fit=crop'
-      },
-      {
-        title: 'The Shot',
-        category: 'Documentary',
-        src: 'https://images.unsplash.com/photo-1579632652768-6cb9dcf85912?w=1600&q=85&auto=format&fit=crop'
-      },
-      {
-        title: 'Event Floor',
-        category: 'Event',
-        src: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1600&q=85&auto=format&fit=crop'
-      },
-      {
-        title: 'Gathering Moments',
-        category: 'Event',
-        src: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1600&q=85&auto=format&fit=crop'
-      },
-      {
-        title: 'Formal Occasion',
-        category: 'Event',
-        src: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=1600&q=85&auto=format&fit=crop'
-      },
-      {
-        title: 'Studio Light',
-        category: 'Commercial',
-        src: 'https://images.unsplash.com/photo-1560343090-f0409e92791a?w=1600&q=85&auto=format&fit=crop'
-      },
-      {
-        title: 'Stage Performance',
-        category: 'Music',
-        src: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=1600&q=85&auto=format&fit=crop'
-      },
-      {
-        title: 'Portrait Study',
-        category: 'Portrait',
-        src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1600&q=85&auto=format&fit=crop'
-      }
+      { title: 'Traditional Elegance', category: 'Wedding',     src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=85&auto=format&fit=crop' },
+      { title: 'Golden Hour Portrait', category: 'Portrait',    src: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=1600&q=85&auto=format&fit=crop' },
+      { title: 'Heritage Beauty',      category: 'Portrait',    src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1600&q=85&auto=format&fit=crop' },
+      { title: 'Forever Begins',       category: 'Wedding',     src: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1600&q=85&auto=format&fit=crop' },
+      { title: 'Royal Celebration',    category: 'Wedding',     src: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1600&q=85&auto=format&fit=crop' },
+      { title: 'Bride in Bloom',       category: 'Wedding',     src: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1600&q=85&auto=format&fit=crop' },
+      { title: 'Behind the Lens',      category: 'Documentary', src: 'https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=1600&q=85&auto=format&fit=crop' },
+      { title: 'The Shot',             category: 'Documentary', src: 'https://images.unsplash.com/photo-1579632652768-6cb9dcf85912?w=1600&q=85&auto=format&fit=crop' },
+      { title: 'Event Floor',          category: 'Event',       src: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1600&q=85&auto=format&fit=crop' },
+      { title: 'Gathering Moments',    category: 'Event',       src: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1600&q=85&auto=format&fit=crop' },
+      { title: 'Formal Occasion',      category: 'Event',       src: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=1600&q=85&auto=format&fit=crop' },
+      { title: 'Studio Light',         category: 'Commercial',  src: 'https://images.unsplash.com/photo-1560343090-f0409e92791a?w=1600&q=85&auto=format&fit=crop' },
+      { title: 'Stage Performance',    category: 'Music',       src: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=1600&q=85&auto=format&fit=crop' },
+      { title: 'Portrait Study',       category: 'Portrait',    src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1600&q=85&auto=format&fit=crop' }
     ];
 
     /* ============================================
