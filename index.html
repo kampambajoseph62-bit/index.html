@@ -29,12 +29,9 @@
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
     }
     img { max-width: 100%; height: auto; display: block; }
     button { font-family: inherit; cursor: pointer; }
-
-    /* Prevent body scroll when modal open */
     body.modal-open { overflow: hidden; position: fixed; width: 100%; }
 
     #canvas-container {
@@ -55,7 +52,7 @@
     }
 
     /* ============================================
-       CODEX-BANX HEADER
+       CODEX-BANX HEADER (top-left)
        ============================================ */
     .codex-header {
       position: fixed;
@@ -121,6 +118,136 @@
     }
 
     /* ============================================
+       TOP NAVIGATION BAR (shared across pages)
+       ============================================ */
+    .site-nav {
+      position: fixed;
+      top: max(1rem, env(safe-area-inset-top));
+      right: 1rem;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.4rem;
+      background: rgba(11, 11, 15, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 50px;
+      transition: all 0.4s ease;
+    }
+    .site-nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      border-radius: 40px;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    .site-nav a:hover { color: #d4af37; background: rgba(212, 175, 55, 0.1); }
+    .site-nav a.active { color: #0b0b0f; background: #d4af37; }
+    .site-nav a i { font-size: 0.75em; }
+
+    /* Mobile hamburger */
+    .mobile-nav-toggle {
+      display: none;
+      position: fixed;
+      top: max(1rem, env(safe-area-inset-top));
+      right: 1rem;
+      z-index: 200;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(11, 11, 15, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: #d4af37;
+      font-size: 1.1rem;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+    }
+    .mobile-nav-toggle:hover { background: #d4af37; color: #0b0b0f; }
+
+    /* Mobile nav drawer */
+    .nav-drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+      background: rgba(5, 5, 10, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .nav-drawer.open { opacity: 1; visibility: visible; }
+    .nav-drawer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      width: 100%;
+      max-width: 340px;
+    }
+    .nav-drawer-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .nav-drawer-title .dot { color: #d4af37; }
+    .nav-drawer a {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      width: 100%;
+      padding: 1rem 1.4rem;
+      border-radius: 16px;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 1rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      transition: all 0.3s ease;
+    }
+    .nav-drawer a:hover,
+    .nav-drawer a.active {
+      background: rgba(212, 175, 55, 0.15);
+      color: #d4af37;
+      border-color: #d4af37;
+      transform: translateX(4px);
+    }
+    .nav-drawer a i { color: #d4af37; width: 20px; text-align: center; }
+    .nav-drawer-close {
+      position: absolute;
+      top: max(1rem, env(safe-area-inset-top));
+      right: max(1rem, env(safe-area-inset-right));
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: #fff;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ============================================
        CONTENT
        ============================================ */
     .content {
@@ -180,7 +307,6 @@
       margin-bottom: 0.6rem;
       white-space: nowrap;
       min-height: 46px;
-      -webkit-tap-highlight-color: transparent;
     }
     .btn-primary { background: #d4af37; color: #0b0b0f; border-color: #d4af37; }
     .btn-primary:hover, .btn-primary:active { background: transparent; color: #d4af37; transform: translateY(-3px); box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2); }
@@ -479,9 +605,9 @@
       font-size: 1.15rem;
       transition: 0.3s;
       text-decoration: none;
-      -webkit-tap-highlight-color: transparent;
+      border: 1px solid rgba(212, 175, 55, 0.15);
     }
-    .footer .socials a:hover, .footer .socials a:active { background: #d4af37; color: #0b0b0f; transform: translateY(-5px); }
+    .footer .socials a:hover, .footer .socials a:active { background: #d4af37; color: #0b0b0f; transform: translateY(-5px); border-color: #d4af37; }
     .copyright { margin-top: 1.5rem; color: rgba(255, 255, 255, 0.4); font-size: clamp(0.75rem, 2.8vw, 0.9rem); }
 
     .codex-badge {
@@ -584,7 +710,6 @@
       border-radius: 24px;
       transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       will-change: transform;
-      -webkit-tap-highlight-color: transparent;
     }
     @media (hover: hover) {
       .category-card:hover {
@@ -594,9 +719,7 @@
         box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
       }
     }
-    .category-card:active {
-      transform: scale(0.98);
-    }
+    .category-card:active { transform: scale(0.98); }
 
     .stack {
       position: relative;
@@ -710,11 +833,9 @@
       color: #d4af37;
       font-size: clamp(0.75rem, 3vw, 1rem);
       font-weight: 600;
-      letter-spacing: 0.05em;
     }
     .category-modal-close {
-      width: 48px;
-      height: 48px;
+      width: 48px; height: 48px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(212, 175, 55, 0.4);
@@ -726,13 +847,8 @@
       justify-content: center;
       transition: 0.3s;
       flex-shrink: 0;
-      -webkit-tap-highlight-color: transparent;
     }
-    .category-modal-close:hover, .category-modal-close:active {
-      background: #d4af37;
-      color: #0b0b0f;
-      transform: rotate(90deg);
-    }
+    .category-modal-close:hover, .category-modal-close:active { background: #d4af37; color: #0b0b0f; transform: rotate(90deg); }
 
     .category-modal-body {
       padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 4vw, 2rem) max(4rem, env(safe-area-inset-bottom));
@@ -755,11 +871,9 @@
       background: #111;
       transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s ease;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-      -webkit-tap-highlight-color: transparent;
     }
     .masonry-item img {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
       display: block;
       transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s ease;
@@ -789,8 +903,7 @@
     .masonry-title { font-size: clamp(0.75rem, 2.8vw, 0.95rem); font-weight: 700; color: #fff; }
     .masonry-badge {
       position: absolute;
-      top: 0.6rem;
-      right: 0.6rem;
+      top: 0.6rem; right: 0.6rem;
       background: rgba(11, 11, 15, 0.8);
       backdrop-filter: blur(6px);
       border: 1px solid rgba(212, 175, 55, 0.5);
@@ -868,8 +981,7 @@
       position: absolute;
       top: max(0.8rem, env(safe-area-inset-top));
       right: max(0.8rem, env(safe-area-inset-right));
-      width: 48px;
-      height: 48px;
+      width: 48px; height: 48px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(10px);
@@ -882,15 +994,13 @@
       justify-content: center;
       transition: 0.3s;
       z-index: 10000;
-      -webkit-tap-highlight-color: transparent;
     }
     .lightbox-close:hover, .lightbox-close:active { background: #d4af37; color: #0b0b0f; transform: rotate(90deg); }
     .lightbox-nav {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 48px;
-      height: 48px;
+      width: 48px; height: 48px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(10px);
@@ -903,7 +1013,6 @@
       justify-content: center;
       transition: 0.3s;
       z-index: 10000;
-      -webkit-tap-highlight-color: transparent;
     }
     .lightbox-nav:hover, .lightbox-nav:active { background: #d4af37; color: #0b0b0f; }
     .lightbox-prev { left: clamp(0.5rem, 2vw, 1.5rem); }
@@ -962,45 +1071,32 @@
     }
 
     /* ============================================
-       RESPONSIVE — TABLET
+       RESPONSIVE
        ============================================ */
     @media (max-width: 900px) {
+      .site-nav { display: none; }
+      .mobile-nav-toggle { display: flex; }
       .hero {
         grid-template-columns: 1fr;
         gap: 2.5rem;
         text-align: center;
         padding: clamp(5rem, 14vw, 7rem) 0 3rem;
       }
-      .hero-text {
-        align-items: center;
-        text-align: center;
-        order: 2;
-      }
-      .hero-photo-wrap {
-        order: 1;
-        justify-content: center;
-      }
-      .hero-buttons {
-        justify-content: center;
-      }
+      .hero-text { align-items: center; text-align: center; order: 2; }
+      .hero-photo-wrap { order: 1; justify-content: center; }
+      .hero-buttons { justify-content: center; }
       .hero-photo { max-width: clamp(240px, 55vw, 340px); }
       .hero-photo-badge { right: 4%; bottom: 6%; }
       .hero-photo-ring { width: 55px; height: 55px; }
-
       h2 { text-align: left; }
     }
 
-    /* ============================================
-       RESPONSIVE — PHONE
-       ============================================ */
     @media (max-width: 640px) {
       .content {
         padding: 0 1.15rem;
         padding-left: max(1.15rem, env(safe-area-inset-left));
         padding-right: max(1.15rem, env(safe-area-inset-right));
       }
-
-      /* Compact codex header so it doesn't overlap */
       .codex-header {
         top: max(0.7rem, env(safe-area-inset-top));
         left: max(0.7rem, env(safe-area-inset-left));
@@ -1010,235 +1106,114 @@
       .codex-header-mark { width: 26px; height: 26px; }
       .codex-header-name { font-size: 0.75rem; }
       .codex-header-tag { font-size: 0.48rem; letter-spacing: 0.2em; }
-
-      /* Hero photo — bigger & more beautiful on phone */
-      .hero {
-        padding: clamp(5.5rem, 18vw, 7rem) 0 2.5rem;
-        gap: 2rem;
-      }
-      .hero-photo {
-        max-width: min(78vw, 320px);
-      }
-      .hero-photo-ring {
+      .mobile-nav-toggle {
+        top: max(0.7rem, env(safe-area-inset-top));
+        right: max(0.7rem, env(safe-area-inset-right));
         width: 44px; height: 44px;
-        top: -3%; left: -3%;
       }
-      .hero-photo-badge {
-        padding: 0.45rem 0.9rem 0.45rem 0.65rem;
-        gap: 0.4rem;
-        right: 3%;
-        bottom: 5%;
-      }
+
+      .hero { padding: clamp(5.5rem, 18vw, 7rem) 0 2.5rem; gap: 2rem; }
+      .hero-photo { max-width: min(78vw, 320px); }
+      .hero-photo-ring { width: 44px; height: 44px; top: -3%; left: -3%; }
+      .hero-photo-badge { padding: 0.45rem 0.9rem 0.45rem 0.65rem; gap: 0.4rem; right: 3%; bottom: 5%; }
       .hero-photo-badge .text { font-size: 0.62rem; letter-spacing: 0.12em; }
       .hero-photo-badge .dot-live { width: 7px; height: 7px; }
-
-      /* Bigger, easier to tap buttons */
-      .hero-buttons {
-        width: 100%;
-        gap: 0.5rem;
-      }
-      .btn {
-        flex: 1 1 auto;
-        min-width: 140px;
-        margin-right: 0;
-        padding: 0.85rem 1.2rem;
-        font-size: 0.9rem;
-      }
-
-      /* Section spacing */
+      .hero-buttons { width: 100%; gap: 0.5rem; }
+      .btn { flex: 1 1 auto; min-width: 140px; margin-right: 0; padding: 0.85rem 1.2rem; font-size: 0.9rem; }
       .section { padding: 3rem 0; }
       h2 { font-size: clamp(1.5rem, 7vw, 2rem); }
       h2::after { width: 40px; height: 3px; }
-
-      /* Cards: better padding for phone */
-      .card {
-        padding: 1.4rem 1.3rem;
-        border-radius: 20px;
-      }
+      .card { padding: 1.4rem 1.3rem; border-radius: 20px; }
       .card i { font-size: 2rem; margin-bottom: 1rem; }
       .card h3 { font-size: 1.15rem; }
       .card p { font-size: 0.9rem; line-height: 1.55; }
-
-      /* Process steps: single column, tighter */
       .process-steps { gap: 0.7rem; }
       .step { padding: 1.1rem 1.2rem; border-radius: 16px; }
       .step-number { font-size: 1.5rem; }
       .step h4 { font-size: 1rem; }
       .step p { font-size: 0.82rem; }
-
-      /* Category stack — bigger fan-out for visibility */
-      .category-grid {
-        gap: 1.6rem;
-      }
-      .category-card {
-        padding: 1.1rem;
-        padding-bottom: 1.8rem;
-        border-radius: 20px;
-      }
+      .category-grid { gap: 1.6rem; }
+      .category-card { padding: 1.1rem; padding-bottom: 1.8rem; border-radius: 20px; }
       .stack { margin-bottom: 1.1rem; }
       .stack-photo.layer-4 { transform: translate(14px, -13px) rotate(6deg) scale(0.86); }
       .stack-photo.layer-3 { transform: translate(-11px, -11px) rotate(-4deg) scale(0.90); }
       .stack-photo.layer-2 { transform: translate(8px, -7px) rotate(3deg) scale(0.95); }
       .category-name { font-size: 1.2rem; }
       .category-cta-line { font-size: 0.78rem; }
-
-      /* Masonry modal — better on phone */
-      .category-modal-body {
-        padding: 1rem 1rem max(3rem, env(safe-area-inset-bottom));
-      }
-      .masonry-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 90px;
-        gap: 0.6rem;
-      }
-      .masonry-item.size-big,
-      .masonry-item.size-wide,
-      .masonry-item.size-hero { grid-column: span 2; }
-      .masonry-item.size-tall,
-      .masonry-item.size-std { grid-row: span 4; }
+      .category-modal-body { padding: 1rem 1rem max(3rem, env(safe-area-inset-bottom)); }
+      .masonry-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 90px; gap: 0.6rem; }
+      .masonry-item.size-big, .masonry-item.size-wide, .masonry-item.size-hero { grid-column: span 2; }
+      .masonry-item.size-tall, .masonry-item.size-std { grid-row: span 4; }
       .masonry-item.size-small { grid-row: span 3; }
       .masonry-item.size-hero { grid-row: span 5; }
       .masonry-item.size-big { grid-row: span 4; }
       .masonry-item.size-wide { grid-row: span 3; }
-
-      /* Lightbox — nav buttons become bottom bar on mobile */
-      .lightbox {
-        padding: 0.5rem;
-      }
-      .lightbox-img-wrap {
-        max-width: 100vw;
-        max-height: 78vh;
-        border-radius: 12px;
-      }
-      .lightbox img {
-        max-height: 78vh;
-      }
-      .lightbox-close {
-        top: max(0.7rem, env(safe-area-inset-top));
-        right: max(0.7rem, env(safe-area-inset-right));
-        width: 44px; height: 44px;
-        background: rgba(11, 11, 15, 0.9);
-      }
-      .lightbox-nav {
-        top: auto;
-        bottom: max(1rem, env(safe-area-inset-bottom));
-        transform: none;
-        width: 52px; height: 52px;
-        background: rgba(11, 11, 15, 0.9);
-        font-size: 1.15rem;
-      }
+      .lightbox { padding: 0.5rem; }
+      .lightbox-img-wrap { max-width: 100vw; max-height: 78vh; border-radius: 12px; }
+      .lightbox img { max-height: 78vh; }
+      .lightbox-close { top: max(0.7rem, env(safe-area-inset-top)); right: max(0.7rem, env(safe-area-inset-right)); width: 44px; height: 44px; background: rgba(11, 11, 15, 0.9); }
+      .lightbox-nav { top: auto; bottom: max(1rem, env(safe-area-inset-bottom)); transform: none; width: 52px; height: 52px; background: rgba(11, 11, 15, 0.9); font-size: 1.15rem; }
       .lightbox-prev { left: calc(50% - 62px); }
       .lightbox-next { left: calc(50% + 10px); right: auto; }
-
-      /* Stats — 2 columns with tighter gap */
-      .stats-banner {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.2rem;
-        padding: 1.5rem 1.2rem;
-      }
+      .stats-banner { grid-template-columns: repeat(2, 1fr); gap: 1.2rem; padding: 1.5rem 1.2rem; }
       .stat-number { font-size: 2rem; }
       .stat-label { font-size: 0.7rem; letter-spacing: 0.5px; }
-
-      /* Testimonials — reduce quote size */
       .testimonial-card { padding: 1.4rem 1.3rem; border-radius: 20px; }
       .testimonial-card p { font-size: 0.95rem; }
-
-      /* FAQ — comfortable tap target */
-      .faq-question {
-        padding: 0.4rem 0;
-        font-size: 0.98rem;
-        gap: 0.8rem;
-      }
+      .faq-question { padding: 0.4rem 0; font-size: 0.98rem; gap: 0.8rem; }
       .faq-answer { font-size: 0.88rem; padding-right: 1rem; }
-
-      /* Contact info — better tap targets */
-      .contact-info p {
-        font-size: 0.92rem;
-        gap: 0.5rem;
-        padding: 0.3rem 0;
-      }
-
-      /* Footer socials — larger tap area */
+      .contact-info p { font-size: 0.92rem; gap: 0.5rem; padding: 0.3rem 0; }
       .footer .socials { gap: 0.7rem; }
       .footer .socials a { width: 50px; height: 50px; font-size: 1.2rem; }
-
-      /* Codex badge — smaller on mobile */
       .codex-badge-mark { width: 40px; height: 40px; }
       .codex-badge-name { font-size: 1rem; }
       .codex-badge-link { padding: 0.7rem 1.3rem; gap: 0.7rem; }
     }
 
-    /* ============================================
-       VERY SMALL PHONES
-       ============================================ */
     @media (max-width: 380px) {
       .codex-header-text { display: none; }
       .codex-header { padding: 0.4rem; }
       .codex-header-mark { width: 28px; height: 28px; }
-
       .hero-photo { max-width: 82vw; }
       .hero-sub { font-size: 0.68rem; letter-spacing: 1px; }
-
       .btn { min-width: auto; flex: 1 1 100%; }
-
       .category-name { font-size: 1.1rem; }
-
       .masonry-grid { grid-auto-rows: 80px; }
     }
 
-    /* ============================================
-       LANDSCAPE PHONES
-       ============================================ */
     @media (max-height: 500px) and (orientation: landscape) {
-      .hero {
-        min-height: auto;
-        padding: 4rem 0 2.5rem;
-      }
+      .hero { min-height: auto; padding: 4rem 0 2.5rem; }
       .hero-photo { max-width: 42vw; }
     }
 
-    /* ============================================
-       IPHONE NOTCH / SAFE AREAS
-       ============================================ */
     @supports (padding: env(safe-area-inset-top)) {
-      .codex-header {
-        top: max(1rem, env(safe-area-inset-top));
-        left: max(1rem, env(safe-area-inset-left));
-      }
+      .codex-header { top: max(1rem, env(safe-area-inset-top)); left: max(1rem, env(safe-area-inset-left)); }
     }
 
-    /* ============================================
-       SCROLLBAR
-       ============================================ */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #0b0b0f; }
     ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #b8942e; }
     @media (max-width: 768px) { ::-webkit-scrollbar { width: 0; display: none; } }
 
-    /* ============================================
-       REDUCED MOTION
-       ============================================ */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
       }
     }
 
-    /* ============================================
-       PREVENT TEXT SELECTION ON UI ELEMENTS
-       ============================================ */
-    .codex-header, .category-card, .masonry-item, .btn, .filter-btn, .footer .socials a, .lightbox-nav, .lightbox-close, .category-modal-close {
+    .codex-header, .site-nav a, .category-card, .masonry-item, .btn, .filter-btn, .footer .socials a, .lightbox-nav, .lightbox-close, .category-modal-close, .mobile-nav-toggle, .nav-drawer a {
       user-select: none;
       -webkit-user-select: none;
     }
   </style>
 </head>
 <body>
-  <a href="#" class="codex-header" aria-label="Codex-Banx — Web Development">
+
+  <!-- Codex-Banx logo (top-left) -->
+  <a href="index.html" class="codex-header" aria-label="Codex-Banx — Home">
     <div class="codex-header-mark">
       <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -1270,6 +1245,35 @@
     </div>
   </a>
 
+  <!-- Desktop top nav -->
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
+    <a href="videos.html"><i class="fas fa-film"></i> Videos</a>
+    <a href="services.html"><i class="fas fa-briefcase"></i> Services</a>
+    <a href="about.html"><i class="fas fa-user"></i> About</a>
+    <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+  </nav>
+
+  <!-- Mobile nav toggle -->
+  <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <!-- Mobile nav drawer -->
+  <div class="nav-drawer" id="navDrawer">
+    <button class="nav-drawer-close" id="navDrawerClose" aria-label="Close menu">
+      <i class="fas fa-times"></i>
+    </button>
+    <div class="nav-drawer-inner">
+      <div class="nav-drawer-title">Codex<span class="dot">·</span>Banx</div>
+      <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
+      <a href="videos.html"><i class="fas fa-film"></i> Videos</a>
+      <a href="services.html"><i class="fas fa-briefcase"></i> Services</a>
+      <a href="about.html"><i class="fas fa-user"></i> About</a>
+      <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+    </div>
+  </div>
+
   <div id="canvas-container"></div>
   <div class="overlay" id="overlay"></div>
 
@@ -1282,8 +1286,8 @@
         <h1>Capturing Stories.<br>Creating Impact.</h1>
         <p class="hero-tagline">Welcome to Kay Official TGD CHEZZI — a creative media brand focused on professional videography, content creation and visual storytelling.</p>
         <div class="hero-buttons">
-          <a href="#gallery" class="btn btn-primary">View My Work</a>
-          <a href="#contact" class="btn btn-outline">Book Me</a>
+          <a href="videos.html" class="btn btn-primary">▶ Watch Videos</a>
+          <a href="contact.html" class="btn btn-outline">Book Me</a>
         </div>
       </div>
 
@@ -1399,30 +1403,22 @@
           <div style="margin: 2rem 0;">
             <p>
               <i class="fas fa-phone-alt"></i>
-              <a href="https://wa.me/260765169875" target="_blank" rel="noopener noreferrer">
-                +260 765 169 875
-              </a>
+              <a href="https://wa.me/260765169875" target="_blank" rel="noopener noreferrer">+260 765 169 875</a>
             </p>
             <p>
               <i class="fas fa-envelope"></i>
-              <a href="mailto:kayalexisnkhomatgd@gmail.com">
-                kayalexisnkhomatgd@gmail.com
-              </a>
+              <a href="mailto:kayalexisnkhomatgd@gmail.com">kayalexisnkhomatgd@gmail.com</a>
             </p>
             <p>
               <i class="fab fa-instagram"></i>
-              <a href="https://www.instagram.com/kaynkhomatgd" target="_blank" rel="noopener noreferrer">
-                Kay Nkhoma TGD
-              </a>
+              <a href="https://www.instagram.com/kaynkhomatgd" target="_blank" rel="noopener noreferrer">Kay Nkhoma TGD</a>
             </p>
             <p>
               <i class="fab fa-tiktok"></i>
-              <a href="https://www.tiktok.com/@kayofficialtgd" target="_blank" rel="noopener noreferrer">
-                Kay Official TGD
-              </a>
+              <a href="https://www.tiktok.com/@kayofficialtgd" target="_blank" rel="noopener noreferrer">Kay Official TGD</a>
             </p>
           </div>
-          <a href="#" class="btn btn-primary">Book a Project</a>
+          <a href="contact.html" class="btn btn-primary">Book a Project</a>
         </div>
         <div class="booking-box">
           <h3>To book my services, send me:</h3>
@@ -1460,26 +1456,16 @@
       <p style="font-size: clamp(1rem, 3vw, 1.3rem); font-style: italic; margin-bottom: 2rem;">Capturing Stories. Creating Impact.</p>
 
       <div class="socials">
-        <a href="https://www.instagram.com/kaynkhomatgd"
-           target="_blank"
-           rel="noopener noreferrer"
-           aria-label="Instagram — Kay Nkhoma TGD">
+        <a href="https://www.instagram.com/kaynkhomatgd" target="_blank" rel="noopener noreferrer" aria-label="Instagram — Kay Nkhoma TGD">
           <i class="fab fa-instagram"></i>
         </a>
-        <a href="https://www.tiktok.com/@kayofficialtgd"
-           target="_blank"
-           rel="noopener noreferrer"
-           aria-label="TikTok — Kay Official TGD">
+        <a href="https://www.tiktok.com/@kayofficialtgd" target="_blank" rel="noopener noreferrer" aria-label="TikTok — Kay Official TGD">
           <i class="fab fa-tiktok"></i>
         </a>
-        <a href="https://wa.me/260765169875"
-           target="_blank"
-           rel="noopener noreferrer"
-           aria-label="WhatsApp — +260 765 169 875">
+        <a href="https://wa.me/260765169875" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp — +260 765 169 875">
           <i class="fab fa-whatsapp"></i>
         </a>
-        <a href="mailto:kayalexisnkhomatgd@gmail.com"
-           aria-label="Email — kayalexisnkhomatgd@gmail.com">
+        <a href="mailto:kayalexisnkhomatgd@gmail.com" aria-label="Email — kayalexisnkhomatgd@gmail.com">
           <i class="fas fa-envelope"></i>
         </a>
       </div>
@@ -1649,42 +1635,27 @@
       }
     };
 
-    /* ============================================
-       BUILD STACKED CATEGORY GRID
-       ============================================ */
     (function buildCategoryGrid() {
       const grid = document.getElementById('categoryGrid');
       if (!grid) return;
-
       Object.keys(GALLERY).forEach(catName => {
         const cat = GALLERY[catName];
         const stackPhotos = [cat.cover, ...cat.photos.slice(0, 4).map(p => p.src)];
         const layerCount = Math.min(stackPhotos.length, 4);
-
         let stackHTML = '';
         for (let i = 0; i < layerCount; i++) {
           const layer = i + 1;
           const photoSrc = i === 0 ? cat.cover : cat.photos[i - 1].src;
-          stackHTML += `
-            <div class="stack-photo layer-${layer}">
-              <img src="${photoSrc}" alt="${catName} photo ${i + 1}" loading="lazy">
-            </div>
-          `;
+          stackHTML += `<div class="stack-photo layer-${layer}"><img src="${photoSrc}" alt="${catName} photo ${i + 1}" loading="lazy"></div>`;
         }
-
         const card = document.createElement('div');
         card.className = 'category-card';
         card.dataset.category = catName;
         card.innerHTML = `
-          <div class="stack">
-            ${stackHTML}
-          </div>
+          <div class="stack">${stackHTML}</div>
           <div class="category-label">
             <div class="category-name">${catName}</div>
-            <div class="category-cta-line">
-              <span>View full collection</span>
-              <i class="fas fa-arrow-right"></i>
-            </div>
+            <div class="category-cta-line"><span>View full collection</span><i class="fas fa-arrow-right"></i></div>
           </div>
         `;
         card.addEventListener('click', () => openCategory(catName));
@@ -1692,14 +1663,10 @@
       });
     })();
 
-    /* ============================================
-       CATEGORY MODAL
-       ============================================ */
     const categoryModal = document.getElementById('categoryModal');
     const masonryGrid = document.getElementById('masonryGrid');
     const modalCategoryTitle = document.getElementById('modalCategoryTitle');
     const modalCategoryCount = document.getElementById('modalCategoryCount');
-
     let currentPhotos = [];
     let currentPhotoIndex = 0;
     let lastScrollY = 0;
@@ -1720,10 +1687,8 @@
       if (!cat) return;
       currentPhotos = cat.photos;
       currentPhotoIndex = 0;
-
       modalCategoryTitle.textContent = catName;
       modalCategoryCount.textContent = `${cat.photos.length} photos`;
-
       masonryGrid.innerHTML = '';
       cat.photos.forEach((photo, idx) => {
         const item = document.createElement('div');
@@ -1732,31 +1697,21 @@
         item.innerHTML = `
           <span class="masonry-badge">4K</span>
           <img src="${photo.src}" alt="${photo.title}" loading="lazy">
-          <div class="masonry-overlay">
-            <div class="masonry-title">${photo.title}</div>
-          </div>
+          <div class="masonry-overlay"><div class="masonry-title">${photo.title}</div></div>
         `;
         item.addEventListener('click', () => openLightboxFromCategory(idx));
         masonryGrid.appendChild(item);
       });
-
       categoryModal.classList.add('open');
       lockBodyScroll();
     }
-
     function closeCategory() {
       categoryModal.classList.remove('open');
       unlockBodyScroll();
     }
-
     document.getElementById('categoryModalClose').addEventListener('click', closeCategory);
-    categoryModal.addEventListener('click', (e) => {
-      if (e.target === categoryModal) closeCategory();
-    });
+    categoryModal.addEventListener('click', (e) => { if (e.target === categoryModal) closeCategory(); });
 
-    /* ============================================
-       LIGHTBOX
-       ============================================ */
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
     const lightboxCat = document.getElementById('lightboxCat');
@@ -1774,9 +1729,7 @@
       lightboxTitle.textContent = photo.title;
       lightboxCat.textContent = modalCategoryTitle.textContent;
     }
-    document.getElementById('lightboxClose').addEventListener('click', () => {
-      lightbox.classList.remove('open');
-    });
+    document.getElementById('lightboxClose').addEventListener('click', () => { lightbox.classList.remove('open'); });
     document.getElementById('lightboxPrev').addEventListener('click', (e) => {
       e.stopPropagation();
       currentPhotoIndex = (currentPhotoIndex - 1 + currentPhotos.length) % currentPhotos.length;
@@ -1787,9 +1740,7 @@
       currentPhotoIndex = (currentPhotoIndex + 1) % currentPhotos.length;
       updateLightbox();
     });
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) lightbox.classList.remove('open');
-    });
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('open'); });
     let touchStartX = 0;
     lightbox.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
     lightbox.addEventListener('touchend', (e) => {
@@ -1811,9 +1762,6 @@
       }
     });
 
-    /* ============================================
-       STAT COUNTERS
-       ============================================ */
     (function statCounters() {
       const counters = document.querySelectorAll('.stat-number');
       const speed = 200;
@@ -1836,15 +1784,12 @@
       counters.forEach(c => counterObserver.observe(c));
     })();
 
-    /* ============================================
-       3D CAMERA BACKGROUND
-       ============================================ */
+    /* 3D camera background */
     (function() {
       const container = document.getElementById('canvas-container');
       if (!container) return;
       const isMobile = window.innerWidth < 768 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
       const isSmallMobile = window.innerWidth < 480;
-
       const scene = new THREE.Scene();
       scene.background = new THREE.Color(0x0b0b0f);
       const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -1853,19 +1798,16 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio, 2));
       container.appendChild(renderer.domElement);
-
       scene.add(new THREE.AmbientLight(0x404060, 0.8));
       const keyLight = new THREE.DirectionalLight(0xd4af37, 1.2); keyLight.position.set(5, 8, 10); scene.add(keyLight);
       const fillLight = new THREE.PointLight(0xd4af37, 0.6, 50); fillLight.position.set(-8, 4, 8); scene.add(fillLight);
       const rimLight = new THREE.PointLight(0xd4af37, 0.4, 40); rimLight.position.set(0, -5, -10); scene.add(rimLight);
-
       const cameraGroup = new THREE.Group();
       const bodyMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.5, metalness: 0.7 });
       const accentMat = new THREE.MeshStandardMaterial({ color: 0xd4af37, roughness: 0.3, metalness: 0.9, emissive: 0x221100 });
       const lensMat = new THREE.MeshStandardMaterial({ color: 0x0a0a0a, roughness: 0.1, metalness: 0.95 });
       const glassMat = new THREE.MeshPhysicalMaterial({ color: 0x88aaff, roughness: 0.05, metalness: 0.1, transmission: 0.9, transparent: true, opacity: 0.7, emissive: 0x223344, emissiveIntensity: 0.3 });
       const reelMat = new THREE.MeshStandardMaterial({ color: 0x2a2a2a, roughness: 0.6, metalness: 0.5 });
-
       cameraGroup.add(new THREE.Mesh(new THREE.BoxGeometry(6, 3.4, 3.2), bodyMat));
       const handle = new THREE.Mesh(new THREE.BoxGeometry(2.5, 0.6, 0.8), bodyMat);
       handle.position.set(0, 2.1, 0); cameraGroup.add(handle);
@@ -1890,7 +1832,6 @@
       cameraGroup.add(lensGroup);
       const focusRing = new THREE.Mesh(new THREE.TorusGeometry(1.7, 0.12, 12, 48), accentMat);
       focusRing.position.set(0, 0, 2.2); cameraGroup.add(focusRing);
-
       const gripCount = isMobile ? 12 : 24;
       for (let i = 0; i < gripCount; i++) {
         const angle = (i / gripCount) * Math.PI * 2;
@@ -1906,7 +1847,6 @@
       screenFrame.position.set(3.05, 0.2, 0); cameraGroup.add(screenFrame);
       const screen = new THREE.Mesh(new THREE.PlaneGeometry(2.0, 1.3), new THREE.MeshStandardMaterial({ color: 0x0a1a2a, emissive: 0x112244, emissiveIntensity: 0.5, roughness: 0.2 }));
       screen.position.set(3.12, 0.2, 0); screen.rotation.y = Math.PI / 2; cameraGroup.add(screen);
-
       const reelGroup = new THREE.Group();
       reelGroup.position.set(0, 2.8, 0);
       const reelDisc = new THREE.Mesh(new THREE.CylinderGeometry(1.1, 1.1, 0.25, 24), reelMat);
@@ -1919,7 +1859,6 @@
       }
       const reelRing = new THREE.Mesh(new THREE.TorusGeometry(1.1, 0.06, 10, 36), accentMat);
       reelGroup.add(reelRing); cameraGroup.add(reelGroup);
-
       const frontBar = new THREE.Mesh(new THREE.BoxGeometry(4.5, 0.15, 0.15), accentMat);
       frontBar.position.set(0, -1.4, 1.65); cameraGroup.add(frontBar);
       const brandPlate = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.4, 0.05), accentMat);
@@ -1928,12 +1867,10 @@
       leftGrip.position.set(-3.2, 0, 0); cameraGroup.add(leftGrip);
       const gripAccent = new THREE.Mesh(new THREE.BoxGeometry(0.15, 2.6, 0.65), accentMat);
       gripAccent.position.set(-3.45, 0, 0); cameraGroup.add(gripAccent);
-
       cameraGroup.position.set(0, 1, 0);
       cameraGroup.rotation.y = -0.3;
       cameraGroup.rotation.x = 0.1;
       scene.add(cameraGroup);
-
       const particlesCount = isMobile ? 500 : 1800;
       const particlesGeometry = new THREE.BufferGeometry();
       const posArray = new Float32Array(particlesCount * 3);
@@ -1946,7 +1883,6 @@
       const particlesMaterial = new THREE.PointsMaterial({ size: isMobile ? 0.2 : 0.15, color: 0xd4af37, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending });
       const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
       scene.add(particlesMesh);
-
       const ringGeo = new THREE.TorusGeometry(3, 0.03, 8, 48);
       const ringMat = new THREE.MeshBasicMaterial({ color: 0xd4af37, transparent: true, opacity: 0.15 });
       const rings = [];
@@ -1960,7 +1896,6 @@
         scene.add(r);
         rings.push(r);
       });
-
       const themes = {
         gold:    { bg: 0x0b0b0f, accent: 0xd4af37, overlay: 'rgba(11,11,15,0.95)' },
         cyan:    { bg: 0x051018, accent: 0x00d4ff, overlay: 'rgba(5,16,24,0.95)' },
@@ -1987,7 +1922,6 @@
         });
       }, { threshold: 0.4, rootMargin: '-10% 0px -10% 0px' });
       sections.forEach(s => themeObserver.observe(s));
-
       let scrollTicking = false;
       window.addEventListener('scroll', () => {
         if (scrollTicking) return;
@@ -2012,7 +1946,6 @@
           scrollTicking = false;
         });
       }, { passive: true });
-
       let mouseX = 0, mouseY = 0;
       if (!isMobile) {
         document.addEventListener('mousemove', e => {
@@ -2026,7 +1959,6 @@
           mouseY = (e.touches[0].clientY / window.innerHeight - 0.5) * 2;
         }, { passive: true });
       }
-
       let time = 0;
       function animate() {
         requestAnimationFrame(animate);
@@ -2043,7 +1975,6 @@
         glassMat.emissive.copy(currentTheme.accent).multiplyScalar(0.15);
         particlesMaterial.color.copy(currentTheme.accent);
         ringMat.color.copy(currentTheme.accent);
-
         cameraGroup.position.y = 1 + Math.sin(time * 0.8) * 0.4;
         cameraGroup.position.x = Math.sin(time * 0.4) * 0.5;
         cameraGroup.rotation.y = -0.3 + Math.sin(time * 0.3) * 0.25 + mouseX * 0.3;
@@ -2069,7 +2000,6 @@
         renderer.render(scene, camera);
       }
       animate();
-
       window.addEventListener('resize', () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
@@ -2101,6 +2031,29 @@
         });
       });
     })();
+
+    /* Mobile nav drawer */
+    const mobileNavToggle = document.getElementById('mobileNavToggle');
+    const navDrawer = document.getElementById('navDrawer');
+    const navDrawerClose = document.getElementById('navDrawerClose');
+    if (mobileNavToggle) {
+      mobileNavToggle.addEventListener('click', () => {
+        navDrawer.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    }
+    if (navDrawerClose) {
+      navDrawerClose.addEventListener('click', () => {
+        navDrawer.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    }
+    navDrawer.addEventListener('click', (e) => {
+      if (e.target === navDrawer) {
+        navDrawer.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
   </script>
 </body>
 </html>
