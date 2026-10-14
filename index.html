@@ -538,7 +538,7 @@
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
     /* ============================================
-       GALLERY — STACKED PHOTO DECK EFFECT
+       GALLERY — STACKED PHOTO DECK
        ============================================ */
     .gallery-intro {
       color: rgba(255,255,255,0.7);
@@ -553,7 +553,6 @@
       margin-top: 2rem;
     }
 
-    /* Stacked deck card */
     .category-card {
       position: relative;
       cursor: pointer;
@@ -572,7 +571,6 @@
       box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
     }
 
-    /* The stack wrapper — holds the layered photos */
     .stack {
       position: relative;
       width: 100%;
@@ -580,8 +578,6 @@
       perspective: 1200px;
       margin-bottom: 1.4rem;
     }
-
-    /* Each layered photo */
     .stack-photo {
       position: absolute;
       inset: 0;
@@ -592,66 +588,21 @@
       transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s ease, box-shadow 0.6s ease;
       will-change: transform;
     }
-    .stack-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .stack-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    /* The layer positions — this is what creates the "deck behind" effect */
-    .stack-photo.layer-4 {  /* Most behind — smallest, most rotated */
-      transform: translate(20px, -18px) rotate(6deg) scale(0.86);
-      opacity: 0.45;
-      z-index: 1;
-    }
-    .stack-photo.layer-3 {  /* Behind #2 */
-      transform: translate(-14px, -14px) rotate(-4deg) scale(0.90);
-      opacity: 0.6;
-      z-index: 2;
-    }
-    .stack-photo.layer-2 {  /* Behind #1 */
-      transform: translate(10px, -8px) rotate(3deg) scale(0.95);
-      opacity: 0.8;
-      z-index: 3;
-    }
-    .stack-photo.layer-1 {  /* Front — fully visible */
-      transform: translate(0, 0) rotate(0deg) scale(1);
-      opacity: 1;
-      z-index: 4;
-    }
+    .stack-photo.layer-4 { transform: translate(20px, -18px) rotate(6deg) scale(0.86); opacity: 0.45; z-index: 1; }
+    .stack-photo.layer-3 { transform: translate(-14px, -14px) rotate(-4deg) scale(0.90); opacity: 0.6; z-index: 2; }
+    .stack-photo.layer-2 { transform: translate(10px, -8px) rotate(3deg) scale(0.95); opacity: 0.8; z-index: 3; }
+    .stack-photo.layer-1 { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; z-index: 4; }
 
-    /* Hover — the stack fans out wider */
-    .category-card:hover .stack-photo.layer-4 {
-      transform: translate(32px, -30px) rotate(10deg) scale(0.84);
-      opacity: 0.55;
-    }
-    .category-card:hover .stack-photo.layer-3 {
-      transform: translate(-24px, -22px) rotate(-7deg) scale(0.89);
-      opacity: 0.7;
-    }
-    .category-card:hover .stack-photo.layer-2 {
-      transform: translate(14px, -12px) rotate(4deg) scale(0.94);
-      opacity: 0.9;
-    }
-    .category-card:hover .stack-photo.layer-1 {
-      transform: translate(0, -8px) scale(1.03);
-      box-shadow: 0 25px 60px rgba(212, 175, 55, 0.35);
-    }
+    .category-card:hover .stack-photo.layer-4 { transform: translate(32px, -30px) rotate(10deg) scale(0.84); opacity: 0.55; }
+    .category-card:hover .stack-photo.layer-3 { transform: translate(-24px, -22px) rotate(-7deg) scale(0.89); opacity: 0.7; }
+    .category-card:hover .stack-photo.layer-2 { transform: translate(14px, -12px) rotate(4deg) scale(0.94); opacity: 0.9; }
+    .category-card:hover .stack-photo.layer-1 { transform: translate(0, -8px) scale(1.03); }
 
-    /* Gold border on the front photo */
-    .stack-photo.layer-1 {
-      box-shadow:
-        0 15px 40px rgba(0, 0, 0, 0.55),
-        0 0 0 2px rgba(212, 175, 55, 0.4);
-    }
-    .category-card:hover .stack-photo.layer-1 {
-      box-shadow:
-        0 25px 60px rgba(212, 175, 55, 0.4),
-        0 0 0 2px rgba(212, 175, 55, 0.7);
-    }
+    .stack-photo.layer-1 { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.55), 0 0 0 2px rgba(212, 175, 55, 0.4); }
+    .category-card:hover .stack-photo.layer-1 { box-shadow: 0 25px 60px rgba(212, 175, 55, 0.4), 0 0 0 2px rgba(212, 175, 55, 0.7); }
 
-    /* Subtle gradient at bottom of front photo */
     .stack-photo.layer-1::after {
       content: '';
       position: absolute;
@@ -660,13 +611,7 @@
       pointer-events: none;
     }
 
-    /* Category label */
-    .category-label {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-      padding-left: 0.3rem;
-    }
+    .category-label { display: flex; flex-direction: column; gap: 0.3rem; padding-left: 0.3rem; }
     .category-name {
       font-size: clamp(1.2rem, 2.8vw, 1.6rem);
       font-weight: 800;
@@ -684,10 +629,7 @@
       gap: 0.5rem;
       transition: color 0.3s ease, gap 0.3s ease;
     }
-    .category-card:hover .category-cta-line {
-      color: #d4af37;
-      gap: 0.8rem;
-    }
+    .category-card:hover .category-cta-line { color: #d4af37; gap: 0.8rem; }
     .category-cta-line i { font-size: 0.85em; }
 
     /* ============================================
@@ -723,12 +665,7 @@
       gap: 1rem;
       flex-wrap: wrap;
     }
-    .category-modal-title {
-      display: flex;
-      align-items: baseline;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-    }
+    .category-modal-title { display: flex; align-items: baseline; gap: 0.8rem; flex-wrap: wrap; }
     .category-modal-title h3 {
       font-size: clamp(1.2rem, 3.2vw, 1.9rem);
       font-weight: 800;
@@ -756,29 +693,18 @@
       transition: 0.3s;
       flex-shrink: 0;
     }
-    .category-modal-close:hover {
-      background: #d4af37;
-      color: #0b0b0f;
-      transform: rotate(90deg);
-    }
+    .category-modal-close:hover { background: #d4af37; color: #0b0b0f; transform: rotate(90deg); }
 
-    .category-modal-body {
-      padding: clamp(1.2rem, 3vw, 2rem) clamp(1rem, 4vw, 2rem) clamp(3rem, 8vw, 5rem);
-    }
+    .category-modal-body { padding: clamp(1.2rem, 3vw, 2rem) clamp(1rem, 4vw, 2rem) clamp(3rem, 8vw, 5rem); }
 
-    /* Masonry-style grid */
     .masonry-grid {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       gap: clamp(0.6rem, 1.5vw, 1rem);
       grid-auto-rows: 80px;
     }
-    @media (max-width: 900px) {
-      .masonry-grid { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 70px; }
-    }
-    @media (max-width: 600px) {
-      .masonry-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 80px; }
-    }
+    @media (max-width: 900px) { .masonry-grid { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 70px; } }
+    @media (max-width: 600px) { .masonry-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 80px; } }
 
     .masonry-item {
       position: relative;
@@ -796,15 +722,8 @@
       display: block;
       transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s ease;
     }
-    .masonry-item:hover {
-      transform: scale(1.02);
-      box-shadow: 0 25px 60px rgba(212, 175, 55, 0.35);
-      z-index: 3;
-    }
-    .masonry-item:hover img {
-      transform: scale(1.12);
-      filter: brightness(1.15) saturate(1.1);
-    }
+    .masonry-item:hover { transform: scale(1.02); box-shadow: 0 25px 60px rgba(212, 175, 55, 0.35); z-index: 3; }
+    .masonry-item:hover img { transform: scale(1.12); filter: brightness(1.15) saturate(1.1); }
 
     .masonry-overlay {
       position: absolute;
@@ -821,11 +740,7 @@
     @media (hover: none) {
       .masonry-overlay { opacity: 1; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%); }
     }
-    .masonry-title {
-      font-size: clamp(0.75rem, 1.7vw, 0.95rem);
-      font-weight: 700;
-      color: #fff;
-    }
+    .masonry-title { font-size: clamp(0.75rem, 1.7vw, 0.95rem); font-weight: 700; color: #fff; }
     .masonry-badge {
       position: absolute;
       top: 0.6rem;
@@ -953,6 +868,7 @@
       border: 1px solid rgba(212, 175, 55, 0.15);
       border-radius: 24px;
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
     .stat-item { text-align: center; }
     .stat-number {
@@ -969,6 +885,7 @@
       text-transform: uppercase;
     }
 
+    /* Contact section links */
     .contact-info p {
       display: flex;
       align-items: center;
@@ -978,6 +895,14 @@
       word-break: break-word;
     }
     .contact-info i { color: #d4af37; width: 20px; flex-shrink: 0; }
+    .contact-info a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .contact-info a:hover {
+      color: #d4af37;
+    }
     .booking-box {
       background: rgba(20,20,30,0.7);
       border-radius: 24px;
@@ -1200,10 +1125,30 @@
           <p style="font-size: clamp(1.05rem, 2.8vw, 1.3rem); margin-bottom: 1.5rem;">Have a wedding, event, documentary, business project or content idea? Let’s turn your vision into powerful visual content.</p>
           <p style="margin-bottom: 2rem;">Available for bookings and creative collaborations.</p>
           <div style="margin: 2rem 0;">
-            <p><i class="fas fa-phone-alt"></i> +260 765 169 875</p>
-            <p><i class="fas fa-envelope"></i> kayalexisnkhomatgd@gmail.com</p>
-            <p><i class="fab fa-instagram"></i> Kay Nkhoma TGD</p>
-            <p><i class="fab fa-tiktok"></i> Kay Official TGD</p>
+            <p>
+              <i class="fas fa-phone-alt"></i>
+              <a href="https://wa.me/260765169875" target="_blank" rel="noopener noreferrer">
+                +260 765 169 875
+              </a>
+            </p>
+            <p>
+              <i class="fas fa-envelope"></i>
+              <a href="mailto:kayalexisnkhomatgd@gmail.com">
+                kayalexisnkhomatgd@gmail.com
+              </a>
+            </p>
+            <p>
+              <i class="fab fa-instagram"></i>
+              <a href="https://www.instagram.com/kaynkhomatgd" target="_blank" rel="noopener noreferrer">
+                Kay Nkhoma TGD
+              </a>
+            </p>
+            <p>
+              <i class="fab fa-tiktok"></i>
+              <a href="https://www.tiktok.com/@kayofficialtgd" target="_blank" rel="noopener noreferrer">
+                Kay Official TGD
+              </a>
+            </p>
           </div>
           <a href="#" class="btn btn-primary">Book a Project</a>
         </div>
@@ -1241,12 +1186,32 @@
       <h3>KAY OFFICIAL TGD CHEZZI</h3>
       <p style="color: #d4af37; letter-spacing: 2px; margin: 0.5rem 0 1rem; font-size: clamp(0.75rem, 2vw, 0.9rem);">Videographer · Content Creator · Camera Operator</p>
       <p style="font-size: clamp(1rem, 2.5vw, 1.3rem); font-style: italic; margin-bottom: 2rem;">Capturing Stories. Creating Impact.</p>
+
       <div class="socials">
-        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.instagram.com/kaynkhomatgd"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Instagram — Kay Nkhoma TGD">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.tiktok.com/@kayofficialtgd"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="TikTok — Kay Official TGD">
+          <i class="fab fa-tiktok"></i>
+        </a>
+        <a href="https://wa.me/260765169875"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="WhatsApp — +260 765 169 875">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="mailto:kayalexisnkhomatgd@gmail.com"
+           aria-label="Email — kayalexisnkhomatgd@gmail.com">
+          <i class="fas fa-envelope"></i>
+        </a>
       </div>
+
       <p style="margin-top: 1.5rem;">📱 +260 765 169 875 &nbsp;|&nbsp; ✉️ kayalexisnkhomatgd@gmail.com</p>
       <p style="margin-top: 1rem; color: #d4af37;">Let’s create something worth remembering.</p>
 
@@ -1421,19 +1386,11 @@
 
       Object.keys(GALLERY).forEach(catName => {
         const cat = GALLERY[catName];
-        const totalPhotos = cat.photos.length;
-
-        // Pick up to 4 photos for the stack: front is the cover, others behind
         const stackPhotos = [cat.cover, ...cat.photos.slice(0, 4).map(p => p.src)];
-
-        // Only show as many layers as we have photos (max 4)
         const layerCount = Math.min(stackPhotos.length, 4);
 
-        // Build stack HTML — layer-1 is FRONT, layer-4 is BEHIND
-        // We show the top 4 as: front = cover, behind = next 3 photos
         let stackHTML = '';
         for (let i = 0; i < layerCount; i++) {
-          // layer-1 = front, layer-2 = behind, layer-3 = further behind, layer-4 = furthest
           const layer = i + 1;
           const photoSrc = i === 0 ? cat.cover : cat.photos[i - 1].src;
           stackHTML += `
@@ -1443,7 +1400,6 @@
           `;
         }
 
-        // Build the card
         const card = document.createElement('div');
         card.className = 'category-card';
         card.dataset.category = catName;
