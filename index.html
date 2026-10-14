@@ -46,9 +46,7 @@
       transition: background 1.2s ease;
     }
 
-    /* ============================================
-       CODEX-BANX HEADER
-       ============================================ */
+    /* Codex-Banx header */
     .codex-header {
       position: fixed;
       top: 1rem;
@@ -115,9 +113,6 @@
       to   { transform: rotate(360deg) translateX(88px) rotate(-360deg); }
     }
 
-    /* ============================================
-       CONTENT
-       ============================================ */
     .content {
       position: relative;
       z-index: 2;
@@ -543,7 +538,7 @@
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
     /* ============================================
-       GALLERY — GROUPED CATEGORIES
+       GALLERY — STACKED PHOTO DECK EFFECT
        ============================================ */
     .gallery-intro {
       color: rgba(255,255,255,0.7);
@@ -554,127 +549,149 @@
     .category-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-      gap: clamp(1rem, 3vw, 1.8rem);
-      margin-top: 1.5rem;
+      gap: clamp(1.5rem, 4vw, 2.5rem);
+      margin-top: 2rem;
     }
 
-    /* Featured category card */
+    /* Stacked deck card */
     .category-card {
       position: relative;
-      border-radius: 24px;
-      overflow: hidden;
       cursor: pointer;
-      aspect-ratio: 4 / 3;
-      background: #111;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-      transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.6s ease;
+      padding: clamp(1.2rem, 3vw, 2rem);
+      padding-bottom: clamp(2rem, 4vw, 3rem);
+      background: rgba(20, 20, 30, 0.4);
+      border: 1px solid rgba(212, 175, 55, 0.12);
+      border-radius: 24px;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       will-change: transform;
     }
     .category-card:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 30px 70px rgba(212, 175, 55, 0.35);
-      z-index: 3;
+      background: rgba(20, 20, 30, 0.6);
+      border-color: rgba(212, 175, 55, 0.4);
+      transform: translateY(-6px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
     }
 
-    /* Featured card spans bigger on wide screens */
-    @media (min-width: 900px) {
-      .category-card:nth-child(1) { grid-column: span 2; aspect-ratio: 16 / 10; }
+    /* The stack wrapper — holds the layered photos */
+    .stack {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      perspective: 1200px;
+      margin-bottom: 1.4rem;
     }
 
-    .category-card img {
+    /* Each layered photo */
+    .stack-photo {
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #111;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+      transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s ease, box-shadow 0.6s ease;
+      will-change: transform;
+    }
+    .stack-photo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s ease;
       display: block;
     }
-    .category-card:hover img {
-      transform: scale(1.12);
-      filter: brightness(1.15) saturate(1.1);
+
+    /* The layer positions — this is what creates the "deck behind" effect */
+    .stack-photo.layer-4 {  /* Most behind — smallest, most rotated */
+      transform: translate(20px, -18px) rotate(6deg) scale(0.86);
+      opacity: 0.45;
+      z-index: 1;
+    }
+    .stack-photo.layer-3 {  /* Behind #2 */
+      transform: translate(-14px, -14px) rotate(-4deg) scale(0.90);
+      opacity: 0.6;
+      z-index: 2;
+    }
+    .stack-photo.layer-2 {  /* Behind #1 */
+      transform: translate(10px, -8px) rotate(3deg) scale(0.95);
+      opacity: 0.8;
+      z-index: 3;
+    }
+    .stack-photo.layer-1 {  /* Front — fully visible */
+      transform: translate(0, 0) rotate(0deg) scale(1);
+      opacity: 1;
+      z-index: 4;
     }
 
-    .category-overlay {
+    /* Hover — the stack fans out wider */
+    .category-card:hover .stack-photo.layer-4 {
+      transform: translate(32px, -30px) rotate(10deg) scale(0.84);
+      opacity: 0.55;
+    }
+    .category-card:hover .stack-photo.layer-3 {
+      transform: translate(-24px, -22px) rotate(-7deg) scale(0.89);
+      opacity: 0.7;
+    }
+    .category-card:hover .stack-photo.layer-2 {
+      transform: translate(14px, -12px) rotate(4deg) scale(0.94);
+      opacity: 0.9;
+    }
+    .category-card:hover .stack-photo.layer-1 {
+      transform: translate(0, -8px) scale(1.03);
+      box-shadow: 0 25px 60px rgba(212, 175, 55, 0.35);
+    }
+
+    /* Gold border on the front photo */
+    .stack-photo.layer-1 {
+      box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.55),
+        0 0 0 2px rgba(212, 175, 55, 0.4);
+    }
+    .category-card:hover .stack-photo.layer-1 {
+      box-shadow:
+        0 25px 60px rgba(212, 175, 55, 0.4),
+        0 0 0 2px rgba(212, 175, 55, 0.7);
+    }
+
+    /* Subtle gradient at bottom of front photo */
+    .stack-photo.layer-1::after {
+      content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.35) 55%, transparent 100%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: clamp(1.2rem, 3vw, 1.8rem);
-      transition: opacity 0.4s ease;
+      background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 40%);
+      pointer-events: none;
     }
 
-    .category-title {
-      font-size: clamp(1.3rem, 3vw, 2rem);
+    /* Category label */
+    .category-label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      padding-left: 0.3rem;
+    }
+    .category-name {
+      font-size: clamp(1.2rem, 2.8vw, 1.6rem);
       font-weight: 800;
       color: #fff;
-      margin-bottom: 0.3rem;
+      letter-spacing: -0.02em;
       display: flex;
       align-items: center;
       gap: 0.6rem;
-      flex-wrap: wrap;
     }
-
-    .category-count {
-      font-size: clamp(0.7rem, 1.6vw, 0.85rem);
-      font-weight: 600;
-      color: #0b0b0f;
-      background: #d4af37;
-      padding: 0.25rem 0.75rem;
-      border-radius: 40px;
-      letter-spacing: 0.05em;
-      white-space: nowrap;
-    }
-
-    .category-cta {
-      font-size: clamp(0.75rem, 1.7vw, 0.9rem);
-      color: rgba(255,255,255,0.8);
+    .category-cta-line {
+      font-size: clamp(0.78rem, 1.8vw, 0.9rem);
+      color: rgba(255,255,255,0.6);
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      margin-top: 0.3rem;
-      transition: gap 0.3s ease, color 0.3s ease;
+      transition: color 0.3s ease, gap 0.3s ease;
     }
-    .category-card:hover .category-cta {
-      gap: 0.9rem;
+    .category-card:hover .category-cta-line {
       color: #d4af37;
+      gap: 0.8rem;
     }
-    .category-cta i { font-size: 0.8em; }
-
-    /* Gold badge top-right */
-    .category-badge {
-      position: absolute;
-      top: clamp(0.8rem, 2vw, 1.2rem);
-      right: clamp(0.8rem, 2vw, 1.2rem);
-      background: rgba(11, 11, 15, 0.85);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(212, 175, 55, 0.5);
-      color: #d4af37;
-      font-size: clamp(0.6rem, 1.5vw, 0.7rem);
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      padding: 0.35rem 0.7rem;
-      border-radius: 8px;
-      z-index: 2;
-    }
-
-    /* Shine sweep */
-    .category-card::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -75%;
-      width: 50%; height: 100%;
-      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.15), transparent);
-      transform: skewX(-20deg);
-      transition: left 0.8s ease;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .category-card:hover::after { left: 125%; }
+    .category-cta-line i { font-size: 0.85em; }
 
     /* ============================================
-       CATEGORY MODAL — fullscreen gallery
+       CATEGORY MODAL
        ============================================ */
     .category-modal {
       position: fixed;
@@ -689,10 +706,7 @@
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
     }
-    .category-modal.open {
-      opacity: 1;
-      visibility: visible;
-    }
+    .category-modal.open { opacity: 1; visibility: visible; }
 
     .category-modal-header {
       position: sticky;
@@ -709,7 +723,6 @@
       gap: 1rem;
       flex-wrap: wrap;
     }
-
     .category-modal-title {
       display: flex;
       align-items: baseline;
@@ -728,7 +741,6 @@
       font-weight: 600;
       letter-spacing: 0.05em;
     }
-
     .category-modal-close {
       width: clamp(42px, 5vw, 50px);
       height: clamp(42px, 5vw, 50px);
@@ -754,7 +766,7 @@
       padding: clamp(1.2rem, 3vw, 2rem) clamp(1rem, 4vw, 2rem) clamp(3rem, 8vw, 5rem);
     }
 
-    /* Masonry-style grid with varied positions & sizes */
+    /* Masonry-style grid */
     .masonry-grid {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
@@ -775,7 +787,6 @@
       cursor: pointer;
       background: #111;
       transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s ease;
-      will-change: transform;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
     .masonry-item img {
@@ -831,7 +842,6 @@
       z-index: 2;
     }
 
-    /* Varied tile sizes for dynamic "different positions" layout */
     .masonry-item.size-tall  { grid-row: span 4; }
     .masonry-item.size-big   { grid-column: span 2; grid-row: span 4; }
     .masonry-item.size-wide  { grid-column: span 2; grid-row: span 3; }
@@ -846,7 +856,7 @@
     }
 
     /* ============================================
-       LIGHTBOX (per-photo zoom within modal)
+       LIGHTBOX
        ============================================ */
     .lightbox {
       position: fixed;
@@ -943,7 +953,6 @@
       border: 1px solid rgba(212, 175, 55, 0.15);
       border-radius: 24px;
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
     }
     .stat-item { text-align: center; }
     .stat-number {
@@ -1004,6 +1013,10 @@
       .codex-badge-name { font-size: 1rem; }
       .hero-photo-badge { padding: 0.4rem 0.8rem 0.4rem 0.6rem; }
       .hero-photo-badge .text { font-size: 0.6rem; }
+      .category-grid { grid-template-columns: 1fr; }
+      .stack-photo.layer-4 { transform: translate(12px, -12px) rotate(5deg) scale(0.88); }
+      .stack-photo.layer-3 { transform: translate(-10px, -10px) rotate(-3deg) scale(0.92); }
+      .stack-photo.layer-2 { transform: translate(6px, -6px) rotate(2deg) scale(0.96); }
     }
     @media (max-width: 380px) {
       .codex-header-text { display: none; }
@@ -1123,11 +1136,11 @@
       </div>
     </section>
 
-    <!-- GALLERY — GROUPED BY CATEGORY -->
+    <!-- GALLERY -->
     <section class="section fade-up" id="gallery" data-theme="red">
       <h2>Occasions I Capture</h2>
       <p class="gallery-intro">
-        Explore my work by category. Click any category to see all photos inside — arranged in dynamic layouts.
+        Explore my work by category. Click any stack to reveal all photos inside — the more photos hidden behind, the bigger the collection.
       </p>
 
       <div class="category-grid" id="categoryGrid"></div>
@@ -1329,8 +1342,6 @@
   <script>
     /* ============================================
        GALLERY DATA
-       Grouped by category. Each category has multiple photos
-       with different tile sizes for a dynamic masonry layout.
        ============================================ */
     const GALLERY = {
       'Wedding': {
@@ -1402,7 +1413,7 @@
     };
 
     /* ============================================
-       BUILD CATEGORY GRID (grouped covers)
+       BUILD STACKED CATEGORY GRID
        ============================================ */
     (function buildCategoryGrid() {
       const grid = document.getElementById('categoryGrid');
@@ -1410,19 +1421,40 @@
 
       Object.keys(GALLERY).forEach(catName => {
         const cat = GALLERY[catName];
+        const totalPhotos = cat.photos.length;
+
+        // Pick up to 4 photos for the stack: front is the cover, others behind
+        const stackPhotos = [cat.cover, ...cat.photos.slice(0, 4).map(p => p.src)];
+
+        // Only show as many layers as we have photos (max 4)
+        const layerCount = Math.min(stackPhotos.length, 4);
+
+        // Build stack HTML — layer-1 is FRONT, layer-4 is BEHIND
+        // We show the top 4 as: front = cover, behind = next 3 photos
+        let stackHTML = '';
+        for (let i = 0; i < layerCount; i++) {
+          // layer-1 = front, layer-2 = behind, layer-3 = further behind, layer-4 = furthest
+          const layer = i + 1;
+          const photoSrc = i === 0 ? cat.cover : cat.photos[i - 1].src;
+          stackHTML += `
+            <div class="stack-photo layer-${layer}">
+              <img src="${photoSrc}" alt="${catName} photo ${i + 1}" loading="lazy">
+            </div>
+          `;
+        }
+
+        // Build the card
         const card = document.createElement('div');
         card.className = 'category-card';
         card.dataset.category = catName;
         card.innerHTML = `
-          <span class="category-badge">${cat.photos.length} Photos</span>
-          <img src="${cat.cover}" alt="${catName} category cover" loading="lazy">
-          <div class="category-overlay">
-            <div class="category-title">
-              ${catName}
-              <span class="category-count">${cat.photos.length}</span>
-            </div>
-            <div class="category-cta">
-              <span>View all ${catName} photos</span>
+          <div class="stack">
+            ${stackHTML}
+          </div>
+          <div class="category-label">
+            <div class="category-name">${catName}</div>
+            <div class="category-cta-line">
+              <span>View full collection</span>
               <i class="fas fa-arrow-right"></i>
             </div>
           </div>
@@ -1433,14 +1465,13 @@
     })();
 
     /* ============================================
-       CATEGORY MODAL — masonry of photos
+       CATEGORY MODAL
        ============================================ */
     const categoryModal = document.getElementById('categoryModal');
     const masonryGrid = document.getElementById('masonryGrid');
     const modalCategoryTitle = document.getElementById('modalCategoryTitle');
     const modalCategoryCount = document.getElementById('modalCategoryCount');
 
-    // Current context for the lightbox
     let currentPhotos = [];
     let currentPhotoIndex = 0;
 
@@ -1484,7 +1515,7 @@
     });
 
     /* ============================================
-       LIGHTBOX (photo zoom, uses currentPhotos)
+       LIGHTBOX
        ============================================ */
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
@@ -1496,7 +1527,6 @@
       updateLightbox();
       lightbox.classList.add('open');
     }
-
     function updateLightbox() {
       const photo = currentPhotos[currentPhotoIndex];
       if (!photo) return;
@@ -1504,7 +1534,6 @@
       lightboxTitle.textContent = photo.title;
       lightboxCat.textContent = modalCategoryTitle.textContent;
     }
-
     document.getElementById('lightboxClose').addEventListener('click', () => {
       lightbox.classList.remove('open');
     });
@@ -1521,8 +1550,6 @@
     lightbox.addEventListener('click', (e) => {
       if (e.target === lightbox) lightbox.classList.remove('open');
     });
-
-    // Touch swipe
     let touchStartX = 0;
     lightbox.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
     lightbox.addEventListener('touchend', (e) => {
@@ -1534,8 +1561,6 @@
         updateLightbox();
       }
     }, { passive: true });
-
-    // Keyboard nav
     document.addEventListener('keydown', (e) => {
       if (lightbox.classList.contains('open')) {
         if (e.key === 'Escape') lightbox.classList.remove('open');
