@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0b0f">
+  <meta name="description" content="About Kay Nkhoma — Videographer, Content Creator & Camera Operator based in Lusaka, Zambia. 5+ years of storytelling experience.">
+  <title>About | Kay Official TGD CHEZZI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpolygon points='100,14 174,57 174,143 100,186 26,143 26,57' fill='none' stroke='%23d4af37' stroke-width='6' stroke-linejoin='round'/%3E%3Cpath d='M 62 70 L 44 100 L 62 130' fill='none' stroke='%23d4af37' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M 138 70 L 156 100 L 138 130' fill='none' stroke='%23d4af37' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='100' cy='100' r='9' fill='%23fff'/%3E%3C/svg%3E">
+  <style>
+    /* ============================================
+       RESET & BASE
+       ============================================ */
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0b0b0f;
+      color: #ffffff;
+      overflow-x: hidden;
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    button { font-family: inherit; cursor: pointer; }
+
+    /* ============================================
+       BACKGROUND DECORATION
+       ============================================ */
+    .bg-decor {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 75%, rgba(212, 175, 55, 0.05) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(10, 10, 20, 0.6) 0%, #0b0b0f 90%);
+    }
+    .bg-decor::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 20% 30%, rgba(212,175,55,0.4), transparent),
+        radial-gradient(1px 1px at 60% 70%, rgba(212,175,55,0.25), transparent),
+        radial-gradient(1px 1px at 80% 20%, rgba(212,175,55,0.3), transparent),
+        radial-gradient(1px 1px at 30% 80%, rgba(212,175,55,0.2), transparent);
+      background-size: 200% 200%;
+      animation: driftBg 40s linear infinite;
+      opacity: 0.7;
+    }
+    @keyframes driftBg {
+      0%   { background-position: 0% 0%; }
+      100% { background-position: 100% 100%; }
+    }
+
+    /* ============================================
+       CODEX-BANX HEADER
+       ============================================ */
+    .codex-header {
+      position: fixed;
+      top: max(1rem, env(safe-area-inset-top));
+      left: 1rem;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.55rem 1rem 0.55rem 0.7rem;
+      background: rgba(11, 11, 15, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .codex-header:hover {
+      border-color: rgba(212, 175, 55, 0.6);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25);
+      transform: translateY(-2px);
+    }
+    .codex-header-mark { width: 30px; height: 30px; flex-shrink: 0; filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5)); }
+    .codex-header-mark svg { width: 100%; height: 100%; overflow: visible; }
+    .codex-header-text { display: flex; flex-direction: column; line-height: 1; gap: 0.15rem; }
+    .codex-header-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem; font-weight: 800;
+      color: #ffffff; letter-spacing: -0.02em;
+    }
+    .codex-header-name .dot { color: #d4af37; display: inline-block; animation: codexDotBlink 2s ease-in-out infinite; }
+    .codex-header-tag {
+      font-size: 0.55rem; font-weight: 500;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: rgba(212, 175, 55, 0.75);
+    }
+    @keyframes codexDotBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .codex-ring-outer { transform-origin: 100px 100px; animation: codexSpinSlow 22s linear infinite; }
+    @keyframes codexSpinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .codex-center-node { transform-origin: 100px 100px; animation: codexPulse 2.4s ease-in-out infinite; }
+    @keyframes codexPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%      { transform: scale(1.15); opacity: 0.85; }
+    }
+
+    /* ============================================
+       TOP NAVIGATION
+       ============================================ */
+    .site-nav {
+      position: fixed;
+      top: max(1rem, env(safe-area-inset-top));
+      right: 1rem;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.4rem;
+      background: rgba(11, 11, 15, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 50px;
+      transition: all 0.4s ease;
+    }
+    .site-nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      border-radius: 40px;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    .site-nav a:hover { color: #d4af37; background: rgba(212, 175, 55, 0.1); }
+    .site-nav a.active { color: #0b0b0f; background: #d4af37; }
+    .site-nav a i { font-size: 0.75em; }
+
+    .mobile-nav-toggle {
+      display: none;
+      position: fixed;
+      top: max(1rem, env(safe-area-inset-top));
+      right: 1rem;
+      z-index: 200;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(11, 11, 15, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: #d4af37;
+      font-size: 1.1rem;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+    }
+    .mobile-nav-toggle:hover { background: #d4af37; color: #0b0b0f; }
+
+    /* ============================================
+       PAGE WRAPPER
+       ============================================ */
+    .page {
+      position: relative;
+      z-index: 2;
+      padding: clamp(7rem, 12vw, 10rem) clamp(1rem, 4vw, 2rem) clamp(3rem, 8vw, 5rem);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ============================================
+       PAGE HEADER
+       ============================================ */
+    .page-header {
+      margin-bottom: clamp(2.5rem, 6vw, 4rem);
+      text-align: center;
+    }
+    .page-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: clamp(0.7rem, 1.6vw, 0.85rem);
+      color: #d4af37;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      padding: 0.5rem 1.1rem;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 40px;
+      background: rgba(212, 175, 55, 0.05);
+    }
+    .page-eyebrow i { font-size: 0.9em; }
+    .page-title {
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      background: linear-gradient(135deg, #ffffff 0%, #d4af37 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+    .page-subtitle {
+      font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ============================================
+       HERO ABOUT — photo + intro
+       ============================================ */
+    .about-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+      margin-bottom: clamp(3rem, 8vw, 5rem);
+    }
+    .about-photo-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1200px;
+    }
+    .about-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -6%;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgba(212, 175, 55, 0.35) 40deg,
+        transparent 80deg,
+        transparent 180deg,
+        rgba(212, 175, 55, 0.25) 220deg,
+        transparent 260deg
+      );
+      filter: blur(28px);
+      opacity: 0.7;
+      animation: heroHaloSpin 20s linear infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+    @keyframes heroHaloSpin { to { transform: rotate(360deg); } }
+
+    .about-photo {
+      position: relative;
+      width: 100%;
+      max-width: clamp(240px, 30vw, 420px);
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      z-index: 1;
+      border-radius: 42% 58% 52% 48% / 48% 42% 58% 52%;
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.65),
+        0 0 0 2px rgba(212, 175, 55, 0.35),
+        0 0 60px rgba(212, 175, 55, 0.15),
+        inset 0 0 40px rgba(0, 0, 0, 0.5);
+      animation: heroBlobMorph 12s ease-in-out infinite alternate;
+    }
+    @keyframes heroBlobMorph {
+      0%   { border-radius: 42% 58% 52% 48% / 48% 42% 58% 52%; }
+      33%  { border-radius: 58% 42% 46% 54% / 54% 58% 42% 46%; }
+      66%  { border-radius: 50% 50% 60% 40% / 40% 55% 45% 60%; }
+      100% { border-radius: 48% 52% 42% 58% / 58% 48% 52% 42%; }
+    }
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
+      filter: saturate(1.05) contrast(1.02);
+    }
+
+    /* Badge */
+    .about-badge {
+      position: absolute;
+      bottom: 8%;
+      right: -4%;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.6rem 1.1rem 0.6rem 0.8rem;
+      background: rgba(11, 11, 15, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 50px;
+      animation: heroBadgeFloat 4s ease-in-out infinite;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    @keyframes heroBadgeFloat {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-6px); }
+    }
+    .about-badge i {
+      color: #d4af37;
+      font-size: 1rem;
+    }
+    .about-badge .text {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #d4af37;
+      white-space: nowrap;
+    }
+
+    .about-intro-text h2 {
+      font-size: clamp(1.5rem, 4vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+      line-height: 1.15;
+      color: #fff;
+    }
+    .about-intro-text h2 .accent {
+      background: linear-gradient(135deg, #fff 0%, #d4af37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .about-intro-text p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+      line-height: 1.75;
+      margin-bottom: 1.2rem;
+    }
+    .about-intro-text p:last-child { margin-bottom: 0; }
+    .about-intro-text .signature {
+      font-family: 'JetBrains Mono', monospace;
+      color: #d4af37;
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      font-weight: 700;
+      margin-top: 1.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ============================================
+       STATS ROW
+       ============================================ */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(50%, 140px), 1fr));
+      gap: clamp(1rem, 3vw, 2rem);
+      margin-bottom: clamp(3rem, 8vw, 5rem);
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      background: rgba(20, 20, 30, 0.5);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      border-radius: 24px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .stat-item { text-align: center; }
+    .stat-number {
+      font-size: clamp(1.6rem, 5vw, 2.8rem);
+      font-weight: 800;
+      color: #d4af37;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .stat-label {
+      font-size: clamp(0.7rem, 2vw, 0.85rem);
+      color: rgba(255, 255, 255, 0.6);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ============================================
+       STORY SECTION
+       ============================================ */
+    .story-section {
+      margin-bottom: clamp(3rem, 8vw, 5rem);
+    }
+    .section-title {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.8rem;
+      text-align: center;
+      color: #fff;
+    }
+    .section-sub {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.65);
+      margin-bottom: clamp(2rem, 5vw, 3rem);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+    }
+
+    .story-timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      padding-left: 2rem;
+    }
+    .story-timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 0.5rem;
+      bottom: 0.5rem;
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, rgba(212, 175, 55, 0.5), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+      padding-left: 1rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 0.5rem;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #0b0b0f;
+      border: 3px solid #d4af37;
+      box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15), 0 0 20px rgba(212, 175, 55, 0.4);
+    }
+    .timeline-item .year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.7rem, 1.8vw, 0.85rem);
+      color: #d4af37;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.4rem;
+    }
+    .timeline-item h4 {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .timeline-item p {
+      color: rgba(255, 255, 255, 0.75);
+      font-size: clamp(0.88rem, 2vw, 0.98rem);
+      line-height: 1.65;
+    }
+
+    /* ============================================
+       VALUES
+       ============================================ */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+      gap: clamp(1rem, 3vw, 1.8rem);
+      margin-bottom: clamp(3rem, 8vw, 5rem);
+    }
+    .value-card {
+      position: relative;
+      padding: clamp(1.5rem, 4vw, 2rem);
+      background: rgba(20, 20, 30, 0.55);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      border-radius: 24px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      overflow: hidden;
+    }
+    .value-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, transparent, #d4af37, transparent);
+      opacity: 0.4;
+      transition: opacity 0.4s ease;
+    }
+    @media (hover: hover) {
+      .value-card:hover {
+        border-color: rgba(212, 175, 55, 0.5);
+        transform: translateY(-6px);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(212, 175, 55, 0.12);
+      }
+      .value-card:hover::before { opacity: 1; }
+    }
+    .value-icon {
+      width: 56px; height: 56px;
+      border-radius: 16px;
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      color: #d4af37;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.1rem;
+      transition: all 0.4s ease;
+    }
+    @media (hover: hover) {
+      .value-card:hover .value-icon {
+        background: #d4af37;
+        color: #0b0b0f;
+        transform: rotate(-6deg) scale(1.05);
+      }
+    }
+    .value-card h3 {
+      font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+      font-weight: 800;
+      margin-bottom: 0.6rem;
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+    .value-card p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: clamp(0.88rem, 2vw, 0.95rem);
+      line-height: 1.6;
+    }
+
+    /* ============================================
+       GEAR SECTION
+       ============================================ */
+    .gear-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+      gap: clamp(0.8rem, 2vw, 1.2rem);
+      margin-bottom: clamp(3rem, 8vw, 5rem);
+    }
+    .gear-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: clamp(1rem, 2.5vw, 1.2rem);
+      background: rgba(20, 20, 30, 0.5);
+      border: 1px solid rgba(212, 175, 55, 0.12);
+      border-radius: 18px;
+      transition: all 0.3s ease;
+    }
+    @media (hover: hover) {
+      .gear-item:hover {
+        border-color: rgba(212, 175, 55, 0.4);
+        background: rgba(212, 175, 55, 0.05);
+        transform: translateY(-3px);
+      }
+    }
+    .gear-item i {
+      font-size: 1.4rem;
+      color: #d4af37;
+      width: 44px; height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(212, 175, 55, 0.1);
+      border-radius: 12px;
+      flex-shrink: 0;
+    }
+    .gear-info h4 {
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.2rem;
+    }
+    .gear-info p {
+      font-size: clamp(0.75rem, 1.8vw, 0.85rem);
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* ============================================
+       QUOTE STRIP
+       ============================================ */
+    .quote-strip {
+      margin: clamp(3rem, 8vw, 5rem) 0;
+      padding: clamp(2rem, 5vw, 3rem);
+      text-align: center;
+      position: relative;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(20, 20, 30, 0.5) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 28px;
+      overflow: hidden;
+    }
+    .quote-strip::before {
+      content: '"';
+      position: absolute;
+      top: -30px;
+      left: 30px;
+      font-size: 10rem;
+      color: #d4af37;
+      opacity: 0.12;
+      font-family: Georgia, serif;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .quote-strip blockquote {
+      position: relative;
+      font-size: clamp(1.1rem, 3vw, 1.6rem);
+      font-style: italic;
+      font-weight: 500;
+      color: #fff;
+      line-height: 1.5;
+      max-width: 800px;
+      margin: 0 auto 1.2rem;
+      letter-spacing: -0.01em;
+    }
+    .quote-strip cite {
+      position: relative;
+      color: #d4af37;
+      font-style: normal;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      font-size: clamp(0.8rem, 2vw, 0.9rem);
+      text-transform: uppercase;
+    }
+
+    /* ============================================
+       CTA STRIP
+       ============================================ */
+    .cta-strip {
+      margin-top: clamp(3rem, 8vw, 5rem);
+      padding: clamp(2rem, 5vw, 3rem);
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(20, 20, 30, 0.6) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-strip::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 40%);
+      animation: ctaRotate 20s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes ctaRotate { to { transform: rotate(360deg); } }
+    .cta-strip h3 {
+      position: relative;
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.7rem;
+      background: linear-gradient(135deg, #fff 0%, #d4af37 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cta-strip p {
+      position: relative;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+      margin-bottom: 1.6rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-buttons {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: clamp(0.75rem, 2vw, 0.9rem) clamp(1.4rem, 3vw, 2rem);
+      border-radius: 50px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: clamp(0.85rem, 2vw, 0.95rem);
+      border: 2px solid transparent;
+      cursor: pointer;
+      white-space: nowrap;
+      min-height: 46px;
+    }
+    .btn-primary { background: #d4af37; color: #0b0b0f; border-color: #d4af37; }
+    .btn-primary:hover { background: transparent; color: #d4af37; transform: translateY(-3px); box-shadow: 0 15px 30px rgba(212, 175, 55, 0.25); }
+    .btn-outline { border-color: rgba(255, 255, 255, 0.4); color: #fff; background: transparent; }
+    .btn-outline:hover { background: #fff; color: #0b0b0f; transform: translateY(-3px); border-color: #fff; }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    .footer {
+      position: relative;
+      z-index: 2;
+      padding: clamp(2.5rem, 6vw, 4rem) clamp(1rem, 4vw, 2rem) 2rem;
+      padding-bottom: max(2rem, env(safe-area-inset-bottom));
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer h3 { font-size: clamp(1.3rem, 3.5vw, 1.8rem); font-weight: 800; letter-spacing: -0.02em; }
+    .footer .footer-tag {
+      color: #d4af37;
+      letter-spacing: 0.15em;
+      margin: 0.5rem 0 1rem;
+      font-size: clamp(0.7rem, 1.8vw, 0.85rem);
+      font-weight: 600;
+    }
+    .footer .footer-quote {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      font-style: italic;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 2rem;
+    }
+    .footer .socials {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 1.5rem 0;
+    }
+    .footer .socials a {
+      color: white;
+      background: rgba(255, 255, 255, 0.05);
+      width: 48px; height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 1.15rem;
+      transition: 0.3s;
+      text-decoration: none;
+      border: 1px solid rgba(212, 175, 55, 0.15);
+    }
+    .footer .socials a:hover {
+      background: #d4af37;
+      color: #0b0b0f;
+      transform: translateY(-5px);
+      border-color: #d4af37;
+    }
+    .footer .contact-line {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: clamp(0.85rem, 2vw, 0.95rem);
+      margin-top: 1rem;
+    }
+    .footer .contact-line a { color: inherit; text-decoration: none; transition: color 0.3s; }
+    .footer .contact-line a:hover { color: #d4af37; }
+    .footer .copyright {
+      margin-top: 1.5rem;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: clamp(0.7rem, 1.8vw, 0.85rem);
+    }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+    @media (max-width: 900px) {
+      .site-nav { display: none; }
+      .mobile-nav-toggle { display: flex; }
+
+      .about-hero {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+      }
+      .about-photo-wrap { order: -1; justify-content: center; }
+      .about-photo { max-width: min(70vw, 320px); }
+      .about-badge { right: 3%; bottom: 5%; }
+      .about-intro-text { text-align: left; }
+    }
+
+    /* Mobile nav drawer */
+    .nav-drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+      background: rgba(5, 5, 10, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .nav-drawer.open { opacity: 1; visibility: visible; }
+    .nav-drawer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      width: 100%;
+      max-width: 340px;
+    }
+    .nav-drawer-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .nav-drawer-title .dot { color: #d4af37; }
+    .nav-drawer a {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      width: 100%;
+      padding: 1rem 1.4rem;
+      border-radius: 16px;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 1rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      transition: all 0.3s ease;
+    }
+    .nav-drawer a:hover,
+    .nav-drawer a.active {
+      background: rgba(212, 175, 55, 0.15);
+      color: #d4af37;
+      border-color: #d4af37;
+      transform: translateX(4px);
+    }
+    .nav-drawer a i { color: #d4af37; width: 20px; text-align: center; }
+    .nav-drawer-close {
+      position: absolute;
+      top: max(1rem, env(safe-area-inset-top));
+      right: max(1rem, env(safe-area-inset-right));
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: #fff;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (max-width: 640px) {
+      .codex-header { top: max(0.7rem, env(safe-area-inset-top)); left: max(0.7rem, env(safe-area-inset-left)); padding: 0.45rem 0.85rem 0.45rem 0.6rem; gap: 0.5rem; }
+      .codex-header-mark { width: 26px; height: 26px; }
+      .codex-header-name { font-size: 0.75rem; }
+      .codex-header-tag { font-size: 0.48rem; letter-spacing: 0.2em; }
+
+      .page { padding: clamp(6rem, 20vw, 8rem) 1.15rem clamp(2.5rem, 8vw, 4rem); }
+      .page-header { margin-bottom: 2rem; }
+      .page-eyebrow { font-size: 0.65rem; letter-spacing: 0.2em; padding: 0.4rem 0.9rem; }
+
+      .story-timeline { padding-left: 1.5rem; }
+      .timeline-item { padding-left: 0.5rem; }
+      .timeline-item::before { left: -1.5rem; width: 14px; height: 14px; }
+
+      .cta-buttons { flex-direction: column; }
+      .cta-buttons .btn { width: 100%; }
+    }
+    @media (max-width: 380px) {
+      .codex-header-text { display: none; }
+      .codex-header { padding: 0.4rem; }
+      .codex-header-mark { width: 28px; height: 28px; }
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0b0b0f; }
+    ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 4px; }
+    @media (max-width: 768px) { ::-webkit-scrollbar { width: 0; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-decor"></div>
+
+  <a href="index.html" class="codex-header" aria-label="Codex-Banx — Home">
+    <div class="codex-header-mark">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="codexGoldGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#f9e8a8"/>
+            <stop offset="50%"  stop-color="#d4af37"/>
+            <stop offset="100%" stop-color="#b8942e"/>
+          </linearGradient>
+        </defs>
+        <g class="codex-ring-outer">
+          <circle cx="100" cy="100" r="92" fill="none" stroke="#d4af37" stroke-width="2" stroke-dasharray="6 10" opacity="0.5"/>
+        </g>
+        <polygon points="100,14 174,57 174,143 100,186 26,143 26,57"
+                 fill="none" stroke="url(#codexGoldGrad1)" stroke-width="5" stroke-linejoin="round"/>
+        <path d="M 62 70 L 44 100 L 62 130"
+              fill="none" stroke="url(#codexGoldGrad1)" stroke-width="11"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 138 70 L 156 100 L 138 130"
+              fill="none" stroke="url(#codexGoldGrad1)" stroke-width="11"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <g class="codex-center-node">
+          <circle cx="100" cy="100" r="5" fill="#ffffff"/>
+        </g>
+      </svg>
+    </div>
+    <div class="codex-header-text">
+      <span class="codex-header-name">Codex<span class="dot">·</span>Banx</span>
+      <span class="codex-header-tag">Built the site</span>
+    </div>
+  </a>
+
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    <a href="videos.html"><i class="fas fa-film"></i> Videos</a>
+    <a href="services.html"><i class="fas fa-briefcase"></i> Services</a>
+    <a href="about.html" class="active"><i class="fas fa-user"></i> About</a>
+    <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+  </nav>
+
+  <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <div class="nav-drawer" id="navDrawer">
+    <button class="nav-drawer-close" id="navDrawerClose" aria-label="Close menu">
+      <i class="fas fa-times"></i>
+    </button>
+    <div class="nav-drawer-inner">
+      <div class="nav-drawer-title">Codex<span class="dot">·</span>Banx</div>
+      <a href="index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="videos.html"><i class="fas fa-film"></i> Videos</a>
+      <a href="services.html"><i class="fas fa-briefcase"></i> Services</a>
+      <a href="about.html" class="active"><i class="fas fa-user"></i> About</a>
+      <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+    </div>
+  </div>
+
+  <main class="page">
+
+    <!-- Page Header -->
+    <header class="page-header">
+      <div class="page-eyebrow">
+        <i class="fas fa-user"></i> About Me
+      </div>
+      <h1 class="page-title">The Story Behind The Lens</h1>
+      <p class="page-subtitle">
+        More than just a camera operator — I'm a storyteller, a visual artist, and someone who genuinely cares about capturing the moments that matter most.
+      </p>
+    </header>
+
+    <!-- ABOUT HERO -->
+    <section class="about-hero">
+      <div class="about-photo-wrap">
+        <div class="about-photo">
+          <img
+            src="hero.jpg"
+            alt="Kay Nkhoma — Videographer & Content Creator"
+            loading="eager"
+            onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=900&q=85&auto=format&fit=crop';"
+          >
+        </div>
+        <div class="about-badge">
+          <i class="fas fa-camera"></i>
+          <span class="text">5+ Years Experience</span>
+        </div>
+      </div>
+
+      <div class="about-intro-text">
+        <h2>Hi, I'm <span class="accent">Kay Nkhoma</span></h2>
+        <p>
+          I'm a Videographer, Content Creator and Camera Operator based in Lusaka, Zambia. For over five years I've been turning fleeting moments into timeless visual stories.
+        </p>
+        <p>
+          What started as a fascination with storytelling through moving images has grown into a full creative practice — capturing weddings, documenting lives, filming campaigns and creating content for brands, churches and individuals across Zambia.
+        </p>
+        <p>
+          Every project I take on, no matter the size, is treated with the same care, attention to detail, and creative energy. Because I believe every story deserves to be told beautifully.
+        </p>
+        <p class="signature">— Kay Nkhoma · Kay Official TGD CHEZZI</p>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats-row">
+      <div class="stat-item">
+        <div class="stat-number" data-count="250">0</div>
+        <div class="stat-label">Projects Completed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-count="120">0</div>
+        <div class="stat-label">Happy Clients</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-count="5">0</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-count="15">0</div>
+        <div class="stat-label">Awards & Features</div>
+      </div>
+    </section>
+
+    <!-- STORY TIMELINE -->
+    <section class="story-section">
+      <h2 class="section-title">My Journey</h2>
+      <p class="section-sub">From first frame to full production — here's how it all came together.</p>
+
+      <div class="story-timeline">
+        <div class="timeline-item">
+          <div class="year">2020</div>
+          <h4>The First Frame</h4>
+          <p>Picked up my first camera and discovered the magic of storytelling through moving images. Started filming small events for friends and family in Lusaka.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2021</div>
+          <h4>Going Professional</h4>
+          <p>Launched Kay Official TGD CHEZZI as an official creative brand. Shot my first weddings, corporate events and church productions across Zambia.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2022</div>
+          <h4>Leveling Up</h4>
+          <p>Invested in professional-grade gear and expanded services to include documentaries, drone coverage, and social media content for businesses and creators.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2023</div>
+          <h4>Into The Air</h4>
+          <p>Added aerial videography to my offering. From weddings in the bush to city skylines — drone footage opened up a whole new dimension of storytelling.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2024</div>
+          <h4>Trusted By Many</h4>
+          <p>Worked with churches, businesses, organizations and individuals on over 200 projects. Built a reputation for reliability, creativity and fast delivery.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2025 → Today</div>
+          <h4>Storytelling Reimagined</h4>
+          <p>Continuing to push creative boundaries — cinematic wedding films, brand documentaries, short-form content and full production support for major events.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="story-section">
+      <h2 class="section-title">What I Stand For</h2>
+      <p class="section-sub">The values that guide every project I take on.</p>
+
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon"><i class="fas fa-heart"></i></div>
+          <h3>Story First</h3>
+          <p>I don't just record moments — I craft stories with emotion, purpose and lasting impact.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon"><i class="fas fa-gem"></i></div>
+          <h3>Quality Always</h3>
+          <p>From camera angles to color grading, I obsess over the small details that make a big difference.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon"><i class="fas fa-bolt"></i></div>
+          <h3>Fast & Reliable</h3>
+          <p>You get your content on time — every time. I respect your deadlines and your schedule.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon"><i class="fas fa-handshake"></i></div>
+          <h3>Clear Communication</h3>
+          <p>From the first call to final delivery, you'll always know exactly what's happening.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon"><i class="fas fa-lightbulb"></i></div>
+          <h3>Creative Edge</h3>
+          <p>Every project gets fresh ideas, unique angles and a cinematic touch — no cookie-cutter work.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon"><i class="fas fa-users"></i></div>
+          <h3>People Focused</h3>
+          <p>I work with real people, real stories and real moments. Your comfort matters to me.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- GEAR -->
+    <section class="story-section">
+      <h2 class="section-title">The Gear I Trust</h2>
+      <p class="section-sub">Professional equipment, maintained to broadcast standards.</p>
+
+      <div class="gear-grid">
+        <div class="gear-item">
+          <i class="fas fa-camera-retro"></i>
+          <div class="gear-info">
+            <h4>Cinema Cameras</h4>
+            <p>Full-frame mirrorless bodies</p>
+          </div>
+        </div>
+        <div class="gear-item">
+          <i class="fas fa-camera"></i>
+          <div class="gear-info">
+            <h4>Prime Lenses</h4>
+            <p>Fast, sharp, cinematic glass</p>
+          </div>
+        </div>
+        <div class="gear-item">
+          <i class="fas fa-helicopter"></i>
+          <div class="gear-info">
+            <h4>DJI Drones</h4>
+            <p>4K aerial cinematography</p>
+          </div>
+        </div>
+        <div class="gear-item">
+          <i class="fas fa-lightbulb"></i>
+          <div class="gear-info">
+            <h4>Pro Lighting</h4>
+            <p>LED panels & softbox kits</p>
+          </div>
+        </div>
+        <div class="gear-item">
+          <i class="fas fa-microphone"></i>
+          <div class="gear-info">
+            <h4>Audio Gear</h4>
+            <p>Lapel mics, boom & recorders</p>
+          </div>
+        </div>
+        <div class="gear-item">
+          <i class="fas fa-laptop"></i>
+          <div class="gear-info">
+            <h4>Editing Suite</h4>
+            <p>DaVinci Resolve & Adobe Suite</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUOTE -->
+    <section class="quote-strip">
+      <blockquote>
+        "Every frame I capture is a chance to preserve a moment that will never happen again. That's the responsibility — and the joy — of what I do."
+      </blockquote>
+      <cite>— Kay Nkhoma</cite>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-strip">
+      <h3>Let's Create Together</h3>
+      <p>Have a story that deserves to be told beautifully? I'd love to hear about your project.</p>
+      <div class="cta-buttons">
+        <a href="contact.html" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Get in Touch</a>
+        <a href="videos.html" class="btn btn-outline"><i class="fas fa-play"></i> Watch My Work</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <h3>KAY OFFICIAL TGD CHEZZI</h3>
+    <p class="footer-tag">Videographer · Content Creator · Camera Operator</p>
+    <p class="footer-quote">Capturing Stories. Creating Impact.</p>
+
+    <div class="socials">
+      <a href="https://www.instagram.com/kaynkhomatgd" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.tiktok.com/@kayofficialtgd" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+        <i class="fab fa-tiktok"></i>
+      </a>
+      <a href="https://wa.me/260765169875" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+      <a href="mailto:kayalexisnkhomatgd@gmail.com" aria-label="Email">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </div>
+
+    <p class="contact-line">📱 +260 765 169 875 &nbsp;|&nbsp; ✉️ <a href="mailto:kayalexisnkhomatgd@gmail.com">kayalexisnkhomatgd@gmail.com</a></p>
+    <p class="copyright">© 2026 Kay Official TGD CHEZZI. All Rights Reserved. · Website by <a href="index.html" style="color:#d4af37; text-decoration:none;">Codex·Banx</a></p>
+  </footer>
+
+  <script>
+    /* Animated stat counters */
+    (function statCounters() {
+      const counters = document.querySelectorAll('.stat-number');
+      const speed = 200;
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const target = parseInt(el.dataset.count);
+          let current = 0;
+          const increment = target / speed;
+          const update = () => {
+            current += increment;
+            if (current < target) { el.textContent = Math.ceil(current); requestAnimationFrame(update); }
+            else el.textContent = target + '+';
+          };
+          update();
+          counterObserver.unobserve(el);
+        });
+      }, { threshold: 0.5 });
+      counters.forEach(c => counterObserver.observe(c));
+    })();
+
+    /* Mobile nav drawer */
+    const mobileNavToggle = document.getElementById('mobileNavToggle');
+    const navDrawer = document.getElementById('navDrawer');
+    const navDrawerClose = document.getElementById('navDrawerClose');
+
+    if (mobileNavToggle) {
+      mobileNavToggle.addEventListener('click', () => {
+        navDrawer.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    }
+    if (navDrawerClose) {
+      navDrawerClose.addEventListener('click', () => {
+        navDrawer.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    }
+    navDrawer.addEventListener('click', (e) => {
+      if (e.target === navDrawer) {
+        navDrawer.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
+</body>
+</html>
